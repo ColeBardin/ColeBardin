@@ -80,53 +80,66 @@ class PyQtLayout(QWidget):
         self.setGeometry(self.__ax, self.__ay, self.__width, self.__height)
         self.setWindowTitle("Kaia's Restaurant Picker")
 
+    # Adjusts the CSS elements
     def set_total_layout(self):
-        #Color Pallet
+        #Color Pallet:
         #light purple = 9a82b0
         #dark purple = 4f2262
         #grey = 3f3b3b
         #dark_grey = #6a6383
         #light blue = 92d8e3
         #off_black = #553b5e
+
+        # Adjust CSS of Main Window
         self.setStyleSheet("background-color: #9a82b0;"
                             "font-weight: bold;"
                             "color: #4f2262;"
                             )
-
+        # Add Location Button
         self.button_add_location.setStyleSheet("color: #4f2262;"
-                                   "background-color: #92d8e3;"
-                                   )
+                                               "background-color: #92d8e3;"
+                                               )
+        # Add Restaurant Button
         self.button_add_restaurant.setStyleSheet("color: #4f2262;"
-                                   "background-color: #92d8e3;"
-                                   )
+                                                 "background-color: #92d8e3;"
+                                                 )
+        # Update Location Button
         self.button_update_location.setStyleSheet("color: #4f2262;"
-                                   "background-color: #92d8e3;"
-                                   )
+                                                  "background-color: #92d8e3;"
+                                                  )
+        # Quit Button
         self.button_quit.setStyleSheet("color: #4f2262;"
-                                   "background-color: #92d8e3;"
-                                   )        
+                                       "background-color: #92d8e3;"
+                                       )       
+        # Get Random Restaurant Button
         self.button_random_restaurants.setStyleSheet("color: #4f2262;"
-                                   "background-color: #92d8e3;"
-                                   )        
+                                                     "background-color: #92d8e3;"
+                                                     )      
+        # Location Select Dropdown
         self.combo_location_select.setStyleSheet("color: #4f2262;"
-                                   "background: #92d8e3;"
-                                   )
+                                                 "background: #92d8e3;"
+                                                 )
+        # Locations List
         self.list_locations.setStyleSheet("background-color: #6a6383;"
-                                     "border: 5px solid #553b5e;"
-                                     "color: #c2e9f0;"
-                                     )
-        self.table_results.setStyleSheet("background-color: #6a6383;"
-                                     "border: 5px solid #553b5e;"
-                                     "color: #c2e9f0;"
-                                     )
-        self.label_current_location.setStyleSheet("background-color: #6a6383;"
-                                     "border: 5px solid #553b5e;"
-                                     "color: #c2e9f0;"
-                                     )
+                                          "border: 5px solid #553b5e;"
+                                          "color: #c2e9f0;"
+                                          )
+        # Current Restaurants List
         self.list_current_restaurants.setStyleSheet("background-color: #6a6383;"
-                                     "border: 5px solid #553b5e;"
-                                     "color: #c2e9f0;"
-                                     )
+                                                    "border: 5px solid #553b5e;"
+                                                    "color: #c2e9f0;"
+                                                    )
+
+        # Results Table
+        self.table_results.setStyleSheet("background-color: #6a6383;"
+                                         "border: 5px solid #553b5e;"
+                                         "color: #c2e9f0;"
+                                         )
+        # Current Locations Label
+        self.label_current_location.setStyleSheet("background-color: #6a6383;"
+                                                  "border: 5px solid #553b5e;"
+                                                  "color: #c2e9f0;"
+                                                  )
 
     def init_results_table(self):
         self.table_results.setRowCount(5)
