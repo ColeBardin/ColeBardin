@@ -30,12 +30,12 @@ class PyQtLayout(QWidget):
         self.button_random_restaurants = QPushButton("Choose for me!")
 
         # Run UI Method
-        self.UI()
+        self.init_gui()
     
     # Generate UI layout specifications
-    def UI(self):
+    def init_gui(self):
         # Build all text packets
-        self.init_locations()
+        self.init_locations_table()
         self.update_restaurants()
         self.init_results_table()
         self.build_locations()
@@ -45,17 +45,17 @@ class PyQtLayout(QWidget):
         self.list_locations.setMaximumWidth(int(self.__width/3))
 
         # Display text on current locations list
-        self.label_current_location.setText(self.selected_location_label())
+        self.label_current_location.setText(self.get_selected_location_label())
 
         # Connect all the buttons to their action methods
         self.button_add_location.clicked.connect(self.add_location)
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
-        self.button_update_location.clicked.connect(self.set_selected_location)
+        self.button_update_location.clicked.connect(self.update_selected_location)
         self.button_quit.clicked.connect(self.close)
         self.button_random_restaurants.clicked.connect(self.get_random_restaurant)
         
         # Adjust CSS for this project
-        self.set_total_layout()
+        self.set_css()
 
         # Create grid layout of Widget objects
         grid = QGridLayout()
@@ -80,8 +80,35 @@ class PyQtLayout(QWidget):
         self.setGeometry(self.__ax, self.__ay, self.__width, self.__height)
         self.setWindowTitle("Kaia's Restaurant Picker")
 
+    # Initialize the locations for the table
+    def init_locations_table(self):
+        # Bool used to set first file as current location on startup
+        init = False
+        # Iterate over all files in restaurants directory
+        for file in os.listdir("restaurants"):
+            # Only cound .CSV files for locations
+            if file[-4:] == ".csv":
+                    # Add new location to table
+                    self.update_available_locations(file[:-4])
+            # Set current location as first file
+            if init == False:
+                self.current_location = file[:-4]
+                # Do not run again
+                init = True
+
+    # Initialize results table on startup
+    def init_results_table(self):
+        # Set table size and formatting
+        self.table_results.setRowCount(5)
+        self.table_results.setColumnCount(4)
+        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        # Fill table with blank values until get_random_restaurant() is called
+        for row in range(5):
+            for col in range(4):
+                self.table_results.setItem(row, col, QTableWidgetItem(''))
+
     # Adjusts the CSS elements
-    def set_total_layout(self):
+    def set_css(self):
         #Color Pallet:
         #light purple = 9a82b0
         #dark purple = 4f2262
@@ -140,16 +167,6 @@ class PyQtLayout(QWidget):
                                                   "border: 5px solid #553b5e;"
                                                   "color: #c2e9f0;"
                                                   )
-    # Initialize results table on startup
-    def init_results_table(self):
-        # Set table size and formatting
-        self.table_results.setRowCount(5)
-        self.table_results.setColumnCount(4)
-        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
-        # Fill table with blank values until get_random_restaurant() is called
-        for row in range(5):
-            for col in range(4):
-                self.table_results.setItem(row, col, QTableWidgetItem(''))
 
     # Action method for button_add_location
     def add_location(self):
@@ -174,72 +191,7 @@ class PyQtLayout(QWidget):
                 msg_empty_loc.setIcon(QMessageBox.Warning)
                 empty_loc_ret = msg_empty_loc.exec_()
 
-    # Method to call when the list of resaurants or current location is changed
-    def update_restaurants(self):
-        # Clear all elements from the list
-        self.list_current_restaurants.clear()
-        # Add first title element
-        self.list_current_restaurants.addItem(QListWidgetItem(f"All Restaurants in {self.current_location}:\n"))
-        # Get available restaurants from current location file
-        file = open(f"restaurants\\{self.current_location}.csv", "r")
-        # Iterate over each restaurant packet
-        for line in file:
-            # Parse out the name of the restaurant from the packet
-            self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
-        # Close the current location file
-        file.close()
-
-    # Initialize the locations for the table
-    def init_locations(self):
-        # Bool used to set first file as current location on startup
-        init = False
-        # Iterate over all files in restaurants directory
-        for file in os.listdir("restaurants"):
-            # Only cound .CSV files for locations
-            if file[-4:] == ".csv":
-                    # Add new location to table
-                    self.update_available_locations(file[:-4])
-            # Set current location as first file
-            if init == False:
-                self.current_location = file[:-4]
-                # Do not run again
-                init = True
-    
-    # Method to update the location table with a new location
-    def update_available_locations(self, new_loc): 
-        # Make sure new location is valid
-        if len(new_loc) != 0:
-            # Add the item to the drop down menu
-            self.combo_location_select.addItem(new_loc)
-            # Build the available locations table
-            self.build_locations()
-
-    # Action method to set the selected location from the drop down as the current location
-    def set_selected_location(self):
-        # Setting current location
-        self.current_location = self.combo_location_select.currentText()
-        # Update current location label
-        self.label_current_location.setText(self.selected_location_label())
-        # Update the list of available restaurants from this new location
-        self.update_restaurants()
-
-    # Method to build the location table
-    def build_locations(self):
-        # First, clear the table
-        self.list_locations.clear()
-        # Add first title element
-        self.list_locations.addItem(QListWidgetItem("Full Location List:\n"))
-        # Iterate for all the files in \restaurants subdirectory
-        for file in os.listdir('restaurants'):
-            # Add filename to list of available locations
-            self.list_locations.addItem(QListWidgetItem(file[:-4]))
-
-    # Method to generate new location label with current location
-    def selected_location_label(self):
-        # Returns complete string
-        return "Selected Location: " + self.current_location 
-
-    # Action method to add a new restaurant to current location
+   # Action method to add a new restaurant to current location
     def add_restaurant(self):
         # Make empty list to hold input values
         data = []
@@ -270,6 +222,68 @@ class PyQtLayout(QWidget):
         # Update available restaurants list
         self.update_restaurants()
 
+    # Method to call when the list of resaurants or current location is changed
+    def update_restaurants(self):
+        # Clear all elements from the list
+        self.list_current_restaurants.clear()
+        # Add first title element
+        self.list_current_restaurants.addItem(QListWidgetItem(f"All Restaurants in {self.current_location}:\n"))
+        # Get available restaurants from current location file
+        file = open(f"restaurants\\{self.current_location}.csv", "r")
+        # Iterate over each restaurant packet
+        for line in file:
+            # Parse out the name of the restaurant from the packet
+            self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
+        # Close the current location file
+        file.close()
+    
+    # Method to update the location table with a new location
+    def update_available_locations(self, new_loc): 
+        # Make sure new location is valid
+        if len(new_loc) != 0:
+            # Add the item to the drop down menu
+            self.combo_location_select.addItem(new_loc)
+            # Build the available locations table
+            self.build_locations()
+
+    # Action method to set the selected location from the drop down as the current location
+    def update_selected_location(self):
+        # Setting current location
+        self.current_location = self.combo_location_select.currentText()
+        # Update current location label
+        self.label_current_location.setText(self.get_selected_location_label())
+        # Update the list of available restaurants from this new location
+        self.update_restaurants()
+
+    # Method to build the location table
+    def build_locations(self):
+        # First, clear the table
+        self.list_locations.clear()
+        # Add first title element
+        self.list_locations.addItem(QListWidgetItem("Full Location List:\n"))
+        # Iterate for all the files in \restaurants subdirectory
+        for file in os.listdir('restaurants'):
+            # Add filename to list of available locations
+            self.list_locations.addItem(QListWidgetItem(file[:-4]))
+
+    # Method to build results table with given choices
+    def build_results(self, choices):
+        # Clear the table from previous choices
+        self.table_results.clear()
+        # Reset horizontal header labels
+        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        # Iterate for each row index
+        for row in range(5):
+            # Iterate for each column index
+            for col in range(4):
+                # Parese choices based on current row and column and add them as items to results table
+                self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
+
+    # Method to generate new location label with current location
+    def get_selected_location_label(self):
+        # Returns complete string
+        return "Selected Location: " + self.current_location 
+
     # Action method to display random restaurants
     def get_random_restaurant(self):
         # List to hold all available restaurants
@@ -294,20 +308,7 @@ class PyQtLayout(QWidget):
             # Stop current restaurant from beign displayed twice
             available_restaurants.pop(random_num)
         # Build results table with random choices
-        self.build_results(random_choices)
-   
-    # Method to build results table with given choices
-    def build_results(self, choices):
-        # Clear the table from previous choices
-        self.table_results.clear()
-        # Reset horizontal header labels
-        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
-        # Iterate for each row index
-        for row in range(5):
-            # Iterate for each column index
-            for col in range(4):
-                # Parese choices based on current row and column and add them as items to results table
-                self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
+        self.build_results(random_choices)  
 
 
 # Main body function
