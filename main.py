@@ -204,10 +204,14 @@ class PyQtLayout(QWidget):
                 self.current_location = file[:-4]
                 # Do not run again
                 init = True
-
+    
+    # Method to update the location table with a new location
     def update_available_locations(self, new_loc): 
+        # Make sure new location is valid
         if len(new_loc) != 0:
+            # Add the item to the drop down menu
             self.combo_location_select.addItem(new_loc)
+            # Build the available locations table
             self.build_locations()
 
     def set_selected_location(self):
