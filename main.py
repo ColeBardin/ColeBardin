@@ -214,9 +214,13 @@ class PyQtLayout(QWidget):
             # Build the available locations table
             self.build_locations()
 
+    # Action method to set the selected location from the drop down as the current location
     def set_selected_location(self):
+        # Setting current location
         self.current_location = self.combo_location_select.currentText()
+        # Update current location label
         self.label_current_location.setText(self.selected_location_label())
+        # Update the list of available restaurants from this new location
         self.update_restaurants()
 
     def build_locations(self):
