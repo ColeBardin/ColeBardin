@@ -106,6 +106,7 @@ class PyQtLayout(QWidget):
         # Fill table with blank values until get_random_restaurant() is called
         for row in range(5):
             for col in range(4):
+                # For each row and column, fill with blank item
                 self.table_results.setItem(row, col, QTableWidgetItem(''))
 
     # Adjusts the CSS elements
@@ -310,6 +311,20 @@ class PyQtLayout(QWidget):
             available_restaurants.pop(random_num)
         # Build results table with random choices
         self.build_results(random_choices)  
+
+    # Method to make error messages pop up
+    def generate_error_msg(self, msg, err_type):
+        # Generate message box object
+        error_msg = QMessageBox(self)
+        # Set the window title
+        error_msg.setWindowTitle("ERROR")
+        # Set the message box text to be msg parameter
+        error_msg.setText(msg)
+        #QMessageBox.Warning, Question, Information, Critical
+        # Set error type from parameter
+        error_msg.setIcon(err_type)
+        # Close and save return value
+        err_msg_ret_val = msg_empty_loc.exec_()
 
 
 # Main body function
