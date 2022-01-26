@@ -295,12 +295,18 @@ class PyQtLayout(QWidget):
             available_restaurants.pop(random_num)
         # Build results table with random choices
         self.build_results(random_choices)
-        
+   
+    # Method to build results table with given choices
     def build_results(self, choices):
+        # Clear the table from previous choices
         self.table_results.clear()
+        # Reset horizontal header labels
         self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        # Iterate for each row index
         for row in range(5):
+            # Iterate for each column index
             for col in range(4):
+                # Parese choices based on current row and column and add them as items to results table
                 self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
 
 def main():
