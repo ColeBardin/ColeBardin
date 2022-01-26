@@ -186,12 +186,8 @@ class PyQtLayout(QWidget):
                 # Update the current available locations table
                 self.update_available_locations(text)
             else:
-                # TODO: Make error function
-                msg_empty_loc = QMessageBox(self)
-                msg_empty_loc.setWindowTitle("ERROR")
-                msg_empty_loc.setText("Enter a location name")
-                msg_empty_loc.setIcon(QMessageBox.Warning)
-                empty_loc_ret = msg_empty_loc.exec_()
+                self.generate_error_msg("Enter a valid location name", QMessageBox.Warning)
+                self.add_location()
 
    # Action method to add a new restaurant to current location
     def add_restaurant(self):
@@ -323,8 +319,8 @@ class PyQtLayout(QWidget):
         #QMessageBox.Warning, Question, Information, Critical
         # Set error type from parameter
         error_msg.setIcon(err_type)
-        # Close and save return value
-        err_msg_ret_val = msg_empty_loc.exec_()
+        # Execute error message and save return value
+        err_msg_ret_val = error_msg.exec_()
 
 
 # Main body function
