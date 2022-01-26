@@ -309,12 +309,20 @@ class PyQtLayout(QWidget):
                 # Parese choices based on current row and column and add them as items to results table
                 self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
 
+
+# Main body function
 def main():
+    # Crate PyQt Application
     app = QApplication(sys.argv)
-    app.setStyle('Fusion')
+    # Set style to be 'fusion'
+    app.setStyle("fusion")
+    # Create main window of PyQtLayout class
     window = PyQtLayout()
+    # Display window
     window.show()
+    # Close window when python program is closed
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
+    # Call upon main function
     main()
