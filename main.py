@@ -3,69 +3,80 @@ from random import randint
 import sys
 import os
 
+# Layout class
 class PyQtLayout(QWidget):
     def __init__(self):
         super().__init__()
 
+        # Set main window size and location
         self.__width = int(1500)
         self.__height = int(800)
         self.__ax = 0
         self.__ay = 0
 
-        self.location_text = []
+        # Variable to store current location
         self.current_location = None
 
+        # Initialize all Widgets ons creen
         self.label_current_location = QLabel(self)
-
         self.table_results = QTableWidget(self)
-
         self.list_current_restaurants = QListWidget(self)
         self.list_locations = QListWidget(self)
-
         self.combo_location_select = QComboBox(self)
-        
         self.button_add_location = QPushButton("Add New Location")
         self.button_add_restaurant = QPushButton("Add New Restaurant")
         self.button_update_location = QPushButton("Select Location")
         self.button_quit = QPushButton("Quit")
         self.button_random_restaurants = QPushButton("Choose for me!")
 
+        # Run UI Method
         self.UI()
-
+    
+    # Generate UI layout specifications
     def UI(self):
+        # Build all text packets
         self.init_locations()
         self.update_restaurants()
         self.init_results_table()
         self.build_locations()
 
+        # Set max width for list objects
         self.list_current_restaurants.setMaximumWidth(int(self.__width/3))
         self.list_locations.setMaximumWidth(int(self.__width/3))
 
+        # Display text on current locations list
         self.label_current_location.setText(self.selected_location_label())
 
+        # Connect all the buttons to their action methods
         self.button_add_location.clicked.connect(self.add_location)
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
         self.button_update_location.clicked.connect(self.set_selected_location)
         self.button_quit.clicked.connect(self.close)
         self.button_random_restaurants.clicked.connect(self.get_rand_res)
-
+        
+        # Adjust CSS for this project
         self.set_total_layout()
 
+        # Create grid layout of Widget objects
         grid = QGridLayout()
-        grid.addWidget(self.button_add_location, 0, 6)
-        grid.addWidget(self.button_add_restaurant, 1, 6)
-        grid.addWidget(self.list_locations, 2, 6)
-        grid.addWidget(self.button_quit, 3, 6)
-
+        #Add Widgets to the grid:
+        # Left Column
         grid.addWidget(self.combo_location_select, 1, 0)
         grid.addWidget(self.button_update_location, 0, 0)
-        grid.addWidget(self.list_current_restaurants, 2, 0)
-    
-        grid.addWidget(self.button_random_restaurants, 1, 4)
-        grid.addWidget(self.table_results, 2, 4)
-        grid.addWidget(self.label_current_location, 0, 4)
-        
+        grid.addWidget(self.list_current_restaurants, 2, 0)  
+        # Middle Column
+        grid.addWidget(self.button_random_restaurants, 1, 1)
+        grid.addWidget(self.table_results, 2, 1)
+        grid.addWidget(self.label_current_location, 0, 1)
+        # Right Column
+        grid.addWidget(self.button_add_location, 0, 2)
+        grid.addWidget(self.button_add_restaurant, 1, 2)
+        grid.addWidget(self.list_locations, 2, 2)
+        grid.addWidget(self.button_quit, 3, 2)
+
+        # Apply grid layout
         self.setLayout(grid)
+        # Format window
         self.setGeometry(self.__ax, self.__ay, self.__width, self.__height)
         self.setWindowTitle("Kaia's Restaurant Picker")
 
