@@ -52,7 +52,7 @@ class PyQtLayout(QWidget):
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
         self.button_update_location.clicked.connect(self.set_selected_location)
         self.button_quit.clicked.connect(self.close)
-        self.button_random_restaurants.clicked.connect(self.get_rand_res)
+        self.button_random_restaurants.clicked.connect(self.get_random_restaurant)
         
         # Adjust CSS for this project
         self.set_total_layout()
@@ -140,11 +140,13 @@ class PyQtLayout(QWidget):
                                                   "border: 5px solid #553b5e;"
                                                   "color: #c2e9f0;"
                                                   )
-
+    # Initialize results table on startup
     def init_results_table(self):
+        # Set table size and formatting
         self.table_results.setRowCount(5)
         self.table_results.setColumnCount(4)
         self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        # Fill table with blank values until get_random_restaurant() is called
         for row in range(5):
             for col in range(4):
                 self.table_results.setItem(row, col, QTableWidgetItem(''))
@@ -220,7 +222,7 @@ class PyQtLayout(QWidget):
         new_res.close()
         self.update_restaurants()
 
-    def get_rand_res(self):
+    def get_random_restaurant(self):
         available_restaurants = []
         random_choices = []
     
