@@ -189,14 +189,20 @@ class PyQtLayout(QWidget):
         # Close the current location file
         file.close()
 
-    # TODO: Make path better
+    # Initialize the locations for the table
     def init_locations(self):
+        # Bool used to set first file as current location on startup
         init = False
+        # Iterate over all files in restaurants directory
         for file in os.listdir("restaurants"):
+            # Only cound .CSV files for locations
             if file[-4:] == ".csv":
+                    # Add new location to table
                     self.update_available_locations(file[:-4])
+            # Set current location as first file
             if init == False:
                 self.current_location = file[:-4]
+                # Do not run again
                 init = True
 
     def update_available_locations(self, new_loc): 
