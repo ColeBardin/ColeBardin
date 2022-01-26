@@ -234,7 +234,9 @@ class PyQtLayout(QWidget):
             # Add filename to list of available locations
             self.list_locations.addItem(QListWidgetItem(file[:-4]))
 
+    # Method to generate new location label with current location
     def selected_location_label(self):
+        # Returns complete string
         return "Selected Location: " + self.current_location 
 
     def add_restaurant(self):
