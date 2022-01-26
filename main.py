@@ -223,10 +223,15 @@ class PyQtLayout(QWidget):
         # Update the list of available restaurants from this new location
         self.update_restaurants()
 
+    # Method to build the location table
     def build_locations(self):
+        # First, clear the table
         self.list_locations.clear()
+        # Add first title element
         self.list_locations.addItem(QListWidgetItem("Full Location List:\n"))
+        # Iterate for all the files in \restaurants subdirectory
         for file in os.listdir('restaurants'):
+            # Add filename to list of available locations
             self.list_locations.addItem(QListWidgetItem(file[:-4]))
 
     def selected_location_label(self):
