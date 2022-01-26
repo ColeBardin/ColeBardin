@@ -369,5 +369,6 @@ def main():
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
+    # TODO: Make directory paths OS friendly
     # Call upon main function
     main()
