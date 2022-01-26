@@ -15,12 +15,12 @@ class PyQtLayout(QWidget):
         self.location_text = []
         self.current_location = None
 
-        self.label_locations = QLabel(self)
         self.label_current_location = QLabel(self)
 
         self.table_results = QTableWidget(self)
 
         self.list_current_restaurants = QListWidget(self)
+        self.list_locations = QListWidget(self)
 
         self.combo_location_select = QComboBox(self)
         
@@ -36,10 +36,11 @@ class PyQtLayout(QWidget):
         self.init_locations()
         self.update_restaurants()
         self.init_results_table()
+        self.build_locations()
 
         self.list_current_restaurants.setMaximumWidth(int(self.__width/3))
+        self.list_locations.setMaximumWidth(int(self.__width/3))
 
-        self.label_locations.setText(self.build_location_label())
         self.label_current_location.setText(self.selected_location_label())
 
         self.button_add_location.clicked.connect(self.add_location)
@@ -53,7 +54,7 @@ class PyQtLayout(QWidget):
         grid = QGridLayout()
         grid.addWidget(self.button_add_location, 0, 6)
         grid.addWidget(self.button_add_restaurant, 1, 6)
-        grid.addWidget(self.label_locations, 2, 6)
+        grid.addWidget(self.list_locations, 2, 6)
         grid.addWidget(self.button_quit, 3, 6)
 
         grid.addWidget(self.combo_location_select, 1, 0)
@@ -99,7 +100,7 @@ class PyQtLayout(QWidget):
         self.combo_location_select.setStyleSheet("color: #4f2262;"
                                    "background: #92d8e3;"
                                    )
-        self.label_locations.setStyleSheet("background-color: #6a6383;"
+        self.list_locations.setStyleSheet("background-color: #6a6383;"
                                      "border: 5px solid #553b5e;"
                                      "color: #c2e9f0;"
                                      )
@@ -133,8 +134,7 @@ class PyQtLayout(QWidget):
                 new_loc = open(f"restaurants\\{text}.csv", "w")
                 new_loc.close()
                 self.update_current_locations(text)
-                self.label_locations.setText(self.build_location_label())
-                self.label_locations.adjustSize()
+                self.build_locations()
             else:
                 msg_empty_loc = QMessageBox(self)
                 msg_empty_loc.setWindowTitle("ERROR")
@@ -144,7 +144,7 @@ class PyQtLayout(QWidget):
 
     def update_restaurants(self):
         self.list_current_restaurants.clear()
-        self.list_current_restaurants.addItem(QListWidgetItem("Full Restaurant List:\n"))
+        self.list_current_restaurants.addItem(QListWidgetItem(f"All Restaurants in {self.current_location}:\n"))
         file = open(f"restaurants\\{self.current_location}.csv", "r")
         for line in file:
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
@@ -163,15 +163,17 @@ class PyQtLayout(QWidget):
     def update_current_locations(self, new_loc): 
         if len(new_loc) != 0:
             self.combo_location_select.addItem(new_loc)
-            self.location_text.append(new_loc)
 
     def set_selected_location(self):
         self.current_location = self.combo_location_select.currentText()
-        self.label_locations.setText(self.build_location_label())
-        self.label_locations.adjustSize()
+        self.label_current_location.setText(self.selected_location_label())
+        self.update_restaurants()
 
-    def build_location_label(self):
-        return "\n\nLocations:\n\n" + '\n'.join(self.location_text)
+    def build_locations(self):
+        self.list_locations.clear()
+        self.list_locations.addItem(QListWidgetItem("Full Location List:\n"))
+        for file in os.listdir('restaurants'):
+            self.list_locations.addItem(QListWidgetItem(file[:-4]))
 
     def selected_location_label(self):
         return "Selected Location: " + self.current_location 
