@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import *
+from PyQt5.QtGUI import *
+import PyQt5.QtCore as qt
 from random import randint
 import sys
 import os
@@ -6,8 +8,6 @@ import os
 class PyQtLayout(QWidget):
     def __init__(self):
         super().__init__()
-        self.setStyleSheet("background-color: #B29FF1;"
-                            "font-weight: bold;")
 
         self.__width = int(1300)
         self.__height = int(700)
@@ -15,15 +15,23 @@ class PyQtLayout(QWidget):
         self.__ay = 0
 
         self.loc_label = []
-        self.locations = QLabel(self)
-        self.loc_select = QComboBox(self)
         self.current_location = None
-        self.current_loc_label = QLabel(self)
 
+        self.locations = QLabel(self)
+        self.current_loc_label = QLabel(self)
         self.results = QLabel(self)
 
-        self.UI()
+        self.loc_select = QComboBox(self)
+        
+        self.add_loc = QPushButton("Add New Location")
+        self.add_res = QPushButton("Add New Restaurant")
+        self.update_loc = QPushButton("Select Location")
+        self.quit_button = QPushButton("Quit")
+        self.select_random_restaurant = QPushButton("Choose for me!")
 
+        self.square = QPainter(self)
+        
+        self.UI()
 
     def UI(self):
         self.init_locations()
@@ -32,37 +40,34 @@ class PyQtLayout(QWidget):
         self.current_loc_label.setText(self.selected_location_label())
 
         self.results.setText('')
+        self.square.setPen(QPen(Qt.black, 8, Qt.SolidLine))
+        self.square.setBrush(QBrush(Qt.red, Qt.SolidPattern))
+        self.square.draw
 
-        add_loc = QPushButton("Add New Location")
-        add_loc.resize(100,20)
-        add_loc.clicked.connect(self.add_location)
+        self.add_loc.resize(100,20)
+        self.add_loc.clicked.connect(self.add_location)
 
-        add_res = QPushButton("Add New Restaurant")
-        add_res.resize(100,20)
-        add_res.clicked.connect(self.add_restaurant)
+        self.add_res.resize(100,20)
+        self.add_res.clicked.connect(self.add_restaurant)
 
-        update_loc = QPushButton(self)
-        update_loc.setText("Select Location")
-        update_loc.clicked.connect(self.set_selected_location)
+        self.update_loc.clicked.connect(self.set_selected_location)
 
-        quit_button = QPushButton(self)
-        quit_button.setText("Quit")
-        quit_button.clicked.connect(self.close)
+        self.quit_button.clicked.connect(self.close)
 
-        select_random_restaurant = QPushButton(self)
-        select_random_restaurant.setText("Choose For Me!")
-        select_random_restaurant.clicked.connect(self.get_rand_res)
+        self.select_random_restaurant.clicked.connect(self.get_rand_res)
+
+        self.set_total_layout()
 
         grid = QGridLayout()
-        grid.addWidget(add_loc, 0, 6)
-        grid.addWidget(add_res, 1, 6)
+        grid.addWidget(self.add_loc, 0, 6)
+        grid.addWidget(self.add_res, 1, 6)
         grid.addWidget(self.locations, 2, 6)
-        grid.addWidget(quit_button, 3, 6)
+        grid.addWidget(self.quit_button, 3, 6)
 
         grid.addWidget(self.loc_select, 1, 0)
-        grid.addWidget(update_loc, 0, 0)
+        grid.addWidget(self.update_loc, 0, 0)
     
-        grid.addWidget(select_random_restaurant, 1, 4)
+        grid.addWidget(self.select_random_restaurant, 1, 4)
         grid.addWidget(self.results, 2, 4)
         grid.addWidget(self.current_loc_label, 0, 4)
         
@@ -70,13 +75,43 @@ class PyQtLayout(QWidget):
         self.setGeometry(self.__ax, self.__ay, self.__width, self.__height)
         self.setWindowTitle("Kaia's Restaurant Picker")
 
+    def set_total_layout(self):
+        #Color Pallet
+        #light purple = 9a82b0
+        #dark purple = 4f2262
+        #grey = 3f3b3b
+        #light blue = d4eced
+        self.setStyleSheet("background-color: #9a82b0;"
+                            "font-weight: bold;"
+                            "color: #4f2262;"
+                            )
+
+        self.add_loc.setStyleSheet("color: #4f2262;"
+                                   "background-color: #92d8e3;"
+                                   )
+        self.add_res.setStyleSheet("color: #4f2262;"
+                                   "background-color: #92d8e3;"
+                                   )
+        self.update_loc.setStyleSheet("color: #4f2262;"
+                                   "background-color: #92d8e3;"
+                                   )
+        self.quit_button.setStyleSheet("color: #4f2262;"
+                                   "background-color: #92d8e3;"
+                                   )        
+        self.select_random_restaurant.setStyleSheet("color: #4f2262;"
+                                   "background-color: #92d8e3;"
+                                   )        
+        self.loc_select.setStyleSheet("color: #4f2262;"
+                                   "background: #92d8e3;"
+                                   )
+  
     def add_location(self):
         text , pressed = QInputDialog.getText(self, "Add New Location", "Location Name: ", QLineEdit.Normal, "")
 
         if pressed:
             # TODO: verify that location doesnt exist already
             if text != '':
-                new_loc = open(f"/Users/colebardin/VSCODE/Kaia_project/restaurants/{text}.csv", "w")
+                new_loc = open(f"restaurants\\{text}.csv", "w")
                 new_loc.close()
                 self.update_current_locations(text)
                 self.locations.setText(self.build_location_label())
@@ -91,7 +126,7 @@ class PyQtLayout(QWidget):
     # TODO: Make path better
     def init_locations(self):
         init = False
-        for file in os.listdir("/Users/colebardin/VSCODE/Kaia_project/restaurants"):
+        for file in os.listdir("restaurants"):
             if file[-4:] == ".csv":
                     self.update_current_locations(file[:-4])
             if init == False:
@@ -127,7 +162,7 @@ class PyQtLayout(QWidget):
                 else:
                     data.append(text)
 
-        new_res = open(f"/Users/colebardin/VSCODE/Kaia_project/restaurants/{self.current_location}.csv", "a")
+        new_res = open(f"restaurants\\{self.current_location}.csv", "a")
         new_res.write(','.join(data) + '\n')
         new_res.close()
 
@@ -135,7 +170,7 @@ class PyQtLayout(QWidget):
         available_restaurants = []
         random_choices = []
     
-        current_file = open(f"/Users/colebardin/VSCODE/Kaia_project/restaurants/{self.current_location}.csv", "r")
+        current_file = open(f"restaurants\\{self.current_location}.csv", "r")
         for line in current_file:
             available_restaurants.append(line.split(','))
         current_file.close()
