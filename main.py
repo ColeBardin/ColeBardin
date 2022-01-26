@@ -201,37 +201,48 @@ class PyQtLayout(QWidget):
             # Update the current available locations table
             self.update_available_locations(new_location)
 
-
    # Action method to add a new restaurant to current location
     def add_restaurant(self):
         # Make empty list to hold input values
         data = ['','','','']
-        # TODO: error handle giving invalid information (NEEDS A NAME AT LEAST)
         # List of prompts for line edits
-        display_text = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
-
-        # Iterate 4 times
-        for index in range(4):
-            # Create LineEdit to prompt user for input
-            text, pressed = QInputDialog.getText(self, "Add Restaurant to f{self.current_location}", display_text[index], QLineEdit.Normal, "")
-            
-            # Once entered
-            if pressed:
-                # If user entered nothing
-                if text == '':
-                    data.append(None)
+        messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
+        # Use iterator to determine data type
+        iterator = 0
+        # Repeat until all data is collected
+        while iterator < 4:
+            # Prompt user for input
+            input_data = self.get_user_input("Add restaurant to f{self.current_location}", messages[iterator])
+            # If blank entry is submitted
+            if input_data == '':
+                # Only error if blank name is submitted
+                if iterator == 0:
+                    # Display error message
+                    self.generate_error_msg("Restaurants must at least have a name", QMessageBox.Critical)
+                # If empty input is given for other fields
                 else:
-                    # When given valid data, add it to list
-                    data.append(text)
-        
-        # Add new restaurant packet to current location file
-        new_res = open(f"restaurants\\{self.current_location}.csv", "a")
-        # Join data with a newline and write
-        new_res.write(','.join(data) + '\n')
-        # Close current location file
-        new_res.close()
-        # Update available restaurants list
-        self.update_restaurants()
+                    # Leave data entry blank and move on
+                    iterator += 1
+            # If cancel button is pressed at any time
+            elif type(input_data) == type(None):
+                # Generate error message
+                self.generate_error_msg("Restaurant entry cancelled", QMessageBox.Warning)
+                # End process
+                iterator = 10
+                break;
+            # If a filled submission is given
+            else:
+                data[iterator] = temp_data
+                iterator += 1
+        if iterator == 4:                    
+            # Add new restaurant packet to current location file
+            new_res = open(f"restaurants\\{self.current_location}.csv", "a")
+            # Join data with a newline and write
+            new_res.write(','.join(data) + '\n')
+            # Close current location file
+            new_res.close()
+            # Update available restaurants list
+            self.update_restaurants()
 
     # Method to call when the list of resaurants or current location is changed
     def update_restaurants(self):
