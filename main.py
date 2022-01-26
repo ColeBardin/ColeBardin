@@ -192,12 +192,19 @@ class PyQtLayout(QWidget):
             self.add_location()
         # If cancel button is pressed, NoneType is passed
         elif type(new_location) == type(None):
-            pass
+            self.generate_error_msg("New location entry cancelled", QMessageBox.Information)
         # Else result is valid
         else:
-            # Create a .CSV file with the input as the name
-            new_file = open(f"restaurants\\{new_location}.csv", "w")
-            new_file.close()
+            # Check to see if file exists before writing a new one
+            if os.path.isfile(f"restaurants\\{new_location}.csv"):\
+                # Display error message
+                self.generate_error_msg("A file for this location already exists", QMessageBox.Warning)
+                # Recurse
+                self.add_location()
+            else:
+                # Create a .CSV file with the input as the name
+                new_file = open(f"restaurants\\{new_location}.csv", "w")
+                new_file.close()
             # Update the current available locations table
             self.update_available_locations(new_location)
 
@@ -226,7 +233,7 @@ class PyQtLayout(QWidget):
             # If cancel button is pressed at any time
             elif type(input_data) == type(None):
                 # Generate error message
-                self.generate_error_msg("Restaurant entry cancelled", QMessageBox.Warning)
+                self.generate_error_msg("Restaurant entry cancelled", QMessageBox.Information)
                 # End process
                 iterator = 10
                 break;
