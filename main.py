@@ -170,43 +170,33 @@ class PyQtLayout(QWidget):
                                                   "color: #c2e9f0;"
                                                   )
 
-    # Method to prompt user for a text input
-    def get_user_input(self, title, msg):
-        # Generate input text box for user
-        text , pressed =  text , pressed = QInputDialog.getText(self, title, msg, QLineEdit.Normal, "")
-        
-        # Check for submission
-        if pressed:
-            # Return user input
-            return text
-
     # Action method for button_add_location
     def add_location(self):
         new_location = self.get_user_input("Add New Location", "Enter a new location name:")
-        # TODO: verify that location doesn't exist already
         # If blank entry is submitted
         if new_location == '':
             # Display error message for empty input
-            self.generate_error_msg("Enter a valid location name", QMessageBox.Warning)
+            self.generate_display_msg("Warning", "Enter a valid location name", QMessageBox.Warning)
             # Recurse
             self.add_location()
         # If cancel button is pressed, NoneType is passed
         elif type(new_location) == type(None):
-            self.generate_error_msg("New location entry cancelled", QMessageBox.Information)
+            self.generate_display_msg("Warning", "New location entry cancelled", QMessageBox.Information)
         # Else result is valid
         else:
             # Check to see if file exists before writing a new one
             if os.path.isfile(f"restaurants\\{new_location}.csv"):\
                 # Display error message
-                self.generate_error_msg("A file for this location already exists", QMessageBox.Warning)
+                self.generate_display_msg("Warning", "A file for this location already exists", QMessageBox.Warning)
                 # Recurse
                 self.add_location()
             else:
                 # Create a .CSV file with the input as the name
                 new_file = open(f"restaurants\\{new_location}.csv", "w")
                 new_file.close()
-            # Update the current available locations table
-            self.update_available_locations(new_location)
+                # Update the current available locations table
+                self.update_available_locations(new_location)
+                self.generate_display_msg("Succes", f"Successfully created new location: {new_location}", QMessageBox.Information)
 
    # Action method to add a new restaurant to current location
     def add_restaurant(self):
@@ -225,7 +215,7 @@ class PyQtLayout(QWidget):
                 # Only error if blank name is submitted
                 if iterator == 0:
                     # Display error message
-                    self.generate_error_msg("Restaurants must at least have a name", QMessageBox.Critical)
+                    self.generate_display_msg("Error", "Restaurants must at least have a name", QMessageBox.Critical)
                 # If empty input is given for other fields
                 else:
                     # Leave data entry blank and move on
@@ -233,7 +223,7 @@ class PyQtLayout(QWidget):
             # If cancel button is pressed at any time
             elif type(input_data) == type(None):
                 # Generate error message
-                self.generate_error_msg("Restaurant entry cancelled", QMessageBox.Information)
+                self.generate_display_msg("Warning", "Restaurant entry cancelled", QMessageBox.Information)
                 # End process
                 iterator = 10
                 break;
@@ -340,12 +330,22 @@ class PyQtLayout(QWidget):
         # Build results table with random choices
         self.build_results(random_choices)  
 
+    # Method to prompt user for a text input
+    def get_user_input(self, title, msg):
+        # Generate input text box for user
+        text , pressed =  text , pressed = QInputDialog.getText(self, title, msg, QLineEdit.Normal, "")
+        
+        # Check for submission
+        if pressed:
+            # Return user input
+            return text
+
     # Method to make error messages pop up
-    def generate_error_msg(self, msg, err_type):
+    def generate_display_msg(self, title, msg, err_type):
         # Generate message box object
         error_msg = QMessageBox(self)
         # Set the window title
-        error_msg.setWindowTitle("ERROR")
+        error_msg.setWindowTitle(title)
         # Set the message box text to be msg parameter
         error_msg.setText(msg)
         #QMessageBox.Warning, Question, Information, Critical
