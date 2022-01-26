@@ -151,17 +151,23 @@ class PyQtLayout(QWidget):
             for col in range(4):
                 self.table_results.setItem(row, col, QTableWidgetItem(''))
 
+    # Action method for button_add_location
     def add_location(self):
+        # Read from button
         text , pressed = QInputDialog.getText(self, "Add New Location", "Location Name: ", QLineEdit.Normal, "")
 
+        # When button is pressed
         if pressed:
-            # TODO: verify that location doesnt exist already
+            # TODO: verify that location doesn't exist already
+            # Check to see if text has been sent through line
             if text != '':
+                # Create a .CSV file with the input as the name
                 new_loc = open(f"restaurants\\{text}.csv", "w")
                 new_loc.close()
-                self.update_current_locations(text)
-                self.build_locations()
+                # Update the current available locations table
+                self.update_available_locations(text)
             else:
+                # TODO: Make error function
                 msg_empty_loc = QMessageBox(self)
                 msg_empty_loc.setWindowTitle("ERROR")
                 msg_empty_loc.setText("Enter a location name")
@@ -181,14 +187,15 @@ class PyQtLayout(QWidget):
         init = False
         for file in os.listdir("restaurants"):
             if file[-4:] == ".csv":
-                    self.update_current_locations(file[:-4])
+                    self.update_available_locations(file[:-4])
             if init == False:
                 self.current_location = file[:-4]
                 init = True
 
-    def update_current_locations(self, new_loc): 
+    def update_available_locations(self, new_loc): 
         if len(new_loc) != 0:
             self.combo_location_select.addItem(new_loc)
+            self.build_locations()
 
     def set_selected_location(self):
         self.current_location = self.combo_location_select.currentText()
