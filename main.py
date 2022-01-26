@@ -5,6 +5,7 @@ import os
 
 # Layout class
 class PyQtLayout(QWidget):
+    # Class initialization method
     def __init__(self):
         super().__init__()
 
@@ -52,7 +53,7 @@ class PyQtLayout(QWidget):
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
         self.button_update_location.clicked.connect(self.update_selected_location)
         self.button_quit.clicked.connect(self.close)
-        self.button_random_restaurants.clicked.connect(self.get_random_restaurant)
+        self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
         
         # Adjust CSS for this project
         self.set_css()
@@ -285,7 +286,7 @@ class PyQtLayout(QWidget):
         return "Selected Location: " + self.current_location 
 
     # Action method to display random restaurants
-    def get_random_restaurant(self):
+    def generate_random_restaurant(self):
         # List to hold all available restaurants
         available_restaurants = []
         # List to hold chose restaurants
