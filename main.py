@@ -13,12 +13,12 @@ class PyQtLayout(QWidget):
         self.__ay = 0
 
         self.location_text = []
-        self.restaurant_text = ''
         self.current_location = None
 
         self.label_locations = QLabel(self)
         self.label_current_location = QLabel(self)
-        self.label_results = QLabel(self)
+
+        self.table_results = QTableWidget(self)
 
         self.list_current_restaurants = QListWidget(self)
 
@@ -35,12 +35,12 @@ class PyQtLayout(QWidget):
     def UI(self):
         self.init_locations()
         self.update_restaurants()
+        self.init_results_table()
 
         self.list_current_restaurants.setMaximumWidth(int(self.__width/3))
 
         self.label_locations.setText(self.build_location_label())
         self.label_current_location.setText(self.selected_location_label())
-        self.label_results.setText('')
 
         self.button_add_location.clicked.connect(self.add_location)
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
@@ -61,7 +61,7 @@ class PyQtLayout(QWidget):
         grid.addWidget(self.list_current_restaurants, 2, 0)
     
         grid.addWidget(self.button_random_restaurants, 1, 4)
-        grid.addWidget(self.label_results, 2, 4)
+        grid.addWidget(self.table_results, 2, 4)
         grid.addWidget(self.label_current_location, 0, 4)
         
         self.setLayout(grid)
@@ -103,7 +103,7 @@ class PyQtLayout(QWidget):
                                      "border: 5px solid #553b5e;"
                                      "color: #c2e9f0;"
                                      )
-        self.label_results.setStyleSheet("background-color: #6a6383;"
+        self.table_results.setStyleSheet("background-color: #6a6383;"
                                      "border: 5px solid #553b5e;"
                                      "color: #c2e9f0;"
                                      )
@@ -111,6 +111,18 @@ class PyQtLayout(QWidget):
                                      "border: 5px solid #553b5e;"
                                      "color: #c2e9f0;"
                                      )
+        self.list_current_restaurants.setStyleSheet("background-color: #6a6383;"
+                                     "border: 5px solid #553b5e;"
+                                     "color: #c2e9f0;"
+                                     )
+
+    def init_results_table(self):
+        self.table_results.setRowCount(5)
+        self.table_results.setColumnCount(4)
+        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        for row in range(5):
+            for col in range(4):
+                self.table_results.setItem(row, col, QTableWidgetItem(''))
 
     def add_location(self):
         text , pressed = QInputDialog.getText(self, "Add New Location", "Location Name: ", QLineEdit.Normal, "")
@@ -131,12 +143,12 @@ class PyQtLayout(QWidget):
                 empty_loc_ret = msg_empty_loc.exec_()
 
     def update_restaurants(self):
+        self.list_current_restaurants.clear()
         self.list_current_restaurants.addItem(QListWidgetItem("Full Restaurant List:\n"))
         file = open(f"restaurants\\{self.current_location}.csv", "r")
         for line in file:
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
         file.close()
-
 
     # TODO: Make path better
     def init_locations(self):
@@ -180,7 +192,7 @@ class PyQtLayout(QWidget):
         new_res = open(f"restaurants\\{self.current_location}.csv", "a")
         new_res.write(','.join(data) + '\n')
         new_res.close()
-        update_restaurants()
+        self.update_restaurants()
 
     def get_rand_res(self):
         available_restaurants = []
@@ -197,11 +209,10 @@ class PyQtLayout(QWidget):
         self.build_results(random_choices)
         
     def build_results(self, choices):
-        results_label = f"Here\'s 5 random restaurants in {self.current_location}\nName:\tGenre\tPrice 0($) to 10($$)\tDescription\n\n"
-        for index in range(5):
-            results_label += '\t'.join(choices[index]) + '\n'
-        self.label_results.setText(results_label)
-
+        self.table_results.clear()
+        for row in range(5):
+            for col in range(4):
+                self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
 
 def main():
     app = QApplication(sys.argv)
