@@ -270,18 +270,30 @@ class PyQtLayout(QWidget):
         # Update available restaurants list
         self.update_restaurants()
 
+    # Action method to display random restaurants
     def get_random_restaurant(self):
+        # List to hold all available restaurants
         available_restaurants = []
+        # List to hold chose restaurants
         random_choices = []
     
+        # Read from current location file
         current_file = open(f"restaurants\\{self.current_location}.csv", "r")
+        # Iterate over each line in .CSV
         for line in current_file:
+            # Add restaurants to list to choose from
             available_restaurants.append(line.split(','))
+        # Close the current location file
         current_file.close()
+        # Repeat 5 times
         for _ in range(5):
+            # Choose random number
             random_num = randint(0, len(available_restaurants)-1)
+            # Use random number as index to select restaurant and add to list of choices
             random_choices.append(available_restaurants[random_num])
+            # Stop current restaurant from beign displayed twice
             available_restaurants.pop(random_num)
+        # Build results table with random choices
         self.build_results(random_choices)
         
     def build_results(self, choices):
