@@ -229,11 +229,11 @@ class PyQtLayout(QWidget):
                 break;
             # If a filled submission is given
             else:
-                data[iterator] = temp_data
+                data[iterator] = input_data
                 iterator += 1
         if iterator == 4:                    
             # Add new restaurant packet to current location file
-            new_res = open(f"restaurants\\{self.current_location}.csv", "a")
+            new_res = open(os.path.join("restaurants",f"{self.current_location}.csv"), "a")
             # Join data with a newline and write
             new_res.write(','.join(data) + '\n')
             # Close current location file
@@ -248,7 +248,7 @@ class PyQtLayout(QWidget):
         # Add first title element
         self.list_current_restaurants.addItem(QListWidgetItem(f"All Restaurants in {self.current_location}:\n"))
         # Get available restaurants from current location file
-        file = open(f"restaurants\\{self.current_location}.csv", "r")
+        file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
         # Iterate over each restaurant packet
         for line in file:
             # Parse out the name of the restaurant from the packet
@@ -312,7 +312,7 @@ class PyQtLayout(QWidget):
         random_choices = []
     
         # Read from current location file
-        current_file = open(f"restaurants\\{self.current_location}.csv", "r")
+        current_file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
         # Iterate over each line in .CSV
         for line in current_file:
             # Add restaurants to list to choose from
@@ -369,6 +369,5 @@ def main():
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
-    # TODO: Make directory paths OS friendly
     # Call upon main function
     main()
