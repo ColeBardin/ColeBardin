@@ -7,8 +7,8 @@ class PyQtLayout(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.__width = int(1300)
-        self.__height = int(700)
+        self.__width = int(1500)
+        self.__height = int(800)
         self.__ax = 0
         self.__ay = 0
 
@@ -212,6 +212,7 @@ class PyQtLayout(QWidget):
         
     def build_results(self, choices):
         self.table_results.clear()
+        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
         for row in range(5):
             for col in range(4):
                 self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
