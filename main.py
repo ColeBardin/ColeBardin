@@ -184,7 +184,7 @@ class PyQtLayout(QWidget):
     def add_location(self):
         new_location = self.get_user_input("Add New Location", "Enter a new location name:")
         # TODO: verify that location doesn't exist already
-        # Check to see if text has been sent through line
+        # If blank entry is submitted
         if new_location == '':
             # Display error message for empty input
             self.generate_error_msg("Enter a valid location name", QMessageBox.Warning)
@@ -193,7 +193,7 @@ class PyQtLayout(QWidget):
         # If cancel button is pressed, NoneType is passed
         elif type(new_location) == type(None):
             pass
-        # If blank entry is submitted
+        # Else result is valid
         else:
             # Create a .CSV file with the input as the name
             new_file = open(f"restaurants\\{new_location}.csv", "w")
