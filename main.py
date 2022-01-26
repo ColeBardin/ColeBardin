@@ -239,22 +239,35 @@ class PyQtLayout(QWidget):
         # Returns complete string
         return "Selected Location: " + self.current_location 
 
+    # Action method to add a new restaurant to current location
     def add_restaurant(self):
+        # Make empty list to hold input values
         data = []
+        # TODO: error handle giving invalid information (NEEDS A NAME AT LEAST)
+        # List of prompts for line edits
         display_text = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
 
+        # Iterate 4 times
         for index in range(4):
-            text, pressed = QInputDialog.getText(self, "Add New Restaurant", display_text[index], QLineEdit.Normal, "")
-
+            # Create LineEdit to prompt user for input
+            text, pressed = QInputDialog.getText(self, "Add Restaurant to f{self.current_location}", display_text[index], QLineEdit.Normal, "")
+            
+            # Once entered
             if pressed:
+                # If user entered nothing
                 if text == '':
                     data.append(None)
                 else:
+                    # When given valid data, add it to list
                     data.append(text)
-
+        
+        # Add new restaurant packet to current location file
         new_res = open(f"restaurants\\{self.current_location}.csv", "a")
+        # Join data with a newline and write
         new_res.write(','.join(data) + '\n')
+        # Close current location file
         new_res.close()
+        # Update available restaurants list
         self.update_restaurants()
 
     def get_random_restaurant(self):
