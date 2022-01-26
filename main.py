@@ -170,29 +170,42 @@ class PyQtLayout(QWidget):
                                                   "color: #c2e9f0;"
                                                   )
 
+    # Method to prompt user for a text input
+    def get_user_input(self, title, msg):
+        # Generate input text box for user
+        text , pressed =  text , pressed = QInputDialog.getText(self, title, msg, QLineEdit.Normal, "")
+        
+        # Check for submission
+        if pressed:
+            # Return user input
+            return text
+
     # Action method for button_add_location
     def add_location(self):
-        # Read from button
-        text , pressed = QInputDialog.getText(self, "Add New Location", "Location Name: ", QLineEdit.Normal, "")
+        new_location = self.get_user_input("Add New Location", "Enter a new location name:")
+        # TODO: verify that location doesn't exist already
+        # Check to see if text has been sent through line
+        if new_location == '':
+            # Display error message for empty input
+            self.generate_error_msg("Enter a valid location name", QMessageBox.Warning)
+            # Recurse
+            self.add_location()
+        # If cancel button is pressed, NoneType is passed
+        elif type(new_location) == type(None):
+            pass
+        # If blank entry is submitted
+        else:
+            # Create a .CSV file with the input as the name
+            new_file = open(f"restaurants\\{new_location}.csv", "w")
+            new_file.close()
+            # Update the current available locations table
+            self.update_available_locations(new_location)
 
-        # When button is pressed
-        if pressed:
-            # TODO: verify that location doesn't exist already
-            # Check to see if text has been sent through line
-            if text != '':
-                # Create a .CSV file with the input as the name
-                new_loc = open(f"restaurants\\{text}.csv", "w")
-                new_loc.close()
-                # Update the current available locations table
-                self.update_available_locations(text)
-            else:
-                self.generate_error_msg("Enter a valid location name", QMessageBox.Warning)
-                self.add_location()
 
    # Action method to add a new restaurant to current location
     def add_restaurant(self):
         # Make empty list to hold input values
-        data = []
+        data = ['','','','']
         # TODO: error handle giving invalid information (NEEDS A NAME AT LEAST)
         # List of prompts for line edits
         display_text = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
@@ -237,6 +250,7 @@ class PyQtLayout(QWidget):
     
     # Method to update the location table with a new location
     def update_available_locations(self, new_loc): 
+        # TODO: Input error handle
         # Make sure new location is valid
         if len(new_loc) != 0:
             # Add the item to the drop down menu
