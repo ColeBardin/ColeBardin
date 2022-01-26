@@ -174,12 +174,19 @@ class PyQtLayout(QWidget):
                 msg_empty_loc.setIcon(QMessageBox.Warning)
                 empty_loc_ret = msg_empty_loc.exec_()
 
+    # Method to call when the list of resaurants or current location is changed
     def update_restaurants(self):
+        # Clear all elements from the list
         self.list_current_restaurants.clear()
+        # Add first title element
         self.list_current_restaurants.addItem(QListWidgetItem(f"All Restaurants in {self.current_location}:\n"))
+        # Get available restaurants from current location file
         file = open(f"restaurants\\{self.current_location}.csv", "r")
+        # Iterate over each restaurant packet
         for line in file:
+            # Parse out the name of the restaurant from the packet
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
+        # Close the current location file
         file.close()
 
     # TODO: Make path better
