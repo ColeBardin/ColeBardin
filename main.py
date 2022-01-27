@@ -113,7 +113,6 @@ class PyQtLayout(QWidget):
             # Build the available locations table
             self.build_locations()
 
-
     # Initialize results table on startup
     def init_results_table(self):
         # Set table size and formatting
