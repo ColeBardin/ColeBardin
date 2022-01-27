@@ -234,8 +234,8 @@ class PyQtLayout(QWidget):
 
     # Action method to add a new restaurant to current location
     def add_restaurant(self):
-        # Call method to get restaurant info from user
-        new_restaurant_data, iterator = self.get_restaurant_info()
+        # Call method to get restaurant info from user with new_restaurant paramater True
+        new_restaurant_data, iterator = self.get_restaurant_info(True)
         # Once full data collection has occured
         if iterator == 4:                    
             # Add new restaurant packet to current location file
@@ -250,17 +250,24 @@ class PyQtLayout(QWidget):
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
     # Method to get and return new restaurant info packet and iterator from user
-    def get_restaurant_info(self):
+    def get_restaurant_info(self, new_restaurant):
         # Make empty list to hold input values
         new_restaurant_data = ['','','','']
         # List of prompts for line edits
         messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
+        # Title for prompts selection determined by new_restaurant parameter
+        if new_restaurant == True:
+            # New restaurant title
+            title = f"Add Restaurant to {self.current_location}"
+        else:
+            # Editing restaurant title
+            title = f"Edit {self.current_restaurant} in {self.current_location}"
         # Use iterator to determine data type
         iterator = 0
         # Repeat until all data is collected
         while iterator < 4:
             # Prompt user for input
-            input_data = self.get_user_input(f"Add restaurant to {self.current_location}", messages[iterator])
+            input_data = self.get_user_input(title, messages[iterator])
             # If blank entry is submitted
             if input_data == '':
                 # Only error if blank name is submitted
@@ -415,8 +422,36 @@ class PyQtLayout(QWidget):
         if self.current_restaurant == None:
             # Display error message
             self.generate_display_msg("Error","Select a restaurant to edit",QMessageBox.Warning)
+        # Current restaurant selection is valid
         else:
-
+            # Collect new restaurant data with new_restaurant parameter False to signify editing a restaurant
+            new_restaurant_data, iterator = self.get_restaurant_info(False)
+            # Make an empty string to store contents of new file
+            new_file = ''
+            # Open the location file
+            current_location_file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r+")
+            # Iterate over each line in the file
+            for line in current_location_file:
+                # Validate that line beings with current restaurant name
+                if line[:len(self.current_restaurant)] == self.current_restaurant:
+                    # Append the new data to the buffer instead
+                    new_file += ','.join(new_restaurant_data) + '\n'
+                # Current line entry does not being with current restaurant name
+                else:
+                    # Add previous unedited lines to new file
+                    new_file += line
+            # Set absolute file position
+            current_location_file.seek(0)
+            # Delete all contents of file
+            current_location_file.truncate()
+            # Write new data to file
+            current_location_file.write(new_file)
+            # Close the file
+            current_location_file.close()
+            # Display a success message once rewriting file
+            self.generate_display_msg("Success",f"Successfully edited {self.current_restaurant}", QMessageBox.Information)
+            # Rebuild the list of restaurants
+            self.build_restaurants()
 
 # Main body function
 def main():
