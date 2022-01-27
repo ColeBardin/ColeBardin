@@ -45,7 +45,7 @@ class PyQtLayout(QWidget):
     def init_gui(self):
         # Build all text packets
         self.init_locations_table()
-        self.update_restaurants()
+        self.build_restaurants()
         self.init_results_table()
         self.build_locations()
 
@@ -261,11 +261,31 @@ class PyQtLayout(QWidget):
             # Close current location file
             new_res.close()
             # Update available restaurants list
-            self.update_restaurants()
+            self.build_restaurants()
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
+    # Action method to set the selected location from the drop down as the current location
+    def update_selected_location(self):
+        # Setting current location
+        self.current_location = self.combo_location_select.currentText()
+        # Update current location label
+        self.label_current_location.setText(self.get_selected_location_label())
+        # Update the list of available restaurants from this new location
+        self.build_restaurants()
+
+    # Method to build the location table
+    def build_locations(self):
+        # First, clear the table
+        self.list_locations.clear()
+        # Add first title element
+        self.list_locations.addItem(QListWidgetItem("Your locations:\n"))
+        # Iterate for all the files in \restaurants subdirectory
+        for file in os.listdir('restaurants'):
+            # Add filename to list of available locations
+            self.list_locations.addItem(QListWidgetItem(file[:-4]))
+
     # Method to call when the list of resaurants or current location is changed
-    def update_restaurants(self):
+    def build_restaurants(self):
         # Clear all elements from the list
         self.list_current_restaurants.clear()
         # Add first title element
@@ -278,26 +298,6 @@ class PyQtLayout(QWidget):
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
         # Close the current location file
         file.close()
-
-    # Action method to set the selected location from the drop down as the current location
-    def update_selected_location(self):
-        # Setting current location
-        self.current_location = self.combo_location_select.currentText()
-        # Update current location label
-        self.label_current_location.setText(self.get_selected_location_label())
-        # Update the list of available restaurants from this new location
-        self.update_restaurants()
-
-    # Method to build the location table
-    def build_locations(self):
-        # First, clear the table
-        self.list_locations.clear()
-        # Add first title element
-        self.list_locations.addItem(QListWidgetItem("Your locations:\n"))
-        # Iterate for all the files in \restaurants subdirectory
-        for file in os.listdir('restaurants'):
-            # Add filename to list of available locations
-            self.list_locations.addItem(QListWidgetItem(file[:-4]))
 
     # Method to build results table with given choices
     def build_results(self, choices):
