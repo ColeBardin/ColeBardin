@@ -69,7 +69,7 @@ class PyQtLayout(QWidget):
 
         # Connect list objects to their action methods
         self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
-        self.list_locations.itemClicked.connect(self.update_selected_location)
+        self.list_locations.itemClicked.connect(self.set_current_location)
         
         # Adjust CSS for this project
         self.set_css()
@@ -259,61 +259,6 @@ class PyQtLayout(QWidget):
             # Display success message once completed
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
-    # Method to get and return new restaurant info packet and iterator from user
-    def get_restaurant_info(self, new_restaurant):
-        # Make empty list to hold input values
-        new_restaurant_data = ['','','','']
-        # List of prompts for line edits
-        messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
-        # Title for prompts selection determined by new_restaurant parameter
-        if new_restaurant == True:
-            # New restaurant title
-            title = f"Add Restaurant to {self.current_location}"
-        else:
-            # Editing restaurant title
-            title = f"Edit {self.current_restaurant} in {self.current_location}"
-        # Use iterator to determine data type
-        iterator = 0
-        # Repeat until all data is collected
-        while iterator < 4:
-            # Prompt user for input
-            input_data = self.get_user_input(title, messages[iterator])
-            # If blank entry is submitted
-            if input_data == '':
-                # Only error if blank name is submitted
-                if iterator == 0:
-                    # Display error message
-                    self.generate_display_msg("Error", "Restaurants must at least have a name", QMessageBox.Critical)
-                # If empty input is given for other fields
-                else:
-                    # Leave data entry blank and move on
-                    iterator += 1
-            # If cancel button is pressed at any time
-            elif type(input_data) == type(None):
-                # Generate error message
-                self.generate_display_msg("Warning", "Restaurant entry cancelled", QMessageBox.Information)
-                # End process
-                iterator = 10
-                break;
-            # If a filled submission is given
-            else:
-                # Set most recent input
-                new_restaurant_data[iterator] = input_data
-                # Increment after successful data acquisition
-                iterator += 1
-        # Return the given data and the end status of the iterator
-        return new_restaurant_data, iterator
-
-    # TODO: change name?
-    # Action method to set the selected location from the drop down as the current location
-    def update_selected_location(self, item):
-        # Setting current location
-        self.current_location = item.text()
-        # Update current location label
-        self.label_current_location.setText(self.get_selected_location_label())
-        # Update the list of available restaurants from this new location
-        self.build_restaurants()
-
     # Method to build the location table
     def build_locations(self):
         # First, clear the table
@@ -381,6 +326,51 @@ class PyQtLayout(QWidget):
             # Return submitted value
             return dialog.textValue()
 
+    # Method to get and return new restaurant info packet and iterator from user
+    def get_restaurant_info(self, new_restaurant):
+        # Make empty list to hold input values
+        new_restaurant_data = ['','','','']
+        # List of prompts for line edits
+        messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
+        # Title for prompts selection determined by new_restaurant parameter
+        if new_restaurant == True:
+            # New restaurant title
+            title = f"Add Restaurant to {self.current_location}"
+        else:
+            # Editing restaurant title
+            title = f"Edit {self.current_restaurant} in {self.current_location}"
+        # Use iterator to determine data type
+        iterator = 0
+        # Repeat until all data is collected
+        while iterator < 4:
+            # Prompt user for input
+            input_data = self.get_user_input(title, messages[iterator])
+            # If blank entry is submitted
+            if input_data == '':
+                # Only error if blank name is submitted
+                if iterator == 0:
+                    # Display error message
+                    self.generate_display_msg("Error", "Restaurants must at least have a name", QMessageBox.Critical)
+                # If empty input is given for other fields
+                else:
+                    # Leave data entry blank and move on
+                    iterator += 1
+            # If cancel button is pressed at any time
+            elif type(input_data) == type(None):
+                # Generate error message
+                self.generate_display_msg("Warning", "Restaurant entry cancelled", QMessageBox.Information)
+                # End process
+                iterator = 10
+                break;
+            # If a filled submission is given
+            else:
+                # Set most recent input
+                new_restaurant_data[iterator] = input_data
+                # Increment after successful data acquisition
+                iterator += 1
+        # Return the given data and the end status of the iterator
+        return new_restaurant_data, iterator
+
     # Action method to display random restaurants
     def generate_random_restaurant(self):
         # List to hold all available restaurants
@@ -425,6 +415,15 @@ class PyQtLayout(QWidget):
     def set_current_restaurant(self, item):
         # Update current_restaurant variable with selected item
         self.current_restaurant = item.text()
+
+    # Action method to set the selected location from the drop down as the current location
+    def set_current_location(self, item):
+        # Setting current location
+        self.current_location = item.text()
+        # Update current location label
+        self.label_current_location.setText(self.get_selected_location_label())
+        # Update the list of available restaurants from this new location
+        self.build_restaurants()
 
     # Method to edit the current restaurant
     def edit_restaurant(self):
