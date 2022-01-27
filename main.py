@@ -364,6 +364,23 @@ class PyQtLayout(QWidget):
         # Returns complete string
         return "Selected Location: " + self.current_location 
 
+    # Method to prompt user for a text input
+    def get_user_input(self, title, msg):
+        # Create InputDialog object
+        dialog = QInputDialog(self)
+        # Resize the window
+        dialog.resize(QtCore.QSize(500, 100))
+        # Set window title to passed parameter
+        dialog.setWindowTitle(title)
+        # Set dialog message to passed parameter
+        dialog.setLabelText(msg)
+        # Set Echo mode to normal
+        dialog.setTextEchoMode(QLineEdit.Normal)
+        # Wait for response
+        if dialog.exec_() == QDialog.Accepted:
+            # Return submitted value
+            return dialog.textValue()
+
     # Action method to display random restaurants
     def generate_random_restaurant(self):
         # List to hold all available restaurants
@@ -389,23 +406,6 @@ class PyQtLayout(QWidget):
             available_restaurants.pop(random_num)
         # Build results table with random choices
         self.build_results(random_choices)  
-
-    # Method to prompt user for a text input
-    def get_user_input(self, title, msg):
-        # Create InputDialog object
-        dialog = QInputDialog(self)
-        # Resize the window
-        dialog.resize(QtCore.QSize(500, 100))
-        # Set window title to passed parameter
-        dialog.setWindowTitle(title)
-        # Set dialog message to passed parameter
-        dialog.setLabelText(msg)
-        # Set Echo mode to normal
-        dialog.setTextEchoMode(QLineEdit.Normal)
-        # Wait for response
-        if dialog.exec_() == QDialog.Accepted:
-            # Return submitted value
-            return dialog.textValue()
 
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type):
