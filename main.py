@@ -361,16 +361,16 @@ class PyQtLayout(QWidget):
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type):
         # Generate message box object
-        error_msg = QMessageBox(self)
+        disp_msg = QMessageBox(self)
         # Set the window title
-        error_msg.setWindowTitle(title)
+        disp_msg.setWindowTitle(title)
         # Set the message box text to be msg parameter
-        error_msg.setText(msg)
+        disp_msg.setText(msg)
         #QMessageBox.Warning, Question, Information, Critical
         # Set error type from parameter
-        error_msg.setIcon(err_type)
+        disp_msg.setIcon(err_type)
         # Execute error message and save return value
-        err_msg_ret_val = error_msg.exec_()
+        disp_msg_ret_val = disp_msg.exec_()
 
 
 # Main body function
