@@ -165,7 +165,11 @@ class PyQtLayout(QWidget):
         # Get Random Restaurant Button
         self.button_random_restaurants.setStyleSheet("color: #4f2262;"
                                                      "background-color: #92d8e3;"
-                                                     )      
+                                                     )  
+        # Edit restaurant button
+        self.button_edit_restaurant.setStyleSheet("color: #4f2262;"
+                                                  "background-color: #92d8e3;"
+                                                  )  
         # Locations List
         self.list_locations.setStyleSheet("background-color: #3f3857;"
                                           "border: 5px solid #553b5e;"
