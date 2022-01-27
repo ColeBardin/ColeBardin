@@ -363,8 +363,10 @@ class PyQtLayout(QWidget):
         info_window = QMessageBox(self)
         # Set the title to be the restaurant and location
         info_window.setWindowTitle(f"{restaurant_info[0]}")
+        # Set text format to rich text
+        info_window.setTextFormat(1)
         # Display the restaurant's information
-        info_window.setText(f"{restaurant_info[0]}, {self.current_location}\t\t\n\n\nGenre:\n{restaurant_info[1]}\n\nPrice 0($) to 10($$):\n{restaurant_info[2]}\n\nDescription:\n{restaurant_info[3]}")
+        info_window.setText(f"{restaurant_info[0]}, {self.current_location}\n\n\nGenre:\n{restaurant_info[1]}\n\nPrice 0($) to 10($$):\n{restaurant_info[2]}\n\nDescription:\n{restaurant_info[3]}")
         # Change the styling of the window
         info_window.setStyleSheet("color: #c2e9f0;"
                                   "padding: 10px;"
