@@ -193,6 +193,12 @@ class PyQtLayout(QWidget):
                                                   "border: 5px solid #553b5e;"
                                                   "color: #c2e9f0;"
                                                   )
+        # Welcome info label
+        self.label_welcome_info.setStyleSheet("background-color: #6a6383;"
+                                              "border: 5px solid #553b5e;"
+                                              "color: #c2e9f0;"
+                                              )
+
 
     # Action method for button_add_location
     def add_location(self):
