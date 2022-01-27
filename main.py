@@ -19,6 +19,9 @@ class PyQtLayout(QWidget):
         self.current_location = None
         self.current_restaurant = None
 
+        # Buffer to hold current restaurant information
+        self.info_current_restaurant = None
+
         # Welcome informating string
         self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nClick on a location to select and display its restaurants\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nUse \"Add Location\" button to make a new location file\n\nTo edit an existing restaurant, select it and hit \"Edit Restaurant\"\n\nEnjoy!"
 
@@ -70,6 +73,9 @@ class PyQtLayout(QWidget):
         # Connect list objects to their action methods
         self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
         self.list_locations.itemClicked.connect(self.set_current_location)
+
+        # Connect the table items to generate info QDialog boxes
+        self.table_results.itemClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
         self.set_css()
@@ -336,6 +342,19 @@ class PyQtLayout(QWidget):
         disp_msg.setIcon(err_type)
         # Execute error message and save return value
         disp_msg_ret_val = disp_msg.exec_()
+
+    # Method to display a restaurant's information
+    def generate_restaurant_info(self, restaurant):
+        # Initialize QDialog box winodw
+        info_window = QMessageBox(self)
+        # Set the title to be the restaurant and location
+        info_window.setWindowTitle(f"{restaurant.text()}")
+        # Display the restaurant's information
+        info_window.setText(f"{restaurant.text()}\n\n")
+        # Execute the window build operation
+        result = info_window.exec()
+        # Reset current restaurant to be None
+        self.current_restaurant = None
 
     # Method to update current restaurant
     def set_current_restaurant(self, item):
