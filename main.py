@@ -20,7 +20,7 @@ class PyQtLayout(QWidget):
         self.current_restaurant = None
 
         # Buffer to hold current restaurant information
-        self.info_current_restaurant = None
+        self.info_current_restaurants = None
 
         # Welcome informating string
         self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nClick on a location to select and display its restaurants\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nUse \"Add Location\" button to make a new location file\n\nTo edit an existing restaurant, select it and hit \"Edit Restaurant\"\n\nEnjoy!"
@@ -202,6 +202,8 @@ class PyQtLayout(QWidget):
     def build_restaurants(self):
         # Clear all elements from the list
         self.list_current_restaurants.clear()
+        # Clear buffer of current restaurant info
+        self.info_current_restaurants = []
         # Adjust label with with current location
         self.label_restaurants.setText(f"Your Restaurants in {self.current_location}:")
         # Get available restaurants from current location file
@@ -210,6 +212,8 @@ class PyQtLayout(QWidget):
         for line in file:
             # Parse out the name of the restaurant from the packet
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
+            # Add current restaurant information to info buffer
+            self.info_current_restaurants.append(line.split(','))
         # Close the current location file
         file.close()
         # Set current restaurant to None since list is deselected
