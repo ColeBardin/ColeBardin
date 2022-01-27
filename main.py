@@ -139,9 +139,10 @@ class PyQtLayout(QWidget):
         #light purple = 9a82b0
         #dark purple = 4f2262
         #grey = 3f3b3b
-        #dark_grey = #6a6383
+        #dark_grey = 6a6383
         #light blue = 92d8e3
-        #off_black = #553b5e
+        #off_black = 553b5e
+        #super dark grey = 3f3857
 
         # Adjust CSS of Main Window
         self.setStyleSheet("background-color: #9a82b0;"
@@ -173,12 +174,12 @@ class PyQtLayout(QWidget):
                                                  "background: #92d8e3;"
                                                  )
         # Locations List
-        self.list_locations.setStyleSheet("background-color: #6a6383;"
+        self.list_locations.setStyleSheet("background-color: #3f3857;"
                                           "border: 5px solid #553b5e;"
                                           "color: #c2e9f0;"
                                           )
         # Current Restaurants List
-        self.list_current_restaurants.setStyleSheet("background-color: #6a6383;"
+        self.list_current_restaurants.setStyleSheet("background-color: #3f3857;"
                                                     "border: 5px solid #553b5e;"
                                                     "color: #c2e9f0;"
                                                     )
@@ -198,7 +199,6 @@ class PyQtLayout(QWidget):
                                               "border: 5px solid #553b5e;"
                                               "color: #c2e9f0;"
                                               )
-
 
     # Action method for button_add_location
     def add_location(self):
