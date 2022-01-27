@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import *
+from PyQt5 import QtCore
 from random import randint
 import sys
 import os
@@ -345,13 +346,14 @@ class PyQtLayout(QWidget):
 
     # Method to prompt user for a text input
     def get_user_input(self, title, msg):
-        # Generate input text box for user
-        text , pressed = QInputDialog.getText(self, title, msg, QLineEdit.Normal, "")
-        
-        # Check for submission
-        if pressed:
-            # Return user input
-            return text
+        dialog = QInputDialog(self)
+        dialog.resize(QtCore.QSize(500, 100))
+        dialog.setWindowTitle(title)
+        dialog.setLabelText(msg)
+        dialog.setTextEchoMode(QLineEdit.Normal)
+        if dialog.exec_() == QDialog.Accepted:
+            i = dialog.textValue()
+            return(i)
 
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type):
