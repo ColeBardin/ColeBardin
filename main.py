@@ -349,12 +349,16 @@ class PyQtLayout(QWidget):
 
     # Method to display a restaurant's information
     def generate_restaurant_info(self, restaurant):
+        restaurant_info = None
+        for i_restaurant in self.info_current_restaurants:
+            if i_restaurant[0] == restaurant.text():
+                restaurant_info = i_restaurant
         # Initialize QDialog box winodw
         info_window = QMessageBox(self)
         # Set the title to be the restaurant and location
-        info_window.setWindowTitle(f"{restaurant.text()}")
+        info_window.setWindowTitle(f"{restaurant_info[0]}")
         # Display the restaurant's information
-        info_window.setText(f"{restaurant.text()}\n\n")
+        info_window.setText(f"{restaurant_info[0]}\n\n\nGenre:\n{restaurant_info[1]}\n\nPrice 0($) to 10($$):\n{restaurant_info[2]}\n\nDescription:\n{restaurant_info[3]}")
         # Execute the window build operation
         result = info_window.exec()
         # Reset current restaurant to be None
