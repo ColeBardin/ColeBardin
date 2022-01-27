@@ -18,7 +18,7 @@ class PyQtLayout(QWidget):
         # Variable to store current location
         self.current_location = None
 
-        # Initialize all Widgets ons creen
+        # Initialize all Widgets on screen
         self.label_current_location = QLabel(self)
         self.table_results = QTableWidget(self)
         self.list_current_restaurants = QListWidget(self)
@@ -85,17 +85,23 @@ class PyQtLayout(QWidget):
     def init_locations_table(self):
         # Bool used to set first file as current location on startup
         init = False
+        # Test to see if there are location files in directory
+        if len(os.listdir("restaurants")) == 0:
+            # Set current location string to be empty
+            self.current_location = ''
+        # If files do exist in directory
+        else:
         # Iterate over all files in restaurants directory
-        for file in os.listdir("restaurants"):
-            # Only cound .CSV files for locations
-            if file[-4:] == ".csv":
-                    # Add new location to table
-                    self.update_available_locations(file[:-4])
-            # Set current location as first file
-            if init == False:
-                self.current_location = file[:-4]
-                # Do not run again
-                init = True
+            for file in os.listdir("restaurants"):
+                # Only cound .CSV files for locations
+                if file[-4:] == ".csv":
+                        # Add new location to table
+                        self.update_available_locations(file[:-4])
+                # Set current location as first file
+                if init == False:
+                    self.current_location = file[:-4]
+                    # Do not run again
+                    init = True
 
     # Initialize results table on startup
     def init_results_table(self):
