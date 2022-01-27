@@ -191,6 +191,7 @@ class PyQtLayout(QWidget):
         self.label_current_location.setStyleSheet("background-color: #6a6383;"
                                                   "border: 5px solid #553b5e;"
                                                   "color: #c2e9f0;"
+                                                  "padding: 5px;"
                                                   )
         # Welcome info label
         self.label_welcome_info.setStyleSheet("background-color: #6a6383;"
