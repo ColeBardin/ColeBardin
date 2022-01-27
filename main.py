@@ -229,7 +229,7 @@ class PyQtLayout(QWidget):
         # Repeat until all data is collected
         while iterator < 4:
             # Prompt user for input
-            input_data = self.get_user_input("Add restaurant to f{self.current_location}", messages[iterator])
+            input_data = self.get_user_input(f"Add restaurant to {self.current_location}", messages[iterator])
             # If blank entry is submitted
             if input_data == '':
                 # Only error if blank name is submitted
