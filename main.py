@@ -414,13 +414,13 @@ class PyQtLayout(QWidget):
                                               "alignment: center;"
                                               )
         # Welcome info label
-        self.label_restaurants.setStyleSheet("background-color: #6a6383;"
+        self.label_restaurants.setStyleSheet("background-color: #3f3857;"
                                              "border: 5px solid #553b5e;"
                                              "color: #c2e9f0;"
                                              "padding: 5px;"
                                              )
         # Welcome info label
-        self.label_locations.setStyleSheet("background-color: #6a6383;"
+        self.label_locations.setStyleSheet("background-color: #3f3857;"
                                            "border: 5px solid #553b5e;"
                                            "color: #c2e9f0;"
                                            )
