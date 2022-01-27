@@ -232,7 +232,7 @@ class PyQtLayout(QWidget):
                 # Display success message
                 self.generate_display_msg("Succes", f"Successfully created new location: {new_location}", QMessageBox.Information)
 
-   # Action method to add a new restaurant to current location
+    # Action method to add a new restaurant to current location
     def add_restaurant(self):
         # Call method to get restaurant info from user
         new_restaurant_data, iterator = self.get_restaurant_info()
@@ -246,8 +246,10 @@ class PyQtLayout(QWidget):
             new_res.close()
             # Update available restaurants list
             self.build_restaurants()
+            # Display success message once completed
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
+    # Method to get and return new restaurant info packet and iterator from user
     def get_restaurant_info(self):
         # Make empty list to hold input values
         new_restaurant_data = ['','','','']
