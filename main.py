@@ -124,13 +124,13 @@ class PyQtLayout(QWidget):
     def init_results_table(self):
         # Set table size and formatting
         self.table_results.setRowCount(5)
-        self.table_results.setColumnCount(4)
-        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        self.table_results.setColumnCount(1)
+        # Set horizontal header of table
+        self.table_results.setHorizontalHeaderLabels([f"Five Random Restaurants in {self.current_location}"])
         # Fill table with blank values until get_random_restaurant() is called
         for row in range(5):
-            for col in range(4):
-                # For each row and column, fill with blank item
-                self.table_results.setItem(row, col, QTableWidgetItem(''))
+            # For each row and column, fill with blank item
+            self.table_results.setItem(row, 0, QTableWidgetItem(''))
         # Hide the results table until it is needed
         self.table_results.hide()
 
@@ -216,17 +216,17 @@ class PyQtLayout(QWidget):
         # Clear the table from previous choices
         self.table_results.clear()
         # Reset horizontal header labels
-        self.table_results.setHorizontalHeaderLabels(["Name","Genre","Price","Description"])
+        self.table_results.setHorizontalHeaderLabels([f"Five Random Restaurants in {self.current_location}"])
         # Iterate for each row index
         for row in range(5):
-            # Iterate for each column index
-            for col in range(4):
-                # Create variable to hold instance of QTableWidgetItem so the flags can be adjusted
-                current_item = QTableWidgetItem(choices[row][col])
-                # Make cell static and not editable by the user
-                current_item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
-                # Parese choices based on current row and column and add them as items to results table
-                self.table_results.setItem(row, col, current_item)
+            # Create variable to hold instance of QTableWidgetItem so the flags can be adjusted
+            current_item = QTableWidgetItem(choices[row][0])
+            # Make cell static and not editable by the user
+            current_item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+            # Parese choices based on current row and column and add them as items to results table
+            self.table_results.setItem(row, 0, current_item)
+        # Resize the table by stretching to fit
+        self.table_results.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # Display the table on the screen
         self.table_results.show()
 
