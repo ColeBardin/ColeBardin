@@ -54,7 +54,6 @@ class PyQtLayout(QWidget):
         self.init_locations_table()
         self.build_restaurants()
         self.init_results_table()
-        self.build_locations()
 
         # Set max width for list objects
         self.list_current_restaurants.setMaximumWidth(int(self.__width/4))
