@@ -221,8 +221,10 @@ class PyQtLayout(QWidget):
         for row in range(5):
             # Iterate for each column index
             for col in range(4):
+                # Create variable to hold instance of QTableWidgetItem so the flags can be adjusted
+                current_item = QTableWidgetItem(choices[row][col])
                 # Parese choices based on current row and column and add them as items to results table
-                self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
+                self.table_results.setItem(row, col, current_item)
         # Display the table on the screen
         self.table_results.show()
 
