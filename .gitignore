@@ -1,0 +1,12 @@
+# Directories
+.vs
+.venv
+bin
+include
+lib
+
+# VENV Config file
+pyvenv.cfg
+
+# Mac Shit
+.DS_Store
