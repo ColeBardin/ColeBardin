@@ -252,7 +252,7 @@ class PyQtLayout(QWidget):
         # Clear all elements from the list
         self.list_current_restaurants.clear()
         # Add first title element
-        self.list_current_restaurants.addItem(QListWidgetItem(f"All Restaurants in {self.current_location}:\n"))
+        self.list_current_restaurants.addItem(QListWidgetItem(f"Your Restaurants in {self.current_location}:\n"))
         # Get available restaurants from current location file
         file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
         # Iterate over each restaurant packet
@@ -286,7 +286,7 @@ class PyQtLayout(QWidget):
         # First, clear the table
         self.list_locations.clear()
         # Add first title element
-        self.list_locations.addItem(QListWidgetItem("Full Location List:\n"))
+        self.list_locations.addItem(QListWidgetItem("Your locations:\n"))
         # Iterate for all the files in \restaurants subdirectory
         for file in os.listdir('restaurants'):
             # Add filename to list of available locations
