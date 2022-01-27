@@ -198,6 +198,7 @@ class PyQtLayout(QWidget):
                                               "border: 5px solid #553b5e;"
                                               "color: #c2e9f0;"
                                               "padding: 5px;"
+                                              "alignment: center;"
                                               )
         # Welcome info label
         self.label_restaurants.setStyleSheet("background-color: #6a6383;"
