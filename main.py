@@ -20,7 +20,7 @@ class PyQtLayout(QWidget):
         self.current_restaurant = None
 
         # Welcome informating string
-        self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nClick on a location to select and display its restaurants\n\nUse the \"Add Restaurant\" and \"Add Location\" buttons add restaurants and new location files\n\nTo edit an existing restaurant, select it and hit \"Edit Restaurant\"\n\nEnjoy!"
+        self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nClick on a location to select and display its restaurants\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nUse \"Add Location\" button to make a new location file\n\nTo edit an existing restaurant, select it and hit \"Edit Restaurant\"\n\nEnjoy!"
 
         # Initialize QLabels
         self.label_current_location = QLabel(self)
@@ -412,6 +412,7 @@ class PyQtLayout(QWidget):
                                               "color: #c2e9f0;"
                                               "padding: 5px;"
                                               "alignment: center;"
+                                              "font: 20px bold;"
                                               )
         # Welcome info label
         self.label_restaurants.setStyleSheet("background-color: #3f3857;"
