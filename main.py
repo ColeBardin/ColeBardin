@@ -176,7 +176,6 @@ class PyQtLayout(QWidget):
                                                     "border: 5px solid #553b5e;"
                                                     "color: #c2e9f0;"
                                                     )
-
         # Results Table
         self.table_results.setStyleSheet("background-color: #6a6383;"
                                          "border: 5px solid #553b5e;"
@@ -202,8 +201,6 @@ class PyQtLayout(QWidget):
                                            "border: 5px solid #553b5e;"
                                            "color: #c2e9f0;"
                                            )
-
-
 
     # Action method for button_add_location
     def add_location(self):
@@ -237,8 +234,23 @@ class PyQtLayout(QWidget):
 
    # Action method to add a new restaurant to current location
     def add_restaurant(self):
+        # Call method to get restaurant info from user
+        new_restaurant_data, iterator = self.get_restaurant_info()
+        # Once full data collection has occured
+        if iterator == 4:                    
+            # Add new restaurant packet to current location file
+            new_res = open(os.path.join("restaurants",f"{self.current_location}.csv"), "a")
+            # Join data with a newline and write
+            new_res.write(','.join(new_restaurant_data) + '\n')
+            # Close current location file
+            new_res.close()
+            # Update available restaurants list
+            self.build_restaurants()
+            self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
+
+    def get_restaurant_info(self):
         # Make empty list to hold input values
-        data = ['','','','']
+        new_restaurant_data = ['','','','']
         # List of prompts for line edits
         messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
         # Use iterator to determine data type
@@ -267,21 +279,13 @@ class PyQtLayout(QWidget):
             # If a filled submission is given
             else:
                 # Set most recent input
-                data[iterator] = input_data
+                new_restaurant_data[iterator] = input_data
                 # Increment after successful data acquisition
                 iterator += 1
-        # Once full data collection has occured
-        if iterator == 4:                    
-            # Add new restaurant packet to current location file
-            new_res = open(os.path.join("restaurants",f"{self.current_location}.csv"), "a")
-            # Join data with a newline and write
-            new_res.write(','.join(data) + '\n')
-            # Close current location file
-            new_res.close()
-            # Update available restaurants list
-            self.build_restaurants()
-            self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
+        # Return the given data and the end status of the iterator
+        return new_restaurant_data, iterator
 
+    # TODO: change name?
     # Action method to set the selected location from the drop down as the current location
     def update_selected_location(self, item):
         # Setting current location
@@ -400,6 +404,10 @@ class PyQtLayout(QWidget):
     def set_current_restaurant(self, item):
         # Update current_restaurant variable with selected item
         self.current_restaurant = item.text()
+
+    # Method to edit the current restaurant
+    #def edit_restaurant(self):
+
 
 
 # Main body function
