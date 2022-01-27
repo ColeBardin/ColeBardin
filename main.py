@@ -18,12 +18,20 @@ class PyQtLayout(QWidget):
         # Variable to store current location
         self.current_location = None
 
-        # Initialize all Widgets on screen
+        # Initialize QLabel
         self.label_current_location = QLabel(self)
+
+        # Initialize QTable
         self.table_results = QTableWidget(self)
+
+        # Initialize QLists
         self.list_current_restaurants = QListWidget(self)
         self.list_locations = QListWidget(self)
+
+        # Initialize QComboBox
         self.combo_location_select = QComboBox(self)
+
+        # Initialize QPushButtons
         self.button_add_location = QPushButton("Add New Location")
         self.button_add_restaurant = QPushButton("Add New Restaurant")
         self.button_update_location = QPushButton("Select Location")
