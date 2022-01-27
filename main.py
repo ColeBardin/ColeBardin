@@ -102,14 +102,17 @@ class PyQtLayout(QWidget):
         # Iterate over all files in restaurants directory
             for file in os.listdir("restaurants"):
                 # Only cound .CSV files for locations
-                if file[-4:] == ".csv":
+                if file[-4:] == ".csv" and len(file) != 0:
                         # Add new location to table
-                        self.update_available_locations(file[:-4])
+                        self.combo_location_select.addItem(file[:-4])
                 # Set current location as first file
                 if init == False:
                     self.current_location = file[:-4]
                     # Do not run again
                     init = True
+            # Build the available locations table
+            self.build_locations()
+
 
     # Initialize results table on startup
     def init_results_table(self):
@@ -207,6 +210,7 @@ class PyQtLayout(QWidget):
             else:
                 # Create a .CSV file with the input as the name
                 new_file = open(f"restaurants\\{new_location}.csv", "w")
+                # Close the file
                 new_file.close()
                 # Rebuild the locations table 
                 self.build_locations()
