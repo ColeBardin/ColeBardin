@@ -65,7 +65,7 @@ class PyQtLayout(QWidget):
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
         self.button_quit.clicked.connect(self.close)
         self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
-        #self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
+        self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
 
         # Connect list objects to their action methods
         self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
@@ -322,6 +322,8 @@ class PyQtLayout(QWidget):
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
         # Close the current location file
         file.close()
+        # Set current restaurant to None since list is deselected
+        self.current_restaurant = None
 
     # Method to build results table with given choices
     def build_results(self, choices):
@@ -408,8 +410,12 @@ class PyQtLayout(QWidget):
         self.current_restaurant = item.text()
 
     # Method to edit the current restaurant
-    #def edit_restaurant(self):
-
+    def edit_restaurant(self):
+        # Check to see if current restaurant is selected
+        if self.current_restaurant == None:
+            # Display error message
+            self.generate_display_msg("Error","Select a restaurant to edit",QMessageBox.Warning)
+        else:
 
 
 # Main body function
