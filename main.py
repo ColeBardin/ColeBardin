@@ -378,6 +378,8 @@ class PyQtLayout(QWidget):
         # Get Random Restaurant Button
         self.button_random_restaurants.setStyleSheet("color: #4f2262;"
                                                      "background-color: #92d8e3;"
+                                                     "padding-top: 10px;"
+                                                     "padding-bottom: 10px;"
                                                      )  
         # Edit restaurant button
         self.button_edit_restaurant.setStyleSheet("color: #4f2262;"
