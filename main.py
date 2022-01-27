@@ -15,8 +15,9 @@ class PyQtLayout(QWidget):
         self.__ax = 0
         self.__ay = 0
 
-        # Variable to store current location
+        # Variable to store current selected items
         self.current_location = None
+        self.current_restaurant = None
 
         # Welcome informating string
         self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nUse the drop down menu on the upper left and hit \"Select Location\" to change current location\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nHit \"Add Location\" to create a new location file\n\nEnjoy!"
@@ -70,6 +71,10 @@ class PyQtLayout(QWidget):
         self.button_quit.clicked.connect(self.close)
         self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
         #self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
+
+        # Connect list objects to their action methods
+        self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
+        self.list_locations.itemClicked.connect(self.update_selected_location)
         
         # Adjust CSS for this project
         self.set_css()
@@ -282,9 +287,9 @@ class PyQtLayout(QWidget):
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
     # Action method to set the selected location from the drop down as the current location
-    def update_selected_location(self):
+    def update_selected_location(self, item):
         # Setting current location
-        self.current_location = self.combo_location_select.currentText()
+        self.current_location = item.text()
         # Update current location label
         self.label_current_location.setText(self.get_selected_location_label())
         # Update the list of available restaurants from this new location
@@ -394,6 +399,11 @@ class PyQtLayout(QWidget):
         disp_msg.setIcon(err_type)
         # Execute error message and save return value
         disp_msg_ret_val = disp_msg.exec_()
+
+    # Method to update current restaurant
+    def set_current_restaurant(self, item):
+        # Update current_restaurant variable with selected item
+        self.current_restaurant = item.text()
 
 
 # Main body function
