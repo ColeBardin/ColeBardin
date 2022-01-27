@@ -278,16 +278,6 @@ class PyQtLayout(QWidget):
             self.list_current_restaurants.addItem(QListWidgetItem(f"{line.split(',')[0]}"))
         # Close the current location file
         file.close()
-    
-    # Method to update the location table with a new location
-    def update_available_locations(self, new_loc): 
-        # TODO: Input error handle
-        # Make sure new location is valid
-        if len(new_loc) != 0:
-            # Add the item to the drop down menu
-            self.combo_location_select.addItem(new_loc)
-            # Build the available locations table
-            self.build_locations()
 
     # Action method to set the selected location from the drop down as the current location
     def update_selected_location(self):
