@@ -35,13 +35,9 @@ class PyQtLayout(QWidget):
         self.list_current_restaurants = QListWidget(self)
         self.list_locations = QListWidget(self)
 
-        # Initialize QComboBox
-        self.combo_location_select = QComboBox(self)
-
         # Initialize QPushButtons
         self.button_add_location = QPushButton("Add New Location")
         self.button_add_restaurant = QPushButton("Add New Restaurant")
-        self.button_update_location = QPushButton("Select Location")
         self.button_quit = QPushButton("Quit")
         self.button_random_restaurants = QPushButton("Choose for me!")
         self.button_edit_restaurant = QPushButton("Edit Restaurant")
@@ -67,7 +63,6 @@ class PyQtLayout(QWidget):
         # Connect all the buttons to their action methods
         self.button_add_location.clicked.connect(self.add_location)
         self.button_add_restaurant.clicked.connect(self.add_restaurant)
-        self.button_update_location.clicked.connect(self.update_selected_location)
         self.button_quit.clicked.connect(self.close)
         self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
         #self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
@@ -83,8 +78,6 @@ class PyQtLayout(QWidget):
         grid = QGridLayout()
         #Add Widgets to the grid:
         # Left Column
-        #grid.addWidget(self.combo_location_select, 1, 0)
-        #grid.addWidget(self.button_update_location, 0, 0)
         grid.addWidget(self.button_add_restaurant, 0, 0)
         grid.addWidget(self.label_restaurants, 1, 0)
         grid.addWidget(self.list_current_restaurants, 2, 0) 
@@ -96,7 +89,6 @@ class PyQtLayout(QWidget):
         grid.addWidget(self.label_current_location, 0, 1)
         # Right Column
         grid.addWidget(self.button_add_location, 0, 2)
-        #grid.addWidget(self.button_add_restaurant, 1, 2)
         grid.addWidget(self.label_locations, 1, 2)
         grid.addWidget(self.list_locations, 2, 2)
         grid.addWidget(self.button_quit, 3, 2)
@@ -166,10 +158,6 @@ class PyQtLayout(QWidget):
         self.button_add_restaurant.setStyleSheet("color: #4f2262;"
                                                  "background-color: #92d8e3;"
                                                  )
-        # Update Location Button
-        self.button_update_location.setStyleSheet("color: #4f2262;"
-                                                  "background-color: #92d8e3;"
-                                                  )
         # Quit Button
         self.button_quit.setStyleSheet("color: #4f2262;"
                                        "background-color: #92d8e3;"
@@ -178,10 +166,6 @@ class PyQtLayout(QWidget):
         self.button_random_restaurants.setStyleSheet("color: #4f2262;"
                                                      "background-color: #92d8e3;"
                                                      )      
-        # Location Select Dropdown
-        self.combo_location_select.setStyleSheet("color: #4f2262;"
-                                                 "background: #92d8e3;"
-                                                 )
         # Locations List
         self.list_locations.setStyleSheet("background-color: #3f3857;"
                                           "border: 5px solid #553b5e;"
@@ -208,6 +192,18 @@ class PyQtLayout(QWidget):
                                               "border: 5px solid #553b5e;"
                                               "color: #c2e9f0;"
                                               )
+        # Welcome info label
+        self.label_restaurants.setStyleSheet("background-color: #6a6383;"
+                                             "border: 5px solid #553b5e;"
+                                             "color: #c2e9f0;"
+                                             )
+        # Welcome info label
+        self.label_locations.setStyleSheet("background-color: #6a6383;"
+                                           "border: 5px solid #553b5e;"
+                                           "color: #c2e9f0;"
+                                           )
+
+
 
     # Action method for button_add_location
     def add_location(self):
