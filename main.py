@@ -223,6 +223,8 @@ class PyQtLayout(QWidget):
             for col in range(4):
                 # Create variable to hold instance of QTableWidgetItem so the flags can be adjusted
                 current_item = QTableWidgetItem(choices[row][col])
+                # Make cell static and not editable by the user
+                current_item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
                 # Parese choices based on current row and column and add them as items to results table
                 self.table_results.setItem(row, col, current_item)
         # Display the table on the screen
