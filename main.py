@@ -320,7 +320,7 @@ class PyQtLayout(QWidget):
         # Clear all elements from the list
         self.list_current_restaurants.clear()
         # Adjust label with with current location
-        self.label_restaurants.setText(f"Your Restaurants in {self.current_location}:\n")
+        self.label_restaurants.setText(f"Your Restaurants in {self.current_location}:")
         # Get available restaurants from current location file
         file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
         # Iterate over each restaurant packet
