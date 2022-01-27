@@ -209,7 +209,7 @@ class PyQtLayout(QWidget):
                 new_file = open(f"restaurants\\{new_location}.csv", "w")
                 new_file.close()
                 # Update the current available locations table
-                self.update_available_locations(new_location)
+                self.build_locations()
                 self.generate_display_msg("Succes", f"Successfully created new location: {new_location}", QMessageBox.Information)
 
    # Action method to add a new restaurant to current location
