@@ -24,6 +24,8 @@ class PyQtLayout(QWidget):
         # Initialize QLabels
         self.label_current_location = QLabel(self)
         self.label_welcome_info = QLabel(self)
+        self.label_restaurants = QLabel(self)
+        self.label_locations = QLabel("Your Locations:")
 
         # Initialize QTable
         self.table_results = QTableWidget(self)
@@ -77,8 +79,10 @@ class PyQtLayout(QWidget):
         grid = QGridLayout()
         #Add Widgets to the grid:
         # Left Column
-        grid.addWidget(self.combo_location_select, 1, 0)
-        grid.addWidget(self.button_update_location, 0, 0)
+        #grid.addWidget(self.combo_location_select, 1, 0)
+        #grid.addWidget(self.button_update_location, 0, 0)
+        grid.addWidget(self.button_add_restaurant, 0, 0)
+        grid.addWidget(self.label_restaurants, 1, 0)
         grid.addWidget(self.list_current_restaurants, 2, 0) 
         grid.addWidget(self.button_edit_restaurant, 3, 0)
         # Middle Column
@@ -88,7 +92,8 @@ class PyQtLayout(QWidget):
         grid.addWidget(self.label_current_location, 0, 1)
         # Right Column
         grid.addWidget(self.button_add_location, 0, 2)
-        grid.addWidget(self.button_add_restaurant, 1, 2)
+        #grid.addWidget(self.button_add_restaurant, 1, 2)
+        grid.addWidget(self.label_locations, 1, 2)
         grid.addWidget(self.list_locations, 2, 2)
         grid.addWidget(self.button_quit, 3, 2)
 
@@ -112,13 +117,10 @@ class PyQtLayout(QWidget):
             for file in os.listdir("restaurants"):
                 # Only cound .CSV files for locations
                 if file[-4:] == ".csv" and len(file) != 0:
-                        # Add new location to table
-                        self.combo_location_select.addItem(file[:-4])
-                # Set current location as first file
-                if init == False:
+                    # Set the first file to the current location
                     self.current_location = file[:-4]
-                    # Do not run again
-                    init = True
+                    # Stop loop
+                    break
             # Build the available locations table
             self.build_locations()
 
@@ -293,12 +295,12 @@ class PyQtLayout(QWidget):
     def build_locations(self):
         # First, clear the table
         self.list_locations.clear()
-        # Add first title element
-        self.list_locations.addItem(QListWidgetItem("Your locations:\n"))
         # Iterate for all the files in \restaurants subdirectory
         for file in os.listdir('restaurants'):
-            # Add filename to list of available locations
-            self.list_locations.addItem(QListWidgetItem(file[:-4]))
+            # Only add locations of .CSV file
+            if file[-4:].lower() == ".csv":
+                # Add filename to list of available locations
+                self.list_locations.addItem(QListWidgetItem(file[:-4]))
 
     # Method to call when the list of resaurants or current location is changed
     def build_restaurants(self):
