@@ -41,6 +41,7 @@ class PyQtLayout(QWidget):
         self.button_update_location = QPushButton("Select Location")
         self.button_quit = QPushButton("Quit")
         self.button_random_restaurants = QPushButton("Choose for me!")
+        self.button_edit_restaurant = QPushButton("Edit Restaurant")
 
         # Run UI Method
         self.init_gui()
@@ -67,6 +68,7 @@ class PyQtLayout(QWidget):
         self.button_update_location.clicked.connect(self.update_selected_location)
         self.button_quit.clicked.connect(self.close)
         self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
+        #self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
         
         # Adjust CSS for this project
         self.set_css()
@@ -77,7 +79,8 @@ class PyQtLayout(QWidget):
         # Left Column
         grid.addWidget(self.combo_location_select, 1, 0)
         grid.addWidget(self.button_update_location, 0, 0)
-        grid.addWidget(self.list_current_restaurants, 2, 0)  
+        grid.addWidget(self.list_current_restaurants, 2, 0) 
+        grid.addWidget(self.button_edit_restaurant, 3, 0)
         # Middle Column
         grid.addWidget(self.button_random_restaurants, 1, 1)
         grid.addWidget(self.label_welcome_info, 2, 1)
