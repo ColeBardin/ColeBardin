@@ -23,7 +23,7 @@ class PyQtLayout(QWidget):
         self.info_current_restaurants = None
 
         # Welcome informating string
-        self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nClick on a location to select and display its restaurants\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nUse \"Add Location\" button to make a new location file\n\nTo edit an existing restaurant, select it and hit \"Edit Restaurant\"\n\nEnjoy!"
+        self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nClick on a location to select and display its restaurants\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nUse \"Add Location\" button to make a new location file\n\nTo edit an existing restaurant, select it and hit \"Edit Restaurant\"\n\nEnjoy!"
 
         # Initialize QLabels
         self.label_current_location = QLabel(self)
@@ -402,7 +402,7 @@ class PyQtLayout(QWidget):
 
         # Adjust CSS of Main Window
         self.setStyleSheet("background-color: #9a82b0;"
-                            "font-weight: bold;"
+                            "font: 20px bold;"
                             "color: #4f2262;"
                             )
         # Add Location Button
@@ -443,6 +443,7 @@ class PyQtLayout(QWidget):
         self.table_results.setStyleSheet("background-color: #6a6383;"
                                          "border: 5px solid #553b5e;"
                                          "color: #c2e9f0;"
+                                         "font: 30px bold;"
                                          )
         # Current Locations Label
         self.label_current_location.setStyleSheet("background-color: #6a6383;"
