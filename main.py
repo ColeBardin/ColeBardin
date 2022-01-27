@@ -235,8 +235,11 @@ class PyQtLayout(QWidget):
                 break;
             # If a filled submission is given
             else:
+                # Set most recent input
                 data[iterator] = input_data
+                # Increment after successful data acquisition
                 iterator += 1
+        # Once full data collection has occured
         if iterator == 4:                    
             # Add new restaurant packet to current location file
             new_res = open(os.path.join("restaurants",f"{self.current_location}.csv"), "a")
@@ -246,6 +249,7 @@ class PyQtLayout(QWidget):
             new_res.close()
             # Update available restaurants list
             self.update_restaurants()
+            self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
     # Method to call when the list of resaurants or current location is changed
     def update_restaurants(self):
