@@ -18,8 +18,12 @@ class PyQtLayout(QWidget):
         # Variable to store current location
         self.current_location = None
 
-        # Initialize QLabel
+        # Welcome informating string
+        self.welcome_str = "Welcome to Kaia's Restaurant Picker\n\nHit \"Choose for me!\" to display 5 random restaurants from the current location\n\nUse the drop down menu on the upper left and hit \"Select Location\" to change current location\n\nUse the \"Add Restaurant\" button to add a restaurant to the current location\n\nHit \"Add Location\" to create a new location file\n\nEnjoy!"
+
+        # Initialize QLabels
         self.label_current_location = QLabel(self)
+        self.label_welcome_info = QLabel(self)
 
         # Initialize QTable
         self.table_results = QTableWidget(self)
@@ -50,11 +54,12 @@ class PyQtLayout(QWidget):
         self.build_locations()
 
         # Set max width for list objects
-        self.list_current_restaurants.setMaximumWidth(int(self.__width/3))
-        self.list_locations.setMaximumWidth(int(self.__width/3))
+        self.list_current_restaurants.setMaximumWidth(int(self.__width/4))
+        self.list_locations.setMaximumWidth(int(self.__width/4))
 
-        # Display text on current locations list
+        # Display on label objects
         self.label_current_location.setText(self.get_selected_location_label())
+        self.label_welcome_info.setText(self.welcome_str)
 
         # Connect all the buttons to their action methods
         self.button_add_location.clicked.connect(self.add_location)
@@ -75,6 +80,7 @@ class PyQtLayout(QWidget):
         grid.addWidget(self.list_current_restaurants, 2, 0)  
         # Middle Column
         grid.addWidget(self.button_random_restaurants, 1, 1)
+        grid.addWidget(self.label_welcome_info, 2, 1)
         grid.addWidget(self.table_results, 2, 1)
         grid.addWidget(self.label_current_location, 0, 1)
         # Right Column
@@ -124,6 +130,8 @@ class PyQtLayout(QWidget):
             for col in range(4):
                 # For each row and column, fill with blank item
                 self.table_results.setItem(row, col, QTableWidgetItem(''))
+        # Hide the results table until it is needed
+        self.table_results.hide()
 
     # Adjusts the CSS elements
     def set_css(self):
@@ -300,6 +308,8 @@ class PyQtLayout(QWidget):
 
     # Method to build results table with given choices
     def build_results(self, choices):
+        # Hide the welcome info message
+        self.label_welcome_info.hide()
         # Clear the table from previous choices
         self.table_results.clear()
         # Reset horizontal header labels
@@ -310,6 +320,8 @@ class PyQtLayout(QWidget):
             for col in range(4):
                 # Parese choices based on current row and column and add them as items to results table
                 self.table_results.setItem(row, col, QTableWidgetItem(choices[row][col]))
+        # Display the table on the screen
+        self.table_results.show()
 
     # Method to generate new location label with current location
     def get_selected_location_label(self):
