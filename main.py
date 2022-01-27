@@ -8,7 +8,7 @@ class PyQtLayout(QWidget):
     # Class initialization method
     def __init__(self):
         super().__init__()
-
+        # TODO: make text input prompts larger
         # Set main window size and location
         self.__width = int(1500)
         self.__height = int(800)
