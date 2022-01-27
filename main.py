@@ -346,7 +346,7 @@ class PyQtLayout(QWidget):
     # Method to prompt user for a text input
     def get_user_input(self, title, msg):
         # Generate input text box for user
-        text , pressed =  text , pressed = QInputDialog.getText(self, title, msg, QLineEdit.Normal, "")
+        text , pressed = QInputDialog.getText(self, title, msg, QLineEdit.Normal, "")
         
         # Check for submission
         if pressed:
