@@ -165,7 +165,7 @@ class PyQtLayout(QWidget):
         # Else result is valid
         else:
             # Check to see if file exists before writing a new one
-            if os.path.isfile(f"restaurants\\{new_location}.csv"):\
+            if os.path.isfile(os.path.join("restaurants",f"{new_location}.csv")):
                 # Display error message
                 self.generate_display_msg("Warning", "A file for this location already exists", QMessageBox.Warning)
                 # Recurse
@@ -215,7 +215,7 @@ class PyQtLayout(QWidget):
         # Clear buffer of current restaurant info
         self.info_current_restaurants = []
         # Adjust label with with current location
-        self.label_restaurants.setText(f"{self.current_location} Restaurants:")
+        self.label_restaurants.setText("Your Restaurants:")
         # Get available restaurants from current location file
         file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
         # Iterate over each restaurant packet
@@ -255,7 +255,7 @@ class PyQtLayout(QWidget):
     # Method to generate new location label with current location
     def get_selected_location_label(self):
         # Returns complete string
-        return "Selected Location: " + self.current_location 
+        return f"<h3>Selected Location: <font color=#4f2262>{self.current_location}</font color=#4f2262></h3>"
 
     # Method to prompt user for a text input
     def get_user_input(self, title, msg):
@@ -415,6 +415,8 @@ class PyQtLayout(QWidget):
         self.current_location = item.text()
         # Update current location label
         self.label_current_location.setText(self.get_selected_location_label())
+        # Enable Rich Text Formatting for label
+        self.label_current_location.setTextFormat(1)
         # Update the list of available restaurants from this new location
         self.build_restaurants()
 
