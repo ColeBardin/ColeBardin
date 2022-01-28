@@ -199,7 +199,7 @@ class PyQtLayout(QWidget):
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
     # Method to build the location table
-    def build_locations(self,set=None):
+    def build_locations(self, set=None):
         # First, clear the table
         self.list_locations.clear()
         # Iterate for all the files in \restaurants subdirectory
