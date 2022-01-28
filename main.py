@@ -23,7 +23,7 @@ class PyQtLayout(QWidget):
         self.info_current_restaurants = None
 
         # Welcome informating string
-        self.welcome_str = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr><h3>Hit \"Choose for me!\" to display 5 random restaurants from the current location<br>Click on a location to select and display its restaurants<br>Use the \"Add Restaurant\" button to add a restaurant to the current location<br>Use \"Add Location\" button to make a new location file<br>To edit an existing restaurant, select it and hit \"Edit Restaurant\"<br>Enjoy!</h3>"
+        self.welcome_str = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr><h3>Hit <dfn><font color=#4f2262>Choose for me!</font color=#4f2262></dfn> to display 5 random restaurants from the current location<br>Click on a location to select and display its restaurants<br>Use the <dfn><font color=#4f2262>Add Restaurant</dfn></font color=#4f2262> button to add a restaurant to the current location<br>Use <dfn><font color=#4f2262>Add Location</dfn></font color=#4f2262> button to make a new location file<br>To edit an existing restaurant, select it and hit <dfn><font color=#4f2262>Edit Restaurant</dfn></font color=#4f2262><br>Enjoy!</h3>"
 
         # Initialize QLabels
         self.label_current_location = QLabel(self)
