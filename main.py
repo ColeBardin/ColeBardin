@@ -68,8 +68,11 @@ class PyQtLayout(QWidget):
         self.init_results_table()
 
         # Set max width for list objects
-        self.list_current_restaurants.setMaximumWidth(int(self.__width/4))
-        self.list_locations.setMaximumWidth(int(self.__width/4))
+        self.list_current_restaurants.setMaximumWidth(int(self.__width/5))
+        self.list_locations.setMaximumWidth(int(self.__width/5))
+
+        # Set minimum width for table object
+        self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
 
         # Display on label objects
         self.label_current_location.setText(self.get_selected_location_label())
