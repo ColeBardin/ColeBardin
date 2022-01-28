@@ -299,6 +299,9 @@ class PyQtLayout(QWidget):
         new_restaurant_data = ['','','','']
         # List of prompts for line edits
         messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
+        # Change first prompt when editing a restaurant
+        if new_restaurant == False:
+            messages[0] = f"Restaurant Name:\n(Leave blank to delete {self.current_restaurant})"
         # Title for prompts selection determined by new_restaurant parameter
         if new_restaurant == True:
             # New restaurant title
