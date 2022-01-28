@@ -281,6 +281,7 @@ class PyQtLayout(QWidget):
             return dialog.textValue()
 
     # Method to get and return new restaurant info packet and iterator from user
+    # TODO: error handle when locs have less than 5 or 0 current restaurants
     def get_restaurant_info(self, new_restaurant):
         # Make empty list to hold input values
         new_restaurant_data = ['','','','']
