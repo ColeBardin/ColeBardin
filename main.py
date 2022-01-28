@@ -638,7 +638,7 @@ class PyQtLayout(QWidget):
             # If editing was cancelled at any time during the info getting
             elif iterator == 10:
                 # Display cancelled message
-                self.generate_display_msg("Warning",f"Cancelled editing yuh {self.current_restaurant}", QMessageBox.Information)
+                self.generate_display_msg("Warning",f"Cancelled editing {self.current_restaurant}", QMessageBox.Information)
             # Rebuild the list of restaurants
             self.build_restaurants()
 
