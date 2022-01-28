@@ -15,6 +15,9 @@ class PyQtLayout(QWidget):
         self.__ax = 0
         self.__ay = 0
 
+        # Variable to store status of deletion
+        self.execute_delete = False
+
         # Variable to store current selected items
         self.current_location = None
         self.current_restaurant = None
@@ -184,7 +187,7 @@ class PyQtLayout(QWidget):
     # Action method to add a new restaurant to current location
     def add_restaurant(self):
         # Call method to get restaurant info from user with new_restaurant paramater True
-        new_restaurant_data, iterator = self.get_restaurant_info(True)
+        new_restaurant_data, iterator = self.get_restaurant_info()
         # Once full data collection has occured
         if iterator == 4:                    
             # Add new restaurant packet to current location file
@@ -291,7 +294,7 @@ class PyQtLayout(QWidget):
             return dialog.textValue()
 
     # Method to get and return new restaurant info packet and iterator from user
-    def get_restaurant_info(self, new_restaurant):
+    def get_restaurant_info(self, new_restaurant=True):
         # Make empty list to hold input values
         new_restaurant_data = ['','','','']
         # List of prompts for line edits
@@ -314,19 +317,36 @@ class PyQtLayout(QWidget):
             if input_data == '':
                 # Only error if blank name is submitted
                 if iterator == 0:
-                    # Display error message
-                    self.generate_display_msg("Error", "Restaurants must at least have a name", QMessageBox.Critical)
+                    # If adding a new restaurant, prompt to retry
+                    if new_restaurant == True:
+                        # Display error message
+                        self.generate_display_msg("Error", "Restaurants must at least have a name", QMessageBox.Critical)
+                    # If editing a restaurant
+                    else:
+                        # Generate a delete type error message
+                        self.generate_display_msg("Warning", f"Are you sure you want to delete {self.current_restaurant}?", QMessageBox.Critical, delete=True)
+                        # Determine if restaurant has been ordered to be deleted
+                        if self.execute_delete == True:
+                            # Set restaurant info to None
+                            new_restaurant_data = [None, None, None, None]
+                            # Return iterator to be a different impossible number
+                            iterator = 20
+                            # End while loop
+                            break
                 # If empty input is given for other fields
                 else:
                     # Leave data entry blank and move on
                     iterator += 1
             # If cancel button is pressed at any time
             elif type(input_data) == type(None):
-                # Generate error message
-                self.generate_display_msg("Warning", "Restaurant entry cancelled", QMessageBox.Information)
+                # Display this error message only when cancelling a new restaurant
+                if new_restaurant == True:
+                    # Generate Error Message
+                    self.generate_display_msg("Warning", "Restaurant entry cancelled", QMessageBox.Information)
                 # End process
                 iterator = 10
-                break;
+                # End while loop
+                break
             # If a filled submission is given
             else:
                 # Set most recent input
@@ -384,7 +404,7 @@ class PyQtLayout(QWidget):
             self.build_results(random_choices,number_of_choices)  
 
     # Method to make error messages pop up
-    def generate_display_msg(self, title, msg, err_type):
+    def generate_display_msg(self, title, msg, err_type, delete=False):
         # Generate message box object
         disp_msg = QMessageBox(self)
         # Set the window title
@@ -401,8 +421,23 @@ class PyQtLayout(QWidget):
             "background: #3f3857;"
             "font: 20px;"
             )
+        # For Deletion prompts
+        if delete == True:
+            delete_button = QPushButton("Delete")
+            keep_button = QPushButton("Keep")
+            # Add delete button
+            disp_msg.addButton(delete_button, QMessageBox.YesRole)
+            # Add keep button
+            disp_msg.addButton(keep_button, QMessageBox.RejectRole)
+            # Connect delete button to delete method
+            delete_button.clicked.connect(self.delete_restaurant)
         # Execute error message and save return value
         disp_msg_ret_val = disp_msg.exec_()
+
+    # Method to delete restaurant
+    def delete_restaurant(self):
+        # Change setting to delete
+        self.execute_delete = True
 
     # Method to display a restaurant's information
     def generate_restaurant_info(self, restaurant):
@@ -555,31 +590,53 @@ class PyQtLayout(QWidget):
         # Current restaurant selection is valid
         else:
             # Collect new restaurant data with new_restaurant parameter False to signify editing a restaurant
-            new_restaurant_data, iterator = self.get_restaurant_info(False)
+            new_restaurant_data, iterator = self.get_restaurant_info(new_restaurant=False)
             # Make an empty string to store contents of new file
             new_file = ''
             # Open the location file
             current_location_file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r+")
-            # Iterate over each line in the file
-            for line in current_location_file:
-                # Validate that line beings with current restaurant name
-                if line[:len(self.current_restaurant)] == self.current_restaurant:
-                    # Append the new data to the buffer instead
-                    new_file += ','.join(new_restaurant_data) + '\n'
-                # Current line entry does not being with current restaurant name
-                else:
-                    # Add previous unedited lines to new file
-                    new_file += line
-            # Set absolute file position
-            current_location_file.seek(0)
-            # Delete all contents of file
-            current_location_file.truncate()
-            # Write new data to file
-            current_location_file.write(new_file)
-            # Close the file
-            current_location_file.close()
-            # Display a success message once rewriting file
-            self.generate_display_msg("Success",f"Successfully edited {self.current_restaurant}", QMessageBox.Information)
+            # Check to make sure that the restaurant edit hasn't been cancelled
+            if iterator == 10:
+                # Do not execute file alteration
+                pass
+            # Else a file change must be made
+            else:
+                # Iterate over each line in the file
+                for line in current_location_file:
+                    # Validate that line beings with current restaurant name
+                    if line[:len(self.current_restaurant)] == self.current_restaurant:
+                        # Check to see if restaurant is to be deleted
+                        if self.execute_delete == True:
+                            # Do not add current restaurant back into file
+                            pass  
+                        # If file is to not be deleted
+                        else:
+                            # Append the new data to the buffer instead
+                            new_file += ','.join(new_restaurant_data) + '\n'
+                    # Current line entry does not being with current restaurant name
+                    else:
+                        # Add previous unedited lines to new file
+                        new_file += line
+                # Set absolute file position
+                current_location_file.seek(0)
+                # Delete all contents of file
+                current_location_file.truncate()
+                # Write new data to file
+                current_location_file.write(new_file)
+                # Close the file
+                current_location_file.close()
+                # Display a success message once rewriting file
+                self.generate_display_msg("Success",f"Successfully edited {self.current_restaurant}", QMessageBox.Information)
+            # Determine outcome message based on deletion status
+            if self.execute_delete == True:
+                # Display successfuly deletion message
+                self.generate_display_msg("Success",f"Successfully deleted {self.current_restaurant}", QMessageBox.Information)
+                # Set deletion status to False
+                self.execute_delete = False
+            # If editing was cancelled at any time during the info getting
+            elif iterator == 10:
+                # Display cancelled message
+                self.generate_display_msg("Warning",f"Cancelled editing yuh {self.current_restaurant}", QMessageBox.Information)
             # Rebuild the list of restaurants
             self.build_restaurants()
 
