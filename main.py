@@ -553,6 +553,7 @@ class PyQtLayout(QWidget):
             # Rebuild the list of restaurants
             self.build_restaurants()
 
+
 # Main body function
 def main():
     # Crate PyQt Application
