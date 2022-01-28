@@ -625,8 +625,10 @@ class PyQtLayout(QWidget):
                 current_location_file.write(new_file)
                 # Close the file
                 current_location_file.close()
-                # Display a success message once rewriting file
-                self.generate_display_msg("Success",f"Successfully edited {self.current_restaurant}", QMessageBox.Information)
+                # Only display successful edit method when not deleting
+                if self.execute_delete == False:
+                    # Display a success message once rewriting file
+                    self.generate_display_msg("Success",f"Successfully edited {self.current_restaurant}", QMessageBox.Information)
             # Determine outcome message based on deletion status
             if self.execute_delete == True:
                 # Display successfuly deletion message
