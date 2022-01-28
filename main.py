@@ -23,7 +23,7 @@ class PyQtLayout(QWidget):
         self.info_current_restaurants = None
 
         # Welcome informating string
-        self.welcome_str = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr><h3>Hit <dfn><font color=#4f2262>Choose for me!</font color=#4f2262></dfn> to display 5 random restaurants from the current location<br>Click on a location to select and display its restaurants<br>Use the <dfn><font color=#4f2262>Add Restaurant</dfn></font color=#4f2262> button to add a restaurant to the current location<br>Use <dfn><font color=#4f2262>Add Location</dfn></font color=#4f2262> button to make a new location file<br>To edit an existing restaurant, select it and hit <dfn><font color=#4f2262>Edit Restaurant</dfn></font color=#4f2262><br>Enjoy!</h3>"
+        self.welcome_str = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr><h3>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random restaurants from the <i><font color=#4f2262>current location</font color=#4f2262></i><br>Click on a <i><font color=#4f2262>location</font color=#4f2262></i> to select and display its restaurants<br>Use the <i><font color=#66CADA>Add Restaurant</font color=#66CADA></i> button to add a restaurant to the <i><font color=#4f2262>current location</font color=#4f2262></i><br>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new location file<br>To edit an existing restaurant, select it and hit <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i><br>Enjoy!</h3>"
 
         # Initialize QLabels
         self.label_current_location = QLabel(self)
@@ -395,13 +395,13 @@ class PyQtLayout(QWidget):
     # Adjusts the CSS elements
     def set_css(self):
         #Color Pallet:
-        #light purple = 9a82b0
-        #dark purple = 4f2262
-        #grey = 3f3b3b
-        #dark_grey = 6a6383
-        #light blue = 92d8e3
-        #off_black = 553b5e
-        #super dark grey = 3f3857
+        # Window baground: light purple =   9a82b0
+        # Button font: dark purple =        4f2262
+        # Table and CL BG: dark_grey =      6a6383
+        # Button Background: light blue =   92d8e3
+        # Object border: off_black =        553b5e
+        # List BG: super dark grey =        3f3857
+        # Button indicator: blue =          66CADA
 
         # Adjust CSS of Main Window
         self.setStyleSheet("background-color: #9a82b0;"
