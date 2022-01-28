@@ -300,6 +300,7 @@ class PyQtLayout(QWidget):
         if new_restaurant == True:
             # New restaurant title
             title = f"Add Restaurant to {self.current_location}"
+        # If func is being used to get new data for existing restaurant
         else:
             # Editing restaurant title
             title = f"Edit {self.current_restaurant} in {self.current_location}"
