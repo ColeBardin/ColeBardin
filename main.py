@@ -268,7 +268,7 @@ class PyQtLayout(QWidget):
     # Method to generate new location label with current location
     def get_selected_location_label(self):
         # Returns complete string
-        return f"<h3>Selected Location: <font color=#4f2262>{self.current_location}</font color=#4f2262></h3>"
+        return f"<h3><font color=#3f3857>Selected Location: </font color=#3f3857>{self.current_location}</h3>"
 
     # Method to prompt user for a text input
     def get_user_input(self, title, msg):
