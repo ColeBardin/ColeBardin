@@ -231,15 +231,15 @@ class PyQtLayout(QWidget):
 
     # Method to build results table with given choices
     # TODO: set width of table to be similar enough to welcome message
-    def build_results(self, choices):
+    def build_results(self, choices, number_of_choices):
         # Hide the welcome info message
         self.label_welcome_info.hide()
         # Clear the table from previous choices
         self.table_results.clear()
         # Reset horizontal header labels
         self.table_results.setHorizontalHeaderLabels([f"Five Random Restaurants in {self.current_location}"])
-        # Iterate for each row index
-        for row in range(5):
+        # Iterate for each row index for the number of available choices
+        for row in range(number_of_choices):
             # Create variable to hold instance of QTableWidgetItem so the flags can be adjusted
             current_item = QTableWidgetItem(choices[row][0])
             # Make cell static and not editable by the user
@@ -332,26 +332,47 @@ class PyQtLayout(QWidget):
         # List to hold all available restaurants
         available_restaurants = []
         # List to hold chose restaurants
-        random_choices = []
-    
+        random_choices = [] 
         # Read from current location file
         current_file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
-        # Iterate over each line in .CSV
-        for line in current_file:
-            # Add restaurants to list to choose from
-            available_restaurants.append(line.split(','))
-        # Close the current location file
-        current_file.close()
-        # Repeat 5 times
-        for _ in range(5):
-            # Choose random number
-            random_num = randint(0, len(available_restaurants)-1)
-            # Use random number as index to select restaurant and add to list of choices
-            random_choices.append(available_restaurants[random_num])
-            # Stop current restaurant from beign displayed twice
-            available_restaurants.pop(random_num)
-        # Build results table with random choices
-        self.build_results(random_choices)  
+        # Read all the lines and save them to lines variable
+        lines = current_file.readlines()
+        # Error handle location with no restaurants
+        if len(lines) == 0:
+            # Set to none to indicate no files
+            number_of_choices = 0
+            # Display error message
+            self.generate_display_msg("Warning",f"{self.current_location} doesn't have any restaurants to choose from",QMessageBox.Warning)
+        # Less than 5 but not zero restaurants
+        elif len(lines) < 5:
+            # Restrict output to not get index error
+            number_of_choices = len(lines)
+        # More than 5 restaurants
+        else:
+            # Output 5 choices
+            number_of_choices = 5
+        # If there are no lines
+        if number_of_choices == 0:
+            # Close the file
+            current_file.close()
+        # If there are available lines
+        else:
+            # Iterate over each line in .CSV
+            for line in lines:
+                # Add restaurants to list to choose from
+                available_restaurants.append(line.split(','))
+            # Close the current location file
+            current_file.close()
+            # Repeat 5 times
+            for _ in range(number_of_choices):
+                # Choose random number
+                random_num = randint(0, len(available_restaurants)-1)
+                # Use random number as index to select restaurant and add to list of choices
+                random_choices.append(available_restaurants[random_num])
+                # Stop current restaurant from beign displayed twice
+                available_restaurants.pop(random_num)
+            # Build results table with random choices
+            self.build_results(random_choices,number_of_choices)  
 
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type):
