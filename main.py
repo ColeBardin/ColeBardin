@@ -110,8 +110,9 @@ class PyQtLayout(QWidget):
 
         # Apply grid layout
         self.setLayout(grid)
-        # Format window
+        # Format window size
         self.setGeometry(self.__ax, self.__ay, self.__width, self.__height)
+        # Add window title to the app
         self.setWindowTitle("Kaia's Restaurant Picker")
 
     # Initialize the locations for the table
