@@ -262,13 +262,19 @@ class PyQtLayout(QWidget):
         # Create InputDialog object
         dialog = QInputDialog(self)
         # Resize the window
-        dialog.resize(QtCore.QSize(500, 100))
+        dialog.resize(QtCore.QSize(450, 250))
         # Set window title to passed parameter
         dialog.setWindowTitle(title)
         # Set dialog message to passed parameter
         dialog.setLabelText(msg)
         # Set Echo mode to normal
         dialog.setTextEchoMode(QLineEdit.Normal)
+        # Edit style sheet for the dialog box
+        dialog.setStyleSheet(
+            "color: #92d8e3;"
+            "background: #3f3857;"
+            "font: 20px;"
+            )
         # Wait for response
         if dialog.exec_() == QDialog.Accepted:
             # Return submitted value
@@ -356,6 +362,13 @@ class PyQtLayout(QWidget):
         #QMessageBox.Warning, Question, Information, Critical
         # Set error type from parameter
         disp_msg.setIcon(err_type)
+        # Set style sheet for display message
+        # TODO: fix icon color or change bg color
+        disp_msg.setStyleSheet(
+            "color: #92d8e3;"
+            "background: #3f3857;"
+            "font: 20px;"
+            )
         # Execute error message and save return value
         disp_msg_ret_val = disp_msg.exec_()
 
@@ -381,10 +394,11 @@ class PyQtLayout(QWidget):
         # Set text format to rich text
         info_window.setTextFormat(1)
         # Change the styling of the window
-        info_window.setStyleSheet("color: #c2e9f0;"
-                                  "padding: 10px;"
-                                  "background-color: #3f3857;"
-                                  )
+        info_window.setStyleSheet(
+            "color: #c2e9f0;"
+            "padding: 10px;"
+            "background-color: #3f3857;"
+            )
         # Execute the window build operation
         result = info_window.exec()
         # Reset current restaurant to be None
@@ -416,74 +430,87 @@ class PyQtLayout(QWidget):
         # Button indicator: blue =          66CADA
 
         # Adjust CSS of Main Window
-        self.setStyleSheet("background-color: #9a82b0;"
-                            "font: 20px bold;"
-                            "color: #4f2262;"
-                            )
+        self.setStyleSheet(
+            "background-color: #9a82b0;"
+            "font: 20px bold;"
+            "color: #4f2262;"
+            )
         # Add Location Button
-        self.button_add_location.setStyleSheet("color: #4f2262;"
-                                               "background-color: #92d8e3;"
-                                               )
+        self.button_add_location.setStyleSheet(
+            "color: #4f2262;"
+            "background-color: #92d8e3;"
+            )
         # Add Restaurant Button
-        self.button_add_restaurant.setStyleSheet("color: #4f2262;"
-                                                 "background-color: #92d8e3;"
-                                                 )
+        self.button_add_restaurant.setStyleSheet(
+            "color: #4f2262;"
+            "background-color: #92d8e3;"
+            )
         # Quit Button
-        self.button_quit.setStyleSheet("color: #4f2262;"
-                                       "background-color: #92d8e3;"
-                                       )       
+        self.button_quit.setStyleSheet(
+            "color: #4f2262;"
+            "background-color: #92d8e3;"
+            )       
         # Get Random Restaurant Button
-        self.button_random_restaurants.setStyleSheet("color: #4f2262;"
-                                                     "background-color: #92d8e3;"
-                                                     "padding-top: 10px;"
-                                                     "padding-bottom: 10px;"
-                                                     )  
+        self.button_random_restaurants.setStyleSheet(
+            "color: #4f2262;"
+            "background-color: #92d8e3;"
+            "padding-top: 10px;"
+            "padding-bottom: 10px;"
+            )  
         # Edit restaurant button
-        self.button_edit_restaurant.setStyleSheet("color: #4f2262;"
-                                                  "background-color: #92d8e3;"
-                                                  )  
+        self.button_edit_restaurant.setStyleSheet(
+            "color: #4f2262;"
+            "background-color: #92d8e3;"
+            )  
         # Locations List
-        self.list_locations.setStyleSheet("background-color: #3f3857;"
-                                          "border: 5px solid #553b5e;"
-                                          "color: #c2e9f0;"
-                                          "padding: 10px;"
-                                          )
+        self.list_locations.setStyleSheet(
+            "background-color: #3f3857;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            "padding: 10px;"
+            )
         # Current Restaurants List
-        self.list_current_restaurants.setStyleSheet("background-color: #3f3857;"
-                                                    "border: 5px solid #553b5e;"
-                                                    "color: #c2e9f0;"
-                                                    "padding: 10px;"
-                                                    )
+        self.list_current_restaurants.setStyleSheet(
+            "background-color: #3f3857;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            "padding: 10px;"
+            )
         # Results Table
-        self.table_results.setStyleSheet("background-color: #6a6383;"
-                                         "border: 5px solid #553b5e;"
-                                         "color: #c2e9f0;"
-                                         "font: 30px bold;"
-                                         )
+        self.table_results.setStyleSheet(
+            "background-color: #6a6383;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            "font: 30px bold;"
+            )
         # Current Locations Label
-        self.label_current_location.setStyleSheet("background-color: #6a6383;"
-                                                  "border: 5px solid #553b5e;"
-                                                  "color: #c2e9f0;"
-                                                  "padding: 5px;"
-                                                  )
+        self.label_current_location.setStyleSheet(
+            "background-color: #6a6383;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            "padding: 5px;"
+            )
         # Welcome info label
-        self.label_welcome_info.setStyleSheet("background-color: #6a6383;"
-                                              "border: 5px solid #553b5e;"
-                                              "color: #c2e9f0;"
-                                              "padding: 5px;"
-                                              "font: 20px bold;"
-                                              )
+        self.label_welcome_info.setStyleSheet(
+            "background-color: #6a6383;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            "padding: 5px;"
+            "font: 20px bold;"
+            )
         # Welcome info label
-        self.label_restaurants.setStyleSheet("background-color: #3f3857;"
-                                             "border: 5px solid #553b5e;"
-                                             "color: #c2e9f0;"
-                                             "padding: 5px;"
-                                             )
+        self.label_restaurants.setStyleSheet(
+            "background-color: #3f3857;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            "padding: 5px;"
+            )
         # Welcome info label
-        self.label_locations.setStyleSheet("background-color: #3f3857;"
-                                           "border: 5px solid #553b5e;"
-                                           "color: #c2e9f0;"
-                                           )
+        self.label_locations.setStyleSheet(
+            "background-color: #3f3857;"
+            "border: 5px solid #553b5e;"
+            "color: #c2e9f0;"
+            )
 
     # Method to edit the current restaurant
     def edit_restaurant(self):
