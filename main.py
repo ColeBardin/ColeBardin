@@ -172,7 +172,7 @@ class PyQtLayout(QWidget):
                 self.add_location()
             else:
                 # Create a .CSV file with the input as the name
-                new_file = open(f"restaurants\\{new_location}.csv", "w")
+                new_file = open(os.path.join("restaurants",f"{new_location}.csv"), "w")
                 # Close the file
                 new_file.close()
                 # Rebuild the locations table 
