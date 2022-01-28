@@ -433,14 +433,9 @@ class PyQtLayout(QWidget):
             # Add keep button
             disp_msg.addButton(keep_button, QMessageBox.RejectRole)
             # Connect delete button to delete method
-            delete_button.clicked.connect(self.delete_restaurant)
+            delete_button.clicked.connect(self.set_execute_delete)
         # Execute error message and save return value
         disp_msg_ret_val = disp_msg.exec_()
-
-    # Method to delete restaurant
-    def delete_restaurant(self):
-        # Change setting to delete
-        self.execute_delete = True
 
     # Method to display a restaurant's information
     def generate_restaurant_info(self, restaurant):
@@ -489,6 +484,11 @@ class PyQtLayout(QWidget):
         self.label_current_location.setTextFormat(1)
         # Update the list of available restaurants from this new location
         self.build_restaurants()
+
+    # Method to delete restaurant
+    def set_execute_delete(self):
+        # Change setting to delete
+        self.execute_delete = True
 
     # Adjusts the CSS elements
     def set_css(self):
