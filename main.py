@@ -471,7 +471,6 @@ class PyQtLayout(QWidget):
                                               "border: 5px solid #553b5e;"
                                               "color: #c2e9f0;"
                                               "padding: 5px;"
-                                              "alignment: center;"
                                               "font: 20px bold;"
                                               )
         # Welcome info label
