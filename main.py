@@ -327,7 +327,6 @@ class PyQtLayout(QWidget):
         return new_restaurant_data, iterator
 
     # Action method to display random restaurants
-    # TODO: error handle when locs have less than 5 or 0 current restaurants
     def generate_random_restaurant(self):
         # List to hold all available restaurants
         available_restaurants = []
