@@ -243,6 +243,8 @@ class PyQtLayout(QWidget):
             current_item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
             # Parese choices based on current row and column and add them as items to results table
             self.table_results.setItem(row, 0, current_item)
+            # Resize column height
+            self.table_results.setRowHeight(row, int(self.__height/8))
         # Resize the table by stretching to fit
         self.table_results.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # Display the table on the screen
