@@ -374,7 +374,8 @@ class PyQtLayout(QWidget):
         # Set the title to be the restaurant and location
         info_window.setWindowTitle(f"{restaurant_info[0]}")
         # Display the restaurant's information
-        info_window.setText(f"<h1>{restaurant_info[0]}, {self.current_location}</h1>\n\n\nGenre:\n{restaurant_info[1]}\n\nPrice 0($) to 10($$):\n{restaurant_info[2]}\n\nDescription:\n{restaurant_info[3]}")
+        info_window.setText(
+            f"<h2>{restaurant_info[0]},<br>{self.current_location}</h2><h3><font color=#66CADA>Genre:</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[1]}</font color=#9a82b0></h4><h3><font color=#66CADA>Price 0($) to 10($$):</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[2]}</font color=#9a82b0></h4><h3><font color=#66CADA>Description:</font color=#66CADA></h4><h3><font color=#9a82b0>{restaurant_info[3]}</font color=#9a82b0></h3>")
         # Set text format to rich text
         info_window.setTextFormat(1)
         # Change the styling of the window
