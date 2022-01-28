@@ -30,6 +30,7 @@ class PyQtLayout(QWidget):
         line5 = "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new <i><font color=#3f3857>location</font color=#3f3857></i> file<br>"
         line6 = "<font color=#553b5e>~ </font color=#553b5e>To edit an existing restaurant, select it and hit <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i></h3><br>"
         line7 = "<h2>Enjoy!</h2>"
+        # Format string
         self.welcome_str = line1+line2+line3+line4+line5+line6+line7
 
         # Initialize QLabels
