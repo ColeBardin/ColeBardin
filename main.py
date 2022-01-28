@@ -23,7 +23,14 @@ class PyQtLayout(QWidget):
         self.info_current_restaurants = None
 
         # Welcome informating string
-        self.welcome_str = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr><h3>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random restaurants from the <i><font color=#4f2262>current location</font color=#4f2262></i><br>Click on a <i><font color=#4f2262>location</font color=#4f2262></i> to select and display its restaurants<br>Use the <i><font color=#66CADA>Add Restaurant</font color=#66CADA></i> button to add a restaurant to the <i><font color=#4f2262>current location</font color=#4f2262></i><br>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new location file<br>To edit an existing restaurant, select it and hit <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i><br>Enjoy!</h3>"
+        line1 = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr>"
+        line2 = "<h3><font color=#553b5e>~ </font color=#553b5e>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random <i><font color=#4f2262>restaurants</font color=#4f2262></i> from the <i><font color=#3f3857>current location</font color=#3f3857></i><br>"
+        line3 = "<font color=#553b5e>~ </font color=#553b5e>Click on a <i><font color=#3f3857>location</font color=#3f3857></i> to select and display its <i><font color=#4f2262>restaurants</font color=#4f2262></i><br>"
+        line4 = "<font color=#553b5e>~ </font color=#553b5e>Use the <i><font color=#66CADA>Add Restaurant</font color=#66CADA></i> button to add a <i><font color=#4f2262>restaurant</font color=#4f2262></i> to the <i><font color=#3f3857>current location</font color=#3f3857></i><br>"
+        line5 = "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new <i><font color=#3f3857>location</font color=#3f3857></i> file<br>"
+        line6 = "<font color=#553b5e>~ </font color=#553b5e>To edit an existing restaurant, select it and hit <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i></h3><br>"
+        line7 = "<h2>Enjoy!</h2>"
+        self.welcome_str = line1+line2+line3+line4+line5+line6+line7
 
         # Initialize QLabels
         self.label_current_location = QLabel(self)
