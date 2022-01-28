@@ -152,6 +152,7 @@ class PyQtLayout(QWidget):
 
     # Action method for button_add_location
     def add_location(self):
+        # Prompt the user for a location name
         new_location = self.get_user_input("Add New Location", "Enter a new location name:")
         # If blank entry is submitted
         if new_location == '':
@@ -176,7 +177,7 @@ class PyQtLayout(QWidget):
                 # Close the file
                 new_file.close()
                 # Rebuild the locations table 
-                self.build_locations()
+                self.build_locations(set=new_location)
                 # Display success message
                 self.generate_display_msg("Succes", f"Successfully created new location: {new_location}", QMessageBox.Information)
 
@@ -198,15 +199,23 @@ class PyQtLayout(QWidget):
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
     # Method to build the location table
-    def build_locations(self):
+    def build_locations(self,set=None):
         # First, clear the table
         self.list_locations.clear()
         # Iterate for all the files in \restaurants subdirectory
         for file in os.listdir('restaurants'):
             # Only add locations of .CSV file
             if file[-4:].lower() == ".csv":
+                # Make a QListWidgetItem instance to hold the location
+                location = QListWidgetItem(file[:-4])
                 # Add filename to list of available locations
-                self.list_locations.addItem(QListWidgetItem(file[:-4]))
+                self.list_locations.addItem(location)
+                # Check to see if current location is the one to be set
+                if set == file[:-4]:
+                    # Set it as the current location (Used for when new locations are added)
+                    self.set_current_location(location)
+                    # Highlight the selection
+                    location.setSelected(True)
 
     # Method to call when the list of resaurants or current location is changed
     def build_restaurants(self):
