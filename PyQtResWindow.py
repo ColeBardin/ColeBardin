@@ -528,7 +528,6 @@ class PyQtResWindow(QWidget):
                 font: 20px;
             }
             """)
-
         # Set unique format options for specific elements
         self.label_welcome_info.setStyleSheet(
             "background-color: #6a6383;"
