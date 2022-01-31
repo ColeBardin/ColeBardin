@@ -7,7 +7,6 @@ import os
 path_to_locations = "locations"
 
 
-
 # Layout class
 class PyQtAppWindow(QWidget):
     # Class initialization method
