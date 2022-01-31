@@ -45,6 +45,9 @@ class PyQtResWindow(QWidget):
         self.label_welcome_info.setTextFormat(1)
         self.label_current_location.setTextFormat(1)
 
+        # Enable word wrapping for the welcome label
+        self.label_welcome_info.setWordWrap(True)
+
         # Initialize QTable
         self.table_results = QTableWidget(self)
 
