@@ -12,4 +12,4 @@ pyvenv.cfg
 .DS_Store
 
 # PyCache
-__pycache__
+__pycache__/
