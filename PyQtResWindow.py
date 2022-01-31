@@ -3,6 +3,9 @@ from PyQt5 import QtCore
 from random import randint
 import os
 
+# Variable to location subdirectory name
+path_to_locations = "locations"
+
 # Layout class
 class PyQtResWindow(QWidget):
     # Class initialization method
@@ -131,13 +134,13 @@ class PyQtResWindow(QWidget):
         # Bool used to set first file as current location on startup
         init = False
         # Test to see if there are location files in directory
-        if len(os.listdir("restaurants")) == 0:
+        if len(os.listdir(path_to_locations)) == 0:
             # Set current location string to be empty
             self.current_location = ''
         # If files do exist in directory
         else:
         # Iterate over all files in restaurants directory
-            for file in os.listdir("restaurants"):
+            for file in os.listdir(path_to_locations):
                 # Only cound .CSV files for locations
                 if file[-4:] == ".csv" and len(file) != 0:
                     # Set the first file to the current location
@@ -177,14 +180,14 @@ class PyQtResWindow(QWidget):
         # Else result is valid
         else:
             # Check to see if file exists before writing a new one
-            if os.path.isfile(os.path.join("restaurants",f"{new_location}.csv")):
+            if os.path.isfile(os.path.join(path_to_locations, f"{new_location}.csv")):
                 # Display error message
                 self.generate_display_msg("Warning", "A file for this location already exists", QMessageBox.Warning)
                 # Recurse
                 self.add_location()
             else:
                 # Create a .CSV file with the input as the name
-                new_file = open(os.path.join("restaurants",f"{new_location}.csv"), "w")
+                new_file = open(os.path.join(path_to_locations, f"{new_location}.csv"), "w")
                 # Close the file
                 new_file.close()
                 # Rebuild the locations table 
@@ -199,7 +202,7 @@ class PyQtResWindow(QWidget):
         # Once full data collection has occured
         if iterator == 4:                    
             # Add new restaurant packet to current location file
-            new_res = open(os.path.join("restaurants",f"{self.current_location}.csv"), "a")
+            new_res = open(os.path.join(path_to_locations, f"{self.current_location}.csv"), "a")
             # Join data with a newline and write
             new_res.write(','.join(new_restaurant_data) + '\n')
             # Close current location file
@@ -214,7 +217,7 @@ class PyQtResWindow(QWidget):
         # First, clear the table
         self.list_locations.clear()
         # Iterate for all the files in \restaurants subdirectory
-        for file in os.listdir('restaurants'):
+        for file in os.listdir(path_to_locations):
             # Only add locations of .CSV file
             if file[-4:].lower() == ".csv":
                 # Make a QListWidgetItem instance to hold the location
@@ -237,7 +240,7 @@ class PyQtResWindow(QWidget):
         # Adjust label with with current location
         self.label_restaurants.setText("Your Restaurants:")
         # Get available restaurants from current location file
-        file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
+        file = open(os.path.join(path_to_locations, f"{self.current_location}.csv"), "r")
         # Iterate over each restaurant packet
         for line in file:
             # Parse out the name of the restaurant from the packet
@@ -367,7 +370,7 @@ class PyQtResWindow(QWidget):
         # List to hold chose restaurants
         random_choices = [] 
         # Read from current location file
-        current_file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r")
+        current_file = open(os.path.join(path_to_locations, f"{self.current_location}.csv"), "r")
         # Read all the lines and save them to lines variable
         lines = current_file.readlines()
         # Error handle location with no restaurants
@@ -576,7 +579,7 @@ class PyQtResWindow(QWidget):
             # Make an empty string to store contents of new file
             new_file = ''
             # Open the location file
-            current_location_file = open(os.path.join("restaurants",f"{self.current_location}.csv"), "r+")
+            current_location_file = open(os.path.join(path_to_locations, f"{self.current_location}.csv"), "r+")
             # Check to make sure that the restaurant edit hasn't been cancelled
             if iterator == 10:
                 # Do not execute file alteration
