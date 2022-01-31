@@ -493,8 +493,8 @@ class PyQtResWindow(QWidget):
                 background-color: #9a82b0;
                 font: 20px bold;
                 color: #4f2262;
-                selection-background-color: #66CADA;
-                selection-color: #3f3857;
+                selection-background-color: #92d8e3;
+                selection-color: #4f2262;
             }
             QPushButton {
                 color: #4f2262;
@@ -512,8 +512,8 @@ class PyQtResWindow(QWidget):
                 padding: 10px;
             }
             QListView:item:hover{
-                background: #92d8e3;
-                color: #4f2262
+                background: #66CADA;
+                color: #4f2262;
             }
             QTableWidget {
                 background-color: #6a6383;
@@ -538,19 +538,23 @@ class PyQtResWindow(QWidget):
             }
             """)
         # Set unique format options for specific elements
+        # Welcome Label
         self.label_welcome_info.setStyleSheet(
             "background-color: #6a6383;"
             "border: 5px solid #553b5e;"
             "font: 20px bold;"
             )
+        # Current location label
         self.label_current_location.setStyleSheet(
             "background-color: #6a6383;"
             "border: 5px solid #553b5e;"
             )
+        # List of locations header label
         self.label_locations.setStyleSheet(
             "background-color: #3f3857;"
             "border: 5px solid #553b5e;"
             )
+        # List of restaurants header label
         self.label_restaurants.setStyleSheet(
             "background-color: #3f3857;"
             "border: 5px solid #553b5e;"
