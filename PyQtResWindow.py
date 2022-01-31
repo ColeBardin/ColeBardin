@@ -198,9 +198,9 @@ class PyQtResWindow(QWidget):
     # Action method to add a new restaurant to current location
     def add_restaurant(self):
         # Call method to get restaurant info from user with new_restaurant paramater True
-        new_restaurant_data, iterator = self.get_restaurant_info()
+        new_restaurant_data, result = self.get_restaurant_info()
         # Once full data collection has occured
-        if iterator == 4:                    
+        if result == 4:                    
             # Add new restaurant packet to current location file
             new_res = open(os.path.join(path_to_locations, f"{self.current_location}.csv"), "a")
             # Join data with a newline and write
