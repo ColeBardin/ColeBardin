@@ -106,10 +106,10 @@ class PyQtResWindow(QWidget):
         grid.addWidget(self.list_current_restaurants, 2, 0) 
         grid.addWidget(self.button_edit_restaurant, 3, 0)
         # Middle Column
+        grid.addWidget(self.label_current_location, 0, 1)
         grid.addWidget(self.button_random_restaurants, 1, 1)
         grid.addWidget(self.label_welcome_info, 2, 1)
         grid.addWidget(self.table_results, 2, 1)
-        grid.addWidget(self.label_current_location, 0, 1)
         # Right Column
         grid.addWidget(self.button_add_location, 0, 2)
         grid.addWidget(self.label_locations, 1, 2)
