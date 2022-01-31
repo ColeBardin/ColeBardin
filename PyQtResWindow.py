@@ -250,7 +250,6 @@ class PyQtResWindow(QWidget):
         self.current_restaurant = None
 
     # Method to build results table with given choices
-    # TODO: set width of table to be similar enough to welcome message
     def build_results(self, choices, number_of_choices):
         # Hide the welcome info message
         self.label_welcome_info.hide()
