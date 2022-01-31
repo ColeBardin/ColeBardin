@@ -511,6 +511,10 @@ class PyQtResWindow(QWidget):
                 color: #c2e9f0;
                 padding: 10px;
             }
+            QListView:item:hover{
+                background: #92d8e3;
+                color: #4f2262
+            }
             QTableWidget {
                 background-color: #6a6383;
                 border: 5px solid #553b5e;
