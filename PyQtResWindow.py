@@ -521,6 +521,9 @@ class PyQtResWindow(QWidget):
                 color: #c2e9f0;
                 font: 30px bold; 
             }
+            QTableWidget:item:hover {
+                background-color: #3f3857;
+            }
             QLabel {
                 background-color: #3f3857;
                 color: #c2e9f0;
