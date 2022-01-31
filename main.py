@@ -5,7 +5,7 @@ import sys
 import os
 
 # Layout class
-class PyQtLayout(QWidget):
+class PyQtResWindow(QWidget):
     # Class initialization method
     def __init__(self):
         super().__init__()
@@ -656,7 +656,7 @@ def main():
     # Set style to be 'fusion'
     app.setStyle("fusion")
     # Create main window of PyQtLayout class
-    window = PyQtLayout()
+    window = PyQtResWindow()
     # Display window
     window.show()
     # Close window when python program is closed
