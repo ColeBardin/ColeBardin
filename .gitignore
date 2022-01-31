@@ -10,3 +10,6 @@ pyvenv.cfg
 
 # Mac Shit
 .DS_Store
+
+# PyCache
+__pycache__
