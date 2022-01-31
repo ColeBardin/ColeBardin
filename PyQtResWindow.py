@@ -298,8 +298,30 @@ class PyQtAppWindow(QWidget):
             # Return submitted value
             return dialog.textValue()
 
-    # Method to get and return new restaurant info packet and iterator from user
     def get_restaurant_info(self, new_restaurant=True):
+        # Make empty list to hold input values
+        new_restaurant_data = ['','','','']
+        # List of prompts for line edits
+        messages = [ "Restaurant Name:", "Restaurant Genre", "Price 0($) to 10($$)", "Short Description" ]
+        # Change first prompt when editing a restaurant
+        if new_restaurant == False:
+            messages[0] = f"Restaurant Name:\n(Leave blank to delete {self.current_restaurant})"
+        # Title for prompts selection determined by new_restaurant parameter
+        if new_restaurant == True:
+            # New restaurant title
+            title = f"Add Restaurant to {self.current_location}"
+        # If func is being used to get new data for existing restaurant
+        else:
+            # Editing restaurant title
+            title = f"Edit {self.current_restaurant} in {self.current_location}"
+        window = QGroupBox(title)
+        label_name = QLabel("Name")
+        label
+
+        window.show()
+
+    # Method to get and return new restaurant info packet and iterator from user
+    def get_restaurant_info_old(self, new_restaurant=True):
         # Make empty list to hold input values
         new_restaurant_data = ['','','','']
         # List of prompts for line edits
