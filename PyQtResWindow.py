@@ -506,11 +506,11 @@ class PyQtResWindow(QWidget):
                 color: #c2e9f0;
                 padding: 10px;
             }
-            QTabelWidget {
+            QTableWidget {
                 background-color: #6a6383;
                 border: 5px solid #553b5e;
                 color: #c2e9f0;
-                font: 30px bold;
+                font: 30px bold; 
             }
             QLabel {
                 background-color: #3f3857;
