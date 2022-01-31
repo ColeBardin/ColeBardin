@@ -6,14 +6,16 @@ import os
 # Variable to location subdirectory name
 path_to_locations = "locations"
 
+
+
 # Layout class
-class PyQtResWindow(QWidget):
+class PyQtAppWindow(QWidget):
     # Class initialization method
     def __init__(self):
         super().__init__()
         # Set main window size and location
-        self.__width = int(1500)
-        self.__height = int(800)
+        self.__width = 1500
+        self.__height = 800
         self.__ax = 0
         self.__ay = 0
 

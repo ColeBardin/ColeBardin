@@ -8,7 +8,7 @@ def main():
     # Set style to be 'fusion'
     app.setStyle("fusion")
     # Create main window of PyQtLayout class
-    window = PyQtResWindow()
+    window = PyQtAppWindow()
     # Display window
     window.show()
     # Close window when python program is closed
