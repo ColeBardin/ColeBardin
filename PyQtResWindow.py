@@ -38,9 +38,12 @@ class PyQtResWindow(QWidget):
         # Initialize QLabels
         self.label_current_location = QLabel(self)
         self.label_welcome_info = QLabel(self)
-        self.label_welcome_info.setTextFormat(1)
         self.label_restaurants = QLabel(self)
         self.label_locations = QLabel("Your Locations:")
+
+        # Enable rich formatting for the current labels
+        self.label_welcome_info.setTextFormat(1)
+        self.label_current_location.setTextFormat(1)
 
         # Initialize QTable
         self.table_results = QTableWidget(self)
@@ -482,8 +485,6 @@ class PyQtResWindow(QWidget):
         self.current_location = item.text()
         # Update current location label
         self.label_current_location.setText(self.get_selected_location_label())
-        # Enable Rich Text Formatting for label
-        self.label_current_location.setTextFormat(1)
         # Update the list of available restaurants from this new location
         self.build_restaurants()
 
@@ -646,5 +647,3 @@ class PyQtResWindow(QWidget):
                 self.generate_display_msg("Warning",f"Cancelled editing {self.current_restaurant}", QMessageBox.Information)
             # Rebuild the list of restaurants
             self.build_restaurants()
-
-
