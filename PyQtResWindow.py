@@ -494,11 +494,17 @@ class PyQtResWindow(QWidget):
                 background-color: #9a82b0;
                 font: 20px bold;
                 color: #4f2262;
+                selection-background-color: #66CADA;
+                selection-color: #3f3857;
             }
             QPushButton {
                 color: #4f2262;
                 background-color: #92d8e3;
                 padding: 10px;
+                font: bold;
+            }
+            QPushButton:hover {
+                background-color: #66CADA;
             }
             QListWidget {
                 background-color: #3f3857;
