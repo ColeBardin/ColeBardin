@@ -287,12 +287,6 @@ class PyQtResWindow(QWidget):
         dialog.setLabelText(msg)
         # Set Echo mode to normal
         dialog.setTextEchoMode(QLineEdit.Normal)
-        # Edit style sheet for the dialog box
-        dialog.setStyleSheet(
-            "color: #92d8e3;"
-            "background: #3f3857;"
-            "font: 20px;"
-            )
         # Wait for response
         if dialog.exec_() == QDialog.Accepted:
             # Return submitted value
@@ -422,13 +416,6 @@ class PyQtResWindow(QWidget):
         #QMessageBox.Warning, Question, Information, Critical
         # Set error type from parameter
         disp_msg.setIcon(err_type)
-        # Set style sheet for display message
-        # TODO: fix icon color or change bg color
-        disp_msg.setStyleSheet(
-            "color: #92d8e3;"
-            "background: #3f3857;"
-            "font: 20px;"
-            )
         # For Deletion prompts
         if delete == True:
             delete_button = QPushButton("Delete")
@@ -463,12 +450,6 @@ class PyQtResWindow(QWidget):
             f"<h2>{restaurant_info[0]},<br>{self.current_location}</h2><h3><font color=#66CADA>Genre:</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[1]}</font color=#9a82b0></h4><h3><font color=#66CADA>Price 0($) to 10($$):</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[2]}</font color=#9a82b0></h4><h3><font color=#66CADA>Description:</font color=#66CADA></h4><h3><font color=#9a82b0>{restaurant_info[3]}</font color=#9a82b0></h3>")
         # Set text format to rich text
         info_window.setTextFormat(1)
-        # Change the styling of the window
-        info_window.setStyleSheet(
-            "color: #c2e9f0;"
-            "padding: 10px;"
-            "background-color: #3f3857;"
-            )
         # Execute the window build operation
         result = info_window.exec()
         # Reset current restaurant to be None
@@ -493,10 +474,10 @@ class PyQtResWindow(QWidget):
         # Change setting to delete
         self.execute_delete = True
 
-    # Adjusts the CSS elements
+    # Methdo to set the stylesheet of the window
     def set_css(self):
         #Color Pallet:
-        # Window baground: light purple =   9a82b0
+        # Window GB: light purple =         9a82b0
         # Button font: dark purple =        4f2262
         # Table and CL BG: dark_grey =      6a6383
         # Button Background: light blue =   92d8e3
@@ -504,87 +485,64 @@ class PyQtResWindow(QWidget):
         # List BG: super dark grey =        3f3857
         # Button indicator: blue =          66CADA
 
-        # Adjust CSS of Main Window
-        self.setStyleSheet(
-            "background-color: #9a82b0;"
-            "font: 20px bold;"
-            "color: #4f2262;"
-            )
-        # Add Location Button
-        self.button_add_location.setStyleSheet(
-            "color: #4f2262;"
-            "background-color: #92d8e3;"
-            )
-        # Add Restaurant Button
-        self.button_add_restaurant.setStyleSheet(
-            "color: #4f2262;"
-            "background-color: #92d8e3;"
-            )
-        # Quit Button
-        self.button_quit.setStyleSheet(
-            "color: #4f2262;"
-            "background-color: #92d8e3;"
-            )       
-        # Get Random Restaurant Button
-        self.button_random_restaurants.setStyleSheet(
-            "color: #4f2262;"
-            "background-color: #92d8e3;"
-            "padding-top: 10px;"
-            "padding-bottom: 10px;"
-            )  
-        # Edit restaurant button
-        self.button_edit_restaurant.setStyleSheet(
-            "color: #4f2262;"
-            "background-color: #92d8e3;"
-            )  
-        # Locations List
-        self.list_locations.setStyleSheet(
-            "background-color: #3f3857;"
-            "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
-            "padding: 10px;"
-            )
-        # Current Restaurants List
-        self.list_current_restaurants.setStyleSheet(
-            "background-color: #3f3857;"
-            "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
-            "padding: 10px;"
-            )
-        # Results Table
-        self.table_results.setStyleSheet(
-            "background-color: #6a6383;"
-            "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
-            "font: 30px bold;"
-            )
-        # Current Locations Label
-        self.label_current_location.setStyleSheet(
-            "background-color: #6a6383;"
-            "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
-            "padding: 5px;"
-            )
-        # Welcome info label
+        # Set general StyleSheet for all window obejects
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #9a82b0;
+                font: 20px bold;
+                color: #4f2262;
+            }
+            QPushButton {
+                color: #4f2262;
+                background-color: #92d8e3;
+                padding: 10px;
+            }
+            QListWidget {
+                background-color: #3f3857;
+                border: 5px solid #553b5e;
+                color: #c2e9f0;
+                padding: 10px;
+            }
+            QTabelWidget {
+                background-color: #6a6383;
+                border: 5px solid #553b5e;
+                color: #c2e9f0;
+                font: 30px bold;
+            }
+            QLabel {
+                background-color: #3f3857;
+                color: #c2e9f0;
+                padding: 5px;
+            }
+            QMessageBox {
+                color: #92d8e3;
+                background: #3f3857;
+                font: 20px;
+            }
+            QInputDialog {
+                color: #92d8e3;
+                background: #3f3857;
+                font: 20px;
+            }
+            """)
+
+        # Set unique format options for specific elements
         self.label_welcome_info.setStyleSheet(
             "background-color: #6a6383;"
             "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
-            "padding: 5px;"
             "font: 20px bold;"
             )
-        # Welcome info label
-        self.label_restaurants.setStyleSheet(
-            "background-color: #3f3857;"
+        self.label_current_location.setStyleSheet(
+            "background-color: #6a6383;"
             "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
-            "padding: 5px;"
             )
-        # Welcome info label
         self.label_locations.setStyleSheet(
             "background-color: #3f3857;"
             "border: 5px solid #553b5e;"
-            "color: #c2e9f0;"
+            )
+        self.label_restaurants.setStyleSheet(
+            "background-color: #3f3857;"
+            "border: 5px solid #553b5e;"
             )
 
     # Method to edit the current restaurant
