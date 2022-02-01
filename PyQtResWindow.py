@@ -67,6 +67,24 @@ class PyQtTable(QTableWidget):
         if single is not None:
             # Attach action method to single click
             self.itemClicked.connect(single)
+        # Set the custom stylesheet
+        self.set_css()
+
+    # Method to apply cutsom stylesheet
+    def set_css(self):
+        # Set the custom stylesheet
+        self.setStyleSheet("""
+            QTableWidget {
+                background-color: #6a6383;
+                border: 5px solid #553b5e;
+                color: #c2e9f0;
+                font: 30px bold; 
+            }
+            QTableWidget:item:hover {
+                background-color: #3f3857;
+                color: #92d8e3;
+            }
+        """)
 
 
 # Custom list class
@@ -578,16 +596,6 @@ class PyQtAppWindow(QWidget):
             QListView:item:hover{
                 background: #66CADA;
                 color: #4f2262;
-            }
-            QTableWidget {
-                background-color: #6a6383;
-                border: 5px solid #553b5e;
-                color: #c2e9f0;
-                font: 30px bold; 
-            }
-            QTableWidget:item:hover {
-                background-color: #3f3857;
-                color: #92d8e3;
             }
             QLabel {
                 background-color: #3f3857;
