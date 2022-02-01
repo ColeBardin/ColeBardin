@@ -10,7 +10,7 @@ path_to_locations = "locations"
 class PyQtButton(QPushButton):
     # Initialization method
     def __init__(self, text=None, action=None):
-        # Call upon parent initialization
+        # Call parent initialization
         super().__init__()
         # If button text is given upon initialization
         if text is not None:
@@ -43,7 +43,7 @@ class PyQtButton(QPushButton):
 class PyQtMessageBox(QMessageBox):
     # Initialize method
     def __init__(self, parent=None, title=None, msg=None, err_type=None, rich=False):
-        # Call parent initialization class
+        # Call parent initialization
         super().__init__()
         # If given title
         if title is not None:
@@ -79,7 +79,7 @@ class PyQtMessageBox(QMessageBox):
 class PyQtLabel(QLabel):
     # Initialize method
     def __init__(self, parent=None, text=None, rich=False, restrain=False):
-        # Call parent initialization class
+        # Call parent initialization
         super().__init__()
         # Get main window dimensions
         win_width, win_height = parent.get_window_dimensions()
@@ -103,7 +103,7 @@ class PyQtLabel(QLabel):
 class PyQtTable(QTableWidget):
     # Initialization method
     def __init__(self, parent=None, single=None):
-        # Call parent init method
+        # Call parent initialization
         super().__init__()
         # If single click action is given
         if single is not None:
@@ -148,7 +148,7 @@ class PyQtTable(QTableWidget):
 
 # Custom list class
 class PyQtList(QListWidget):
-    # Initialize the class
+    # Initialization method
     def __init__(self, parent, single=None, double=None):
         # Call parent initialization
         super().__init__()
@@ -186,8 +186,9 @@ class PyQtList(QListWidget):
 
 # Layout class
 class PyQtAppWindow(QWidget):
-    # Class initialization method
+    # Initialization method
     def __init__(self):
+        # Call parent initialization
         super().__init__()
         # Set main window size and location
         self.__width = 1500
