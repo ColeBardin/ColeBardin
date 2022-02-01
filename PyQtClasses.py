@@ -263,8 +263,8 @@ class PyQtAppWindow(QWidget):
     # Generate UI layout specifications
     def __init_gui(self):
         # Build all text packets
-        self.init_locations_list()
-        self.build_restaurants()
+        self.__init_locations_list()
+        self.__build_restaurants()
         
         # Set custom styling
         self.__set_css()
@@ -296,7 +296,7 @@ class PyQtAppWindow(QWidget):
         self.setWindowTitle("Kaia's Restaurant Picker")
 
     # Initialize the locations for the table
-    def init_locations_list(self):
+    def __init_locations_list(self):
         # Test to see if there are location files in directory
         if len(os.listdir(path_to_locations)) == 0:
             # Set current location string to be empty
@@ -358,7 +358,7 @@ class PyQtAppWindow(QWidget):
             # Close current location file
             new_res.close()
             # Update available restaurants list
-            self.build_restaurants()
+            self.__build_restaurants()
             # Display success message once completed
             self.generate_display_msg("Success",f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
 
@@ -382,7 +382,7 @@ class PyQtAppWindow(QWidget):
                     location.setSelected(True)
 
     # Method to call when the list of resaurants or current location is changed
-    def build_restaurants(self):
+    def __build_restaurants(self):
         # Clear all elements from the list
         self.list_current_restaurants.clear()
         # Clear buffer of current restaurant info
@@ -626,7 +626,7 @@ class PyQtAppWindow(QWidget):
         # Update current location label
         self.label_current_location.setText(self.get_selected_location_label())
         # Update the list of available restaurants from this new location
-        self.build_restaurants()
+        self.__build_restaurants()
 
     # Method to delete restaurant
     def set_execute_delete(self):
@@ -741,4 +741,4 @@ class PyQtAppWindow(QWidget):
                 # Display cancelled message
                 self.generate_display_msg("Warning",f"Cancelled editing {self.current_restaurant}", QMessageBox.Information)
             # Rebuild the list of restaurants
-            self.build_restaurants()
+            self.__build_restaurants()
