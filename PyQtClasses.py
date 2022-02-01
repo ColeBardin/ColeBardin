@@ -237,20 +237,20 @@ class PyQtAppWindow(QWidget):
         # Buffer to hold current restaurant information
         self.info_current_restaurants = None
 
-        # Initialize QLabels
+        # Initialize Labels
         self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label(), rich=True)
         self.label_welcome_info = PyQtLabel(parent=self, text=self.get_welcome_str(), rich=True, restrain=True)
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
-        # Initialize QLists
+        # Initialize Lists
         self.list_current_restaurants = PyQtList(parent=self, single=self.set_current_restaurant, double=self.generate_restaurant_info)
         self.list_locations = PyQtList(parent=self, single=self.set_current_location)
 
-        # Initialize QTable
+        # Initialize Table
         self.table_results = PyQtTable(parent=self, single=self.generate_restaurant_info)
 
-        # Initialize QPushButtons 
+        # Initialize PushButtons 
         self.button_add_location = PyQtButton(text="Add New Location", action=self.add_location)
         self.button_add_restaurant = PyQtButton(text="Add New Restaurant", action=self.add_restaurant)
         self.button_quit = PyQtButton(text="Quit", action=self.close)
