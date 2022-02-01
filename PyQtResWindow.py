@@ -195,7 +195,7 @@ class PyQtAppWindow(QWidget):
     # Generate UI layout specifications
     def __init_gui(self):
         # Build all text packets
-        self.init_locations_table()
+        self.init_locations_list()
         self.build_restaurants()
         
         # Adjust CSS for this project
@@ -228,7 +228,7 @@ class PyQtAppWindow(QWidget):
         self.setWindowTitle("Kaia's Restaurant Picker")
 
     # Initialize the locations for the table
-    def init_locations_table(self):
+    def init_locations_list(self):
         # Test to see if there are location files in directory
         if len(os.listdir(path_to_locations)) == 0:
             # Set current location string to be empty
