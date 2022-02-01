@@ -6,6 +6,35 @@ import os
 # Variable to location subdirectory name
 path_to_locations = "locations"
 
+# Class to define QPushButtons
+class PyQtButton(QPushButton):
+    # Initialization method
+    def __init__(self, text=None):
+        # Call upon parent initialization
+        super().__init__()
+        # If button text is given upon initialization
+        if text is not None:
+            # Set the text as the button text
+            self.setText(text)
+        # Style the button
+        self.set_css()
+
+    # Method to style the button
+    def set_css(self):
+        # Apply the custom stylesheet
+        self.setStyleSheet("""            
+            QPushButton {
+                color: #4f2262;
+                background-color: #92d8e3;
+                padding: 10px;
+                font: bold;
+            }
+            QPushButton:hover {
+                background-color: #66CADA;
+            }
+            """)
+
+
 # Layout class
 class PyQtAppWindow(QWidget):
     # Class initialization method
@@ -59,11 +88,11 @@ class PyQtAppWindow(QWidget):
         self.list_locations = QListWidget(self)
 
         # Initialize QPushButtons
-        self.button_add_location = QPushButton("Add New Location")
-        self.button_add_restaurant = QPushButton("Add New Restaurant")
-        self.button_quit = QPushButton("Quit")
-        self.button_random_restaurants = QPushButton("Choose for me!")
-        self.button_edit_restaurant = QPushButton("Edit Restaurant")
+        self.button_add_location = PyQtButton("Add New Location")
+        self.button_add_restaurant = PyQtButton("Add New Restaurant")
+        self.button_quit = PyQtButton("Quit")
+        self.button_random_restaurants = PyQtButton("Choose for me!")
+        self.button_edit_restaurant = PyQtButton("Edit Restaurant")
 
         # Run UI Method
         self.init_gui()
@@ -507,15 +536,6 @@ class PyQtAppWindow(QWidget):
                 color: #4f2262;
                 selection-background-color: #92d8e3;
                 selection-color: #4f2262;
-            }
-            QPushButton {
-                color: #4f2262;
-                background-color: #92d8e3;
-                padding: 10px;
-                font: bold;
-            }
-            QPushButton:hover {
-                background-color: #66CADA;
             }
             QListWidget {
                 background-color: #3f3857;
