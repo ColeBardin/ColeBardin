@@ -193,7 +193,25 @@ class PyQtInputDialog(QInputDialog):
         self.resize(QtCore.QSize(450, 250))
         # Set the TextEchoMode to normal
         self.setTextEchoMode(QLineEdit.Normal)
+        # Check for input title
+        if title is not None:
+            # Set title
+            self.setWindowTitle(title)
+        # Check for input message
+        if msg is not None:
+            # Set label text
+            self.setLabelText(msg)
+        # Set custom styling
+        self.__set_css()
 
+    # Method to add custom styling to the input dialog
+    def __set_css(self):
+        # Apply custom stylesheet
+        self.setStyleSheet("""
+            color: #92d8e3;
+            background: #3f3857;
+            font: 20px;
+        """)
 
 # Custom Layout Class for Main Window
 class PyQtAppWindow(QWidget):
@@ -646,11 +664,6 @@ class PyQtAppWindow(QWidget):
                 background-color: #3f3857;
                 color: #c2e9f0;
                 padding: 5px;
-            }
-            QInputDialog {
-                color: #92d8e3;
-                background: #3f3857;
-                font: 20px;
             }
             """)
         # Set unique format options for specific elements
