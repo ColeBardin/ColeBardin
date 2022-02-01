@@ -42,7 +42,7 @@ class PyQtButton(QPushButton):
 # Custom MessageBox class
 class PyQtMessageBox(QMessageBox):
     # Initialize method
-    def __init__(self, parent=None, title=None, msg=None, err_type=None):
+    def __init__(self, parent=None, title=None, msg=None, err_type=None, rich=False):
         # Call parent initialization class
         super().__init__()
         # If given title
@@ -57,6 +57,10 @@ class PyQtMessageBox(QMessageBox):
         if err_type is not None:
             # Set the icon
             self.setIcon(err_type)
+        # If box is flagged for rich text
+        if rich == True:
+            # Enable rich text for the label
+            self.setTextFormat(1)
         # Set custom styling
         self.__set_css()
 
@@ -570,15 +574,18 @@ class PyQtAppWindow(QWidget):
                 restaurant_info = i_restaurant
                 # No need to execute more iterations
                 break
+        # Create title string
+        info_title = f"{restaurant_info[0]}"
+        # Create message string
+        info_msg = f"<h2>{restaurant_info[0]},<br>{self.current_location}</h2><h3><font color=#66CADA>Genre:</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[1]}</font color=#9a82b0></h4><h3><font color=#66CADA>Price 0($) to 10($$):</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[2]}</font color=#9a82b0></h4><h3><font color=#66CADA>Description:</font color=#66CADA></h4><h3><font color=#9a82b0>{restaurant_info[3]}</font color=#9a82b0></h3>"
         # Initialize QDialog box winodw
-        info_window = QMessageBox(self)
+        info_window = PyQtMessageBox(parent=self, title=info_title, msg=info_msg, rich=True)
         # Set the title to be the restaurant and location
-        info_window.setWindowTitle(f"{restaurant_info[0]}")
+        #info_window.setWindowTitle(info_title)
         # Display the restaurant's information
-        info_window.setText(
-            f"<h2>{restaurant_info[0]},<br>{self.current_location}</h2><h3><font color=#66CADA>Genre:</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[1]}</font color=#9a82b0></h4><h3><font color=#66CADA>Price 0($) to 10($$):</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[2]}</font color=#9a82b0></h4><h3><font color=#66CADA>Description:</font color=#66CADA></h4><h3><font color=#9a82b0>{restaurant_info[3]}</font color=#9a82b0></h3>")
+        #info_window.setText(info_msg)
         # Set text format to rich text
-        info_window.setTextFormat(1)
+        #info_window.setTextFormat(1)
         # Execute the window build operation
         result = info_window.exec()
         # Reset current restaurant to be None
