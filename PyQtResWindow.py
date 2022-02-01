@@ -75,6 +75,8 @@ class PyQtTable(QTableWidget):
             self.itemClicked.connect(single)
         # Set the custom stylesheet
         self.__set_css()
+        # Initialize the physical table
+        self.init_results_table(parent)
 
     # Method to apply cutsom stylesheet
     def __set_css(self):
@@ -91,6 +93,23 @@ class PyQtTable(QTableWidget):
                 color: #92d8e3;
             }
         """)
+
+    # Method to create the specifc table
+
+    # Initialize results table on startup
+    def init_results_table(self, parent):
+        # Set number of rows for table
+        self.setRowCount(5)
+        # Set number of columns for table
+        self.setColumnCount(1)
+        # Set horizontal header of table
+        self.setHorizontalHeaderLabels([f"Five Random Restaurants in {parent.current_location}"])
+        # Fill table with blank values until get_random_restaurant() is called
+        for row in range(5):
+            # For each row and column, fill with blank item
+            self.setItem(row, 0, QTableWidgetItem(''))
+        # Hide the results table until it is needed
+        self.hide()
 
 
 # Custom list class
@@ -180,7 +199,7 @@ class PyQtAppWindow(QWidget):
         # Build all text packets
         self.init_locations_table()
         self.build_restaurants()
-        self.init_results_table()
+        #self.init_results_table()
         
         # Adjust CSS for this project
         self.__set_css()
@@ -229,21 +248,6 @@ class PyQtAppWindow(QWidget):
                     self.build_locations(set=file[:-4])
                     # Stop loop
                     break
-
-    # Initialize results table on startup
-    def init_results_table(self):
-        # Set number of rows for table
-        self.table_results.setRowCount(5)
-        # Set number of columns for table
-        self.table_results.setColumnCount(1)
-        # Set horizontal header of table
-        self.table_results.setHorizontalHeaderLabels([f"Five Random Restaurants in {self.current_location}"])
-        # Fill table with blank values until get_random_restaurant() is called
-        for row in range(5):
-            # For each row and column, fill with blank item
-            self.table_results.setItem(row, 0, QTableWidgetItem(''))
-        # Hide the results table until it is needed
-        self.table_results.hide()
 
     # Action method for button_add_location
     def add_location(self):
