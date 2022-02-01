@@ -21,10 +21,10 @@ class PyQtButton(QPushButton):
             # Connect button click to action method
             self.clicked.connect(action)
         # Style the button
-        self.set_css()
+        self.__set_css()
 
     # Method to style the button
-    def set_css(self):
+    def __set_css(self):
         # Apply the custom stylesheet
         self.setStyleSheet("""            
             QPushButton {
@@ -68,10 +68,10 @@ class PyQtTable(QTableWidget):
             # Attach action method to single click
             self.itemClicked.connect(single)
         # Set the custom stylesheet
-        self.set_css()
+        self.__set_css()
 
     # Method to apply cutsom stylesheet
-    def set_css(self):
+    def __set_css(self):
         # Set the custom stylesheet
         self.setStyleSheet("""
             QTableWidget {
@@ -106,10 +106,10 @@ class PyQtList(QListWidget):
             # Attach action method to double click
             self.itemDoubleClicked.connect(double)
         # Set the custom stylesheet
-        self.set_css()
+        self.__set_css()
 
     # Method to set custom stylesheet
-    def set_css(self):
+    def __set_css(self):
         # Apply custom stylesheet
         self.setStyleSheet("""
             QListWidget {
@@ -183,7 +183,7 @@ class PyQtAppWindow(QWidget):
         #self.table_results.itemClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
-        self.set_css()
+        self.__set_css()
 
         # Create grid layout of Widget objects
         grid = QGridLayout()
@@ -586,7 +586,7 @@ class PyQtAppWindow(QWidget):
         self.execute_delete = True
 
     # Methdo to set the stylesheet of the window
-    def set_css(self):
+    def __set_css(self):
         #Color Pallet:
         # Window GB: light purple =         9a82b0
         # Button font: dark purple =        4f2262
