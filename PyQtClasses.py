@@ -183,6 +183,7 @@ class PyQtList(QListWidget):
             }
         """)
 
+
 # Custom InputDialog Class
 class PyQtInputDialog(QInputDialog):
     # Initialization method
@@ -212,6 +213,7 @@ class PyQtInputDialog(QInputDialog):
             background: #3f3857;
             font: 20px;
         """)
+
 
 # Custom Layout Class for Main Window
 class PyQtAppWindow(QWidget):
