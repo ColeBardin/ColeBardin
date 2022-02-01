@@ -76,7 +76,7 @@ class PyQtTable(QTableWidget):
         # Set the custom stylesheet
         self.__set_css()
         # Initialize the physical table
-        self.init_results_table(parent)
+        self.__init_results_table(parent)
 
     # Method to apply cutsom stylesheet
     def __set_css(self):
@@ -97,7 +97,7 @@ class PyQtTable(QTableWidget):
     # Method to create the specifc table
 
     # Initialize results table on startup
-    def init_results_table(self, parent):
+    def __init_results_table(self, parent):
         # Set number of rows for table
         self.setRowCount(5)
         # Set number of columns for table
