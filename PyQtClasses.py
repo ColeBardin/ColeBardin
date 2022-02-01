@@ -70,8 +70,7 @@ class PyQtMessageBox(QMessageBox):
         self.setStyleSheet("""
                 background-color: #3f3857;
                 color: #92d8e3;
-                font: 20px;
-                  
+                font: 20px;    
         """)
 
 
