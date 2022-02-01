@@ -6,7 +6,6 @@ import os
 # Variable to location subdirectory name
 path_to_locations = "locations"
 
-
 # Layout class
 class PyQtAppWindow(QWidget):
     # Class initialization method
