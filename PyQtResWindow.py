@@ -97,7 +97,7 @@ class PyQtAppWindow(QWidget):
 
         # Initialize QLabels
         self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label())
-        self.label_welcome_info = PyQtLabel(parent=self)
+        self.label_welcome_info = PyQtLabel(parent=self, text=self.welcome_str)
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
@@ -138,9 +138,6 @@ class PyQtAppWindow(QWidget):
 
         # Set minimum width for table object
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
-
-        # Display on label objects
-        self.label_welcome_info.setText(self.welcome_str)
 
         # Connect all the buttons to their action methods
         self.button_add_location.clicked.connect(self.add_location)
