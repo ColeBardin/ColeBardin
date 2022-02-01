@@ -466,8 +466,10 @@ class PyQtAppWindow(QWidget):
         result = info_window.exec()
         # Reset current restaurant to be None
         self.current_restaurant = None
-        # Rebuild restaurants to reset selection on list
-        self.build_restaurants()
+        # Clear selection on Restaurants QList
+        self.list_current_restaurants.clearSelection()
+        # Clears selection of Results QTable
+        self.table_results.clearSelection()
 
     # Method to update current restaurant
     def set_current_restaurant(self, item):
