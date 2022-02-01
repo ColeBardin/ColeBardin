@@ -396,10 +396,7 @@ class PyQtAppWindow(QWidget):
         if dialog.exec_() == QDialog.Accepted:
             # Return submitted value
             return dialog.textValue()
-    def delete_test(self):
-        print("connection possible")
-        return "return complete"
-
+ 
     # Method to get and return new restaurant info packet and iterator from user
     def get_restaurant_info(self, new_restaurant=True):
         # Make empty list to hold input values
