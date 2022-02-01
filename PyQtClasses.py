@@ -438,6 +438,7 @@ class PyQtAppWindow(QWidget):
         dialog.setTextEchoMode(QLineEdit.Normal)
         # Wait for response
         if dialog.exec_() == QDialog.Accepted:
+            # TODO: refactor return value handling
             # Return submitted value
             return dialog.textValue()
  
