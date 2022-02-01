@@ -653,6 +653,7 @@ class PyQtAppWindow(QWidget):
         # List BG: super dark grey =        3f3857
         # Button indicator: blue =          66CADA
 
+        # TODO: Set hover color for non default buttons
         # Apply custom stylesheet for general objects
         self.setStyleSheet("""
             QWidget {
