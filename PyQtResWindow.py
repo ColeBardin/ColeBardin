@@ -38,13 +38,17 @@ class PyQtButton(QPushButton):
 # Custom Label class
 class PyQtLabel(QLabel):
     # Initialize method
-    def __init__(self, parent=None, text=None):
+    def __init__(self, parent=None, text=None, rich=False):
         # Call parent initialization class
         super().__init__()
         # If label text is given
         if text is not None:
             # Apply the text to the label
             self.setText(text)
+        # If the label is flagged for rich text
+        if rich == True:
+            # Enable rich format
+            self.setTextFormat(1)
  
 
 # Custom Table Class
@@ -96,14 +100,14 @@ class PyQtAppWindow(QWidget):
         self.welcome_str = line1+line2+line3+line4+line5+line6+line7
 
         # Initialize QLabels
-        self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label())
-        self.label_welcome_info = PyQtLabel(parent=self, text=self.welcome_str)
+        self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label(), rich=True)
+        self.label_welcome_info = PyQtLabel(parent=self, text=self.welcome_str, rich=True)
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
         # Enable rich formatting for the current labels
-        self.label_welcome_info.setTextFormat(1)
-        self.label_current_location.setTextFormat(1)
+        #self.label_welcome_info.setTextFormat(1)
+        #self.label_current_location.setTextFormat(1)
 
         # Enable word wrapping for the welcome label
         self.label_welcome_info.setWordWrap(True)
