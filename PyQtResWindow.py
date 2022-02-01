@@ -155,8 +155,9 @@ class PyQtAppWindow(QWidget):
 
     # Initialize results table on startup
     def init_results_table(self):
-        # Set table size and formatting
+        # Set number of rows for table
         self.table_results.setRowCount(5)
+        # Set number of columns for table
         self.table_results.setColumnCount(1)
         # Set horizontal header of table
         self.table_results.setHorizontalHeaderLabels([f"Five Random Restaurants in {self.current_location}"])
