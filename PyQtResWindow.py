@@ -67,6 +67,9 @@ class PyQtList(QListWidget):
     def __init__(self, parent=None):
         # Call parent initialization
         super().__init__()
+        win_width, win_height = parent.get_dimensions()
+        # Set the maximum width of the lists
+        self.setMaximumWidth(int(win_width / 5))
 
 
 # Layout class
@@ -121,8 +124,8 @@ class PyQtAppWindow(QWidget):
         self.init_results_table()
 
         # Set max width for list objects
-        self.list_current_restaurants.setMaximumWidth(int(self.__width/5))
-        self.list_locations.setMaximumWidth(int(self.__width/5))
+        #self.list_current_restaurants.setMaximumWidth(int(self.__width/5))
+        #self.list_locations.setMaximumWidth(int(self.__width/5))
 
         # Set minimum width for table object
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
@@ -330,6 +333,11 @@ class PyQtAppWindow(QWidget):
         line7 = "<h2>Enjoy!</h2>"
         # Format and return string
         return line1+line2+line3+line4+line5+line6+line7
+
+    # Method to get dimensions of window
+    def get_dimensions(self):
+        # Return private class fields
+        return self.__width, self.__height
 
     # Method to generate new location label with current location
     def get_selected_location_label(self):
