@@ -239,9 +239,10 @@ class PyQtAppWindow(QWidget):
 
         # Initialize Labels
         self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label(), rich=True)
-        self.label_welcome_info = PyQtLabel(parent=self, text=self.get_welcome_str(), rich=True, restrain=True)
+        self.label_welcome_info = PyQtLabel(parent=self, text=self.get_welcome_label(), rich=True, restrain=True)
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
+        self.label_signoff = PyQtLabel(parent=self, text=self.get_signoff_label(), rich=True)
 
         # Initialize Lists
         self.list_current_restaurants = PyQtList(parent=self, single=self.set_current_restaurant, double=self.generate_restaurant_info)
@@ -426,7 +427,7 @@ class PyQtAppWindow(QWidget):
         self.table_results.show()
 
     # Method to return custom welcome string
-    def get_welcome_str(self):
+    def get_welcome_label(self):
         # Welcome informating string
         line1 = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr>"
         line2 = "<h3><font color=#553b5e>~ </font color=#553b5e>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random <i><font color=#4f2262>restaurants</font color=#4f2262></i> from the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>"
@@ -522,6 +523,11 @@ class PyQtAppWindow(QWidget):
                 iterator += 1
         # Return the given data and the end status of the iterator
         return new_restaurant_data, iterator
+
+    # Method to get the signoff label string
+    def get_signoff_label(self):
+        # Return the string
+        return f"V{self.__current_version} made by Cole Bardin"
 
     # Action method to display random restaurants
     def generate_random_restaurant(self):
