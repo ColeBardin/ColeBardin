@@ -227,6 +227,9 @@ class PyQtAppWindow(QWidget):
         self.__ax = 0
         self.__ay = 0
 
+        # Variable to hold current version
+        self.__current_version = 1.0
+
         # Variable to store status of deletion
         self.execute_delete = False
 
