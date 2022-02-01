@@ -454,7 +454,6 @@ class PyQtAppWindow(QWidget):
         dialog = PyQtInputDialog(parent=self, title=title, msg=msg)
         # Wait for response
         if dialog.exec_() == QDialog.Accepted:
-            # TODO: refactor return value handling
             # Return submitted value
             return dialog.textValue()
  
