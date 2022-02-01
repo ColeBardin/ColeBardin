@@ -9,13 +9,17 @@ path_to_locations = "locations"
 # Class to define QPushButtons
 class PyQtButton(QPushButton):
     # Initialization method
-    def __init__(self, text=None):
+    def __init__(self, text=None, action=None):
         # Call upon parent initialization
         super().__init__()
         # If button text is given upon initialization
         if text is not None:
             # Set the text as the button text
             self.setText(text)
+        # If the button is immediately given an action method
+        if action is not None:
+            # Connect button click to action method
+            self.clicked.connect(action)
         # Style the button
         self.set_css()
 
@@ -108,11 +112,11 @@ class PyQtAppWindow(QWidget):
         self.list_locations = PyQtList(self)
 
         # Initialize QPushButtons 
-        self.button_add_location = PyQtButton("Add New Location")
-        self.button_add_restaurant = PyQtButton("Add New Restaurant")
-        self.button_quit = PyQtButton("Quit")
-        self.button_random_restaurants = PyQtButton("Choose for me!")
-        self.button_edit_restaurant = PyQtButton("Edit Restaurant")
+        self.button_add_location = PyQtButton(text="Add New Location", action=self.add_location)
+        self.button_add_restaurant = PyQtButton(text="Add New Restaurant", action=self.add_restaurant)
+        self.button_quit = PyQtButton(text="Quit", action=self.close)
+        self.button_random_restaurants = PyQtButton(text="Choose for me!", action=self.generate_random_restaurant)
+        self.button_edit_restaurant = PyQtButton(text="Edit Restaurant", action=self.edit_restaurant)
 
         # Run UI Method
         self.init_gui()
@@ -128,11 +132,11 @@ class PyQtAppWindow(QWidget):
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
 
         # Connect all the buttons to their action methods
-        self.button_add_location.clicked.connect(self.add_location)
-        self.button_add_restaurant.clicked.connect(self.add_restaurant)
-        self.button_quit.clicked.connect(self.close)
-        self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
-        self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
+        #self.button_add_location.clicked.connect(self.add_location)
+        #self.button_add_restaurant.clicked.connect(self.add_restaurant)
+        #self.button_quit.clicked.connect(self.close)
+        #self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
+        #self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
 
         # Connect list objects to their action methods
         self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
