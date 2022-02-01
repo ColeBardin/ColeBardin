@@ -139,15 +139,8 @@ class PyQtAppWindow(QWidget):
         # Set minimum width for table object
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
 
-        # Connect list objects to their action methods
-        #self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
-        #self.list_locations.itemClicked.connect(self.set_current_location)
-
         # Connect the table items to generate info QDialog boxes
         self.table_results.itemClicked.connect(self.generate_restaurant_info)
-
-        # Connect the list items to generate info QDialog boxes when double clicked
-        #self.list_current_restaurants.itemDoubleClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
         self.set_css()
