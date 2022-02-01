@@ -186,9 +186,13 @@ class PyQtList(QListWidget):
 # Custom InputDialog Class
 class PyQtInputDialog(QInputDialog):
     # Initialization method
-    def __init__(self):
+    def __init__(self, parent, title=None, msg=None):
         # Call parent initialization
         super().__init__()
+        # Resize the window
+        self.resize(QtCore.QSize(450, 250))
+        # Set the TextEchoMode to normal
+        self.setTextEchoMode(QLineEdit.Normal)
 
 
 # Custom Layout Class for Main Window
@@ -427,15 +431,15 @@ class PyQtAppWindow(QWidget):
     # Method to prompt user for a text input
     def get_user_input(self, title, msg):
         # Create InputDialog object
-        dialog = QInputDialog(self)
+        dialog = PyQtInputDialog(parent=self, title=title, msg=msg)
         # Resize the window
-        dialog.resize(QtCore.QSize(450, 250))
+        #dialog.resize(QtCore.QSize(450, 250))
         # Set window title to passed parameter
-        dialog.setWindowTitle(title)
+        #dialog.setWindowTitle(title)
         # Set dialog message to passed parameter
-        dialog.setLabelText(msg)
+        #dialog.setLabelText(msg)
         # Set Echo mode to normal
-        dialog.setTextEchoMode(QLineEdit.Normal)
+        #dialog.setTextEchoMode(QLineEdit.Normal)
         # Wait for response
         if dialog.exec_() == QDialog.Accepted:
             # TODO: refactor return value handling
