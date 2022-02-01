@@ -96,10 +96,10 @@ class PyQtAppWindow(QWidget):
         self.welcome_str = line1+line2+line3+line4+line5+line6+line7
 
         # Initialize QLabels
-        self.label_current_location = PyQtLabel(self)
-        self.label_welcome_info = PyQtLabel(self)
-        self.label_restaurants = PyQtLabel(self)
-        self.label_locations = PyQtLabel(text="Your Locations:")
+        self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label())
+        self.label_welcome_info = PyQtLabel(parent=self)
+        self.label_restaurants = PyQtLabel(parent=self)
+        self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
         # Enable rich formatting for the current labels
         self.label_welcome_info.setTextFormat(1)
@@ -115,7 +115,7 @@ class PyQtAppWindow(QWidget):
         self.list_current_restaurants = PyQtList(self)
         self.list_locations = PyQtList(self)
 
-        # Initialize QPushButtons
+        # Initialize QPushButtons 
         self.button_add_location = PyQtButton("Add New Location")
         self.button_add_restaurant = PyQtButton("Add New Restaurant")
         self.button_quit = PyQtButton("Quit")
@@ -140,7 +140,6 @@ class PyQtAppWindow(QWidget):
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
 
         # Display on label objects
-        self.label_current_location.setText(self.get_selected_location_label())
         self.label_welcome_info.setText(self.welcome_str)
 
         # Connect all the buttons to their action methods
