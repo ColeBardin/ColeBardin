@@ -46,7 +46,7 @@ class PyQtLabel(QLabel):
         # Call parent initialization class
         super().__init__()
         # Get main window dimensions
-        win_width, win_height = parent.get_dimensions()
+        win_width, win_height = parent.get_window_dimensions()
         # If label text is given
         if text is not None:
             # Apply the text to the label
@@ -117,7 +117,7 @@ class PyQtList(QListWidget):
         # Call parent initialization
         super().__init__()
         # Get the main app window width and height
-        win_width, win_height = parent.get_dimensions()
+        win_width, win_height = parent.get_window_dimensions()
         # Set the maximum width of the lists
         self.setMaximumWidth(int(win_width / 5))
         # If single click action is given
@@ -371,7 +371,7 @@ class PyQtAppWindow(QWidget):
         return line1+line2+line3+line4+line5+line6+line7
 
     # Method to get dimensions of window
-    def get_dimensions(self):
+    def get_window_dimensions(self):
         # Return private class fields
         return self.__width, self.__height
 
