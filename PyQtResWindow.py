@@ -60,9 +60,13 @@ class PyQtLabel(QLabel):
 # Custom Table Class
 class PyQtTable(QTableWidget):
     # Initialization method
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, single=None):
         # Call parent init method
         super().__init__()
+        # If single click action is given
+        if single is not None:
+            # Attach action method to single click
+            self.itemClicked.connect(single)
 
 
 # Custom list class
@@ -113,7 +117,7 @@ class PyQtAppWindow(QWidget):
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
         # Initialize QTable
-        self.table_results = PyQtTable(self)
+        self.table_results = PyQtTable(parent=self, single=self.generate_restaurant_info)
 
         # Initialize QLists
         self.list_current_restaurants = PyQtList(parent=self, single=self.set_current_restaurant, double=self.generate_restaurant_info)
@@ -140,7 +144,7 @@ class PyQtAppWindow(QWidget):
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
 
         # Connect the table items to generate info QDialog boxes
-        self.table_results.itemClicked.connect(self.generate_restaurant_info)
+        #self.table_results.itemClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
         self.set_css()
