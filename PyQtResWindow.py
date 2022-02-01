@@ -94,8 +94,6 @@ class PyQtTable(QTableWidget):
             }
         """)
 
-    # Method to create the specifc table
-
     # Initialize results table on startup
     def __init_results_table(self, parent):
         # Set number of rows for table
@@ -199,7 +197,6 @@ class PyQtAppWindow(QWidget):
         # Build all text packets
         self.init_locations_table()
         self.build_restaurants()
-        #self.init_results_table()
         
         # Adjust CSS for this project
         self.__set_css()
