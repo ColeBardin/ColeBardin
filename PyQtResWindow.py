@@ -42,9 +42,11 @@ class PyQtButton(QPushButton):
 # Custom Label class
 class PyQtLabel(QLabel):
     # Initialize method
-    def __init__(self, parent=None, text=None, rich=False):
+    def __init__(self, parent=None, text=None, rich=False, restrain=False):
         # Call parent initialization class
         super().__init__()
+        # Get main window dimensions
+        win_width, win_height = parent.get_dimensions()
         # If label text is given
         if text is not None:
             # Apply the text to the label
@@ -55,6 +57,10 @@ class PyQtLabel(QLabel):
             self.setTextFormat(1)
         # Enable word wrap on all labels
         self.setWordWrap(True)
+        # If the list is flagged to be size restrained
+        if restrain == True:
+            # Set the label object to have a maximum size
+            self.setMaximumWidth(int(win_width * 3 / 5))
  
 
 # Custom Table Class
@@ -148,7 +154,7 @@ class PyQtAppWindow(QWidget):
 
         # Initialize QLabels
         self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label(), rich=True)
-        self.label_welcome_info = PyQtLabel(parent=self, text=self.get_welcome_str(), rich=True)
+        self.label_welcome_info = PyQtLabel(parent=self, text=self.get_welcome_str(), rich=True, restrain=True)
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
@@ -175,9 +181,6 @@ class PyQtAppWindow(QWidget):
         self.init_locations_table()
         self.build_restaurants()
         self.init_results_table()
-
-        # Set minimum width for table object
-        self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
         
         # Adjust CSS for this project
         self.__set_css()
