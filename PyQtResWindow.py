@@ -105,6 +105,24 @@ class PyQtList(QListWidget):
         if double is not None:
             # Attach action method to double click
             self.itemDoubleClicked.connect(double)
+        # Set the custom stylesheet
+        self.set_css()
+
+    # Method to set custom stylesheet
+    def set_css(self):
+        # Apply custom stylesheet
+        self.setStyleSheet("""
+            QListWidget {
+                background-color: #3f3857;
+                border: 5px solid #553b5e;
+                color: #c2e9f0;
+                padding: 10px;
+            }
+            QListView:item:hover{
+                background: #66CADA;
+                color: #4f2262;
+            }
+        """)
 
 
 # Layout class
@@ -586,16 +604,6 @@ class PyQtAppWindow(QWidget):
                 color: #4f2262;
                 selection-background-color: #92d8e3;
                 selection-color: #4f2262;
-            }
-            QListWidget {
-                background-color: #3f3857;
-                border: 5px solid #553b5e;
-                color: #c2e9f0;
-                padding: 10px;
-            }
-            QListView:item:hover{
-                background: #66CADA;
-                color: #4f2262;
             }
             QLabel {
                 background-color: #3f3857;
