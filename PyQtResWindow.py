@@ -39,6 +39,25 @@ class PyQtButton(QPushButton):
             """)
 
 
+# Custom MessageBox class
+class PyQtMessageBox(QMessageBox):
+    # Initialize method
+    def __init__(self, parent=None, title=None, msg=None, err_type=None):
+        # Call parent initialization class
+        super().__init__()
+        # If given title
+        if title is not None:
+            # Set title
+            self.setWindowTitle(title)
+        # If given a message
+        if msg is not None:
+            # Set message text
+            self.setText(msg)
+        # If Error Type is given
+        if err_type is not None:
+            # Set the icon
+            self.setIcon(err_type)
+
 # Custom Label class
 class PyQtLabel(QLabel):
     # Initialize method
@@ -513,14 +532,7 @@ class PyQtAppWindow(QWidget):
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type, delete=False):
         # Generate message box object
-        disp_msg = QMessageBox(self)
-        # Set the window title
-        disp_msg.setWindowTitle(title)
-        # Set the message box text to be msg parameter
-        disp_msg.setText(msg)
-        #QMessageBox.Warning, Question, Information, Critical
-        # Set error type from parameter
-        disp_msg.setIcon(err_type)
+        disp_msg = PyQtMessageBox(parent=self, title=title, msg=msg, err_type=err_type)
         # For Deletion prompts
         if delete == True:
             delete_button = PyQtButton("Delete")
@@ -607,11 +619,6 @@ class PyQtAppWindow(QWidget):
                 background-color: #3f3857;
                 color: #c2e9f0;
                 padding: 5px;
-            }
-            QMessageBox {
-                color: #92d8e3;
-                background: #3f3857;
-                font: 20px;
             }
             QInputDialog {
                 color: #92d8e3;
