@@ -35,6 +35,34 @@ class PyQtButton(QPushButton):
             """)
 
 
+# Custom Label class
+class PyQtLabel(QLabel):
+    # Initialize method
+    def __init__(self, parent=None, text=None):
+        # Call parent initialization class
+        super().__init__()
+        # If label text is given
+        if text is not None:
+            # Apply the text to the label
+            self.setText(text)
+ 
+
+# Custom Table Class
+class PyQtTable(QTableWidget):
+    # Initialization method
+    def __init__(self, parent=None):
+        # Call parent init method
+        super().__init__()
+
+
+# Custom list class
+class PyQtList(QListWidget):
+    # Initialize the class
+    def __init__(self, parent=None):
+        # Call parent initialization
+        super().__init__()
+
+
 # Layout class
 class PyQtAppWindow(QWidget):
     # Class initialization method
@@ -68,10 +96,10 @@ class PyQtAppWindow(QWidget):
         self.welcome_str = line1+line2+line3+line4+line5+line6+line7
 
         # Initialize QLabels
-        self.label_current_location = QLabel(self)
-        self.label_welcome_info = QLabel(self)
-        self.label_restaurants = QLabel(self)
-        self.label_locations = QLabel("Your Locations:")
+        self.label_current_location = PyQtLabel(self)
+        self.label_welcome_info = PyQtLabel(self)
+        self.label_restaurants = PyQtLabel(self)
+        self.label_locations = PyQtLabel(text="Your Locations:")
 
         # Enable rich formatting for the current labels
         self.label_welcome_info.setTextFormat(1)
@@ -81,11 +109,11 @@ class PyQtAppWindow(QWidget):
         self.label_welcome_info.setWordWrap(True)
 
         # Initialize QTable
-        self.table_results = QTableWidget(self)
+        self.table_results = PyQtTable(self)
 
         # Initialize QLists
-        self.list_current_restaurants = QListWidget(self)
-        self.list_locations = QListWidget(self)
+        self.list_current_restaurants = PyQtList(self)
+        self.list_locations = PyQtList(self)
 
         # Initialize QPushButtons
         self.button_add_location = PyQtButton("Add New Location")
@@ -457,8 +485,8 @@ class PyQtAppWindow(QWidget):
         disp_msg.setIcon(err_type)
         # For Deletion prompts
         if delete == True:
-            delete_button = QPushButton("Delete")
-            keep_button = QPushButton("Keep")
+            delete_button = PyQtButton("Delete")
+            keep_button = PyQtButton("Keep")
             # Add delete button
             disp_msg.addButton(delete_button, QMessageBox.YesRole)
             # Add keep button
