@@ -105,10 +105,6 @@ class PyQtAppWindow(QWidget):
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
-        # Enable rich formatting for the current labels
-        #self.label_welcome_info.setTextFormat(1)
-        #self.label_current_location.setTextFormat(1)
-
         # Enable word wrapping for the welcome label
         self.label_welcome_info.setWordWrap(True)
 
