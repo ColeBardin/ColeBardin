@@ -64,9 +64,10 @@ class PyQtTable(QTableWidget):
 # Custom list class
 class PyQtList(QListWidget):
     # Initialize the class
-    def __init__(self, parent=None):
+    def __init__(self, parent):
         # Call parent initialization
         super().__init__()
+        # Get the main app window width and height
         win_width, win_height = parent.get_dimensions()
         # Set the maximum width of the lists
         self.setMaximumWidth(int(win_width / 5))
