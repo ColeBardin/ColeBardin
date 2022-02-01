@@ -20,10 +20,10 @@ class PyQtButton(QPushButton):
         if action is not None:
             # Connect button click to action method
             self.clicked.connect(action)
-        # Style the button
+        # Set custom styling
         self.__set_css()
 
-    # Method to style the button
+    # Method to add custom style to the button
     def __set_css(self):
         # Apply the custom stylesheet
         self.setStyleSheet("""            
@@ -64,9 +64,9 @@ class PyQtMessageBox(QMessageBox):
         # Set custom styling
         self.__set_css()
 
-    # Method to set custom styling
+    # Method to add custom styling to message box
     def __set_css(self):
-        # Update the stylesheet
+        # Apply custom stylesheet
         self.setStyleSheet("""
                 background-color: #3f3857;
                 color: #92d8e3;
@@ -109,14 +109,14 @@ class PyQtTable(QTableWidget):
         if single is not None:
             # Attach action method to single click
             self.itemClicked.connect(single)
-        # Set the custom stylesheet
+        # Set custom styling
         self.__set_css()
         # Initialize the physical table
         self.__init_results_table(parent)
 
-    # Method to apply cutsom stylesheet
+    # Method to add custom styling to the table
     def __set_css(self):
-        # Set the custom stylesheet
+        # Apply custom stylesheet
         self.setStyleSheet("""
             QTableWidget {
                 background-color: #6a6383;
@@ -146,7 +146,7 @@ class PyQtTable(QTableWidget):
         self.hide()
 
 
-# Custom list class
+# Custom List Class
 class PyQtList(QListWidget):
     # Initialization method
     def __init__(self, parent, single=None, double=None):
@@ -164,10 +164,10 @@ class PyQtList(QListWidget):
         if double is not None:
             # Attach action method to double click
             self.itemDoubleClicked.connect(double)
-        # Set the custom stylesheet
+        # Set custom styling
         self.__set_css()
 
-    # Method to set custom stylesheet
+    # Method to add custom styling to the list
     def __set_css(self):
         # Apply custom stylesheet
         self.setStyleSheet("""
@@ -235,7 +235,7 @@ class PyQtAppWindow(QWidget):
         self.init_locations_list()
         self.build_restaurants()
         
-        # Adjust CSS for this project
+        # Set custom styling
         self.__set_css()
 
         # Create grid layout of Widget objects
@@ -610,7 +610,7 @@ class PyQtAppWindow(QWidget):
         # Change setting to delete
         self.execute_delete = True
 
-    # Methdo to set the stylesheet of the window
+    # Methdo to add custom styling for the main window
     def __set_css(self):
         #Color Pallet:
         # Window GB: light purple =         9a82b0
@@ -621,7 +621,7 @@ class PyQtAppWindow(QWidget):
         # List BG: super dark grey =        3f3857
         # Button indicator: blue =          66CADA
 
-        # Set general StyleSheet for all window obejects
+        # Apply custom stylesheet for general objects
         self.setStyleSheet("""
             QWidget {
                 background-color: #9a82b0;
