@@ -265,8 +265,9 @@ class PyQtAppWindow(QWidget):
     
     # Generate UI layout specifications
     def __init_gui(self):
-        # Build all text packets
+        # Build the list of locations
         self.__init_locations_list()
+        # Build the list of restaurants
         self.__build_restaurants()
         
         # Set custom styling
