@@ -68,13 +68,21 @@ class PyQtTable(QTableWidget):
 # Custom list class
 class PyQtList(QListWidget):
     # Initialize the class
-    def __init__(self, parent):
+    def __init__(self, parent, single=None, double=None):
         # Call parent initialization
         super().__init__()
         # Get the main app window width and height
         win_width, win_height = parent.get_dimensions()
         # Set the maximum width of the lists
         self.setMaximumWidth(int(win_width / 5))
+        # If single click action is given
+        if single is not None:
+            # Attach action method to single click
+            self.itemClicked.connect(single)
+        # If double click action is given
+        if double is not None:
+            # Attach action method to double click
+            self.itemDoubleClicked.connect(double)
 
 
 # Layout class
@@ -108,8 +116,8 @@ class PyQtAppWindow(QWidget):
         self.table_results = PyQtTable(self)
 
         # Initialize QLists
-        self.list_current_restaurants = PyQtList(self)
-        self.list_locations = PyQtList(self)
+        self.list_current_restaurants = PyQtList(parent=self, single=self.set_current_restaurant, double=self.generate_restaurant_info)
+        self.list_locations = PyQtList(parent=self, single=self.set_current_location)
 
         # Initialize QPushButtons 
         self.button_add_location = PyQtButton(text="Add New Location", action=self.add_location)
@@ -131,22 +139,15 @@ class PyQtAppWindow(QWidget):
         # Set minimum width for table object
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
 
-        # Connect all the buttons to their action methods
-        #self.button_add_location.clicked.connect(self.add_location)
-        #self.button_add_restaurant.clicked.connect(self.add_restaurant)
-        #self.button_quit.clicked.connect(self.close)
-        #self.button_random_restaurants.clicked.connect(self.generate_random_restaurant)
-        #self.button_edit_restaurant.clicked.connect(self.edit_restaurant)
-
         # Connect list objects to their action methods
-        self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
-        self.list_locations.itemClicked.connect(self.set_current_location)
+        #self.list_current_restaurants.itemClicked.connect(self.set_current_restaurant)
+        #self.list_locations.itemClicked.connect(self.set_current_location)
 
         # Connect the table items to generate info QDialog boxes
         self.table_results.itemClicked.connect(self.generate_restaurant_info)
 
         # Connect the list items to generate info QDialog boxes when double clicked
-        self.list_current_restaurants.itemDoubleClicked.connect(self.generate_restaurant_info)
+        #self.list_current_restaurants.itemDoubleClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
         self.set_css()
