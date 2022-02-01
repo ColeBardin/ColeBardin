@@ -134,8 +134,6 @@ class PyQtAppWindow(QWidget):
 
     # Initialize the locations for the table
     def init_locations_table(self):
-        # Bool used to set first file as current location on startup
-        init = False
         # Test to see if there are location files in directory
         if len(os.listdir(path_to_locations)) == 0:
             # Set current location string to be empty
@@ -148,10 +146,10 @@ class PyQtAppWindow(QWidget):
                 if file[-4:] == ".csv" and len(file) != 0:
                     # Set the first file to the current location
                     self.current_location = file[:-4]
+                    # Build the available locations table
+                    self.build_locations(set=file[:-4])
                     # Stop loop
                     break
-            # Build the available locations table
-            self.build_locations()
 
     # Initialize results table on startup
     def init_results_table(self):
