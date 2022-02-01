@@ -6,7 +6,7 @@ import os
 # Variable to location subdirectory name
 path_to_locations = "locations"
 
-# Class to define QPushButtons
+# Custom PushButton Class
 class PyQtButton(QPushButton):
     # Initialization method
     def __init__(self, text=None, action=None):
@@ -39,7 +39,7 @@ class PyQtButton(QPushButton):
             """)
 
 
-# Custom MessageBox class
+# Custom MessageBox Class
 class PyQtMessageBox(QMessageBox):
     # Initialize method
     def __init__(self, parent=None, title=None, msg=None, err_type=None, rich=False):
@@ -75,7 +75,7 @@ class PyQtMessageBox(QMessageBox):
         """)
 
 
-# Custom Label class
+# Custom Label Class
 class PyQtLabel(QLabel):
     # Initialize method
     def __init__(self, parent=None, text=None, rich=False, restrain=False):
@@ -183,8 +183,15 @@ class PyQtList(QListWidget):
             }
         """)
 
+# Custom InputDialog Class
+class PyQtInputDialog(QInputDialog):
+    # Initialization method
+    def __init__(self):
+        # Call parent initialization
+        super().__init__()
 
-# Layout class
+
+# Custom Layout Class for Main Window
 class PyQtAppWindow(QWidget):
     # Initialization method
     def __init__(self):
