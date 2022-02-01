@@ -152,12 +152,12 @@ class PyQtAppWindow(QWidget):
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
 
-        # Initialize QTable
-        self.table_results = PyQtTable(parent=self, single=self.generate_restaurant_info)
-
         # Initialize QLists
         self.list_current_restaurants = PyQtList(parent=self, single=self.set_current_restaurant, double=self.generate_restaurant_info)
         self.list_locations = PyQtList(parent=self, single=self.set_current_location)
+
+        # Initialize QTable
+        self.table_results = PyQtTable(parent=self, single=self.generate_restaurant_info)
 
         # Initialize QPushButtons 
         self.button_add_location = PyQtButton(text="Add New Location", action=self.add_location)
@@ -178,9 +178,6 @@ class PyQtAppWindow(QWidget):
 
         # Set minimum width for table object
         self.label_welcome_info.setMaximumWidth(int(self.__width*3/5))
-
-        # Connect the table items to generate info QDialog boxes
-        #self.table_results.itemClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
         self.__set_css()
