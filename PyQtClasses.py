@@ -286,6 +286,7 @@ class PyQtAppWindow(QWidget):
         grid.addWidget(self.button_random_restaurants, 1, 1)
         grid.addWidget(self.label_welcome_info, 2, 1)
         grid.addWidget(self.table_results, 2, 1)
+        grid.addWidget(self.label_signoff, 3, 1)
         # Right Column
         grid.addWidget(self.button_add_location, 0, 2)
         grid.addWidget(self.label_locations, 1, 2)
@@ -689,6 +690,10 @@ class PyQtAppWindow(QWidget):
         self.label_restaurants.setStyleSheet(
             "background-color: #3f3857;"
             "border: 5px solid #553b5e;"
+            )
+        # Signoff label
+        self.label_signoff.setStyleSheet(
+            "background-color: #9a82b0;"
             )
 
     # Method to edit the current restaurant
