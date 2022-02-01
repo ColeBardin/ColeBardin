@@ -74,6 +74,7 @@ class PyQtMessageBox(QMessageBox):
                   
         """)
 
+
 # Custom Label class
 class PyQtLabel(QLabel):
     # Initialize method
