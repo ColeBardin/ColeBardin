@@ -99,6 +99,9 @@ class PyQtAppWindow(QWidget):
 
         # Connect the table items to generate info QDialog boxes
         self.table_results.itemClicked.connect(self.generate_restaurant_info)
+
+        # Connect the list items to generate info QDialog boxes when double clicked
+        self.list_current_restaurants.itemDoubleClicked.connect(self.generate_restaurant_info)
         
         # Adjust CSS for this project
         self.set_css()
@@ -281,7 +284,7 @@ class PyQtAppWindow(QWidget):
         return f"<h3><font color=#3f3857>Selected Location: </font color=#3f3857>{self.current_location}</h3>"
 
     # Method to prompt user for a text input
-    def get_user_input(self, title, msg, delete_option=False):
+    def get_user_input(self, title, msg):
         # Create InputDialog object
         dialog = QInputDialog(self)
         # Resize the window
@@ -296,6 +299,9 @@ class PyQtAppWindow(QWidget):
         if dialog.exec_() == QDialog.Accepted:
             # Return submitted value
             return dialog.textValue()
+    def delete_test(self):
+        print("connection possible")
+        return "return complete"
 
     # Method to get and return new restaurant info packet and iterator from user
     def get_restaurant_info(self, new_restaurant=True):
@@ -319,7 +325,7 @@ class PyQtAppWindow(QWidget):
         # Repeat until all data is collected
         while iterator < 4:
             # Prompt user for input
-            input_data = self.get_user_input(title, messages[iterator], True)
+            input_data = self.get_user_input(title, messages[iterator])
             # If blank entry is submitted
             if input_data == '':
                 # Only error if blank name is submitted
