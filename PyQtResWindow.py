@@ -173,10 +173,10 @@ class PyQtAppWindow(QWidget):
         self.button_edit_restaurant = PyQtButton(text="Edit Restaurant", action=self.edit_restaurant)
 
         # Run UI Method
-        self.init_gui()
+        self.__init_gui()
     
     # Generate UI layout specifications
-    def init_gui(self):
+    def __init_gui(self):
         # Build all text packets
         self.init_locations_table()
         self.build_restaurants()
