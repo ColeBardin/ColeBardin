@@ -414,7 +414,7 @@ class PyQtAppWindow(QWidget):
                 # Stop current restaurant from beign displayed twice
                 available_restaurants.pop(random_num)
             # Build results table with random choices
-            self.build_results(random_choices,number_of_choices)  
+            self.build_results(random_choices, number_of_choices)  
 
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type, delete=False):
@@ -465,6 +465,8 @@ class PyQtAppWindow(QWidget):
         result = info_window.exec()
         # Reset current restaurant to be None
         self.current_restaurant = None
+        # Rebuild restaurants to reset selection on list
+        self.build_restaurants()
 
     # Method to update current restaurant
     def set_current_restaurant(self, item):
