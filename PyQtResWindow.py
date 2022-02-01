@@ -57,6 +57,18 @@ class PyQtMessageBox(QMessageBox):
         if err_type is not None:
             # Set the icon
             self.setIcon(err_type)
+        # Set custom styling
+        self.__set_css()
+
+    # Method to set custom styling
+    def __set_css(self):
+        # Update the stylesheet
+        self.setStyleSheet("""
+                background-color: #3f3857;
+                color: #92d8e3;
+                font: 20px;
+                  
+        """)
 
 # Custom Label class
 class PyQtLabel(QLabel):
@@ -535,14 +547,14 @@ class PyQtAppWindow(QWidget):
         disp_msg = PyQtMessageBox(parent=self, title=title, msg=msg, err_type=err_type)
         # For Deletion prompts
         if delete == True:
-            delete_button = PyQtButton("Delete")
+            # Create delete button and connect it to delete method
+            delete_button = PyQtButton(text="Delete", action=self.set_execute_delete)
+            # Create keep button, do not assign action
             keep_button = PyQtButton("Keep")
-            # Add delete button
+            # Add delete button to the message box object and give it YesRole
             disp_msg.addButton(delete_button, QMessageBox.YesRole)
-            # Add keep button
+            # Add keep button to message box object and give it RejectRole
             disp_msg.addButton(keep_button, QMessageBox.RejectRole)
-            # Connect delete button to delete method
-            delete_button.clicked.connect(self.set_execute_delete)
         # Execute error message and save return value
         disp_msg_ret_val = disp_msg.exec_()
 
