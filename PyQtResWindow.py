@@ -49,6 +49,8 @@ class PyQtLabel(QLabel):
         if rich == True:
             # Enable rich format
             self.setTextFormat(1)
+        # Enable word wrap on all labels
+        self.setWordWrap(True)
  
 
 # Custom Table Class
@@ -88,25 +90,11 @@ class PyQtAppWindow(QWidget):
         # Buffer to hold current restaurant information
         self.info_current_restaurants = None
 
-        # Welcome informating string
-        line1 = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr>"
-        line2 = "<h3><font color=#553b5e>~ </font color=#553b5e>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random <i><font color=#4f2262>restaurants</font color=#4f2262></i> from the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>"
-        line3 = "<font color=#553b5e>~ </font color=#553b5e>Click on a <i><font color=#3f3857>location</font color=#3f3857></i> to select and display its <i><font color=#4f2262>restaurants</font color=#4f2262></i><br><br>"
-        line4 = "<font color=#553b5e>~ </font color=#553b5e>Use the <i><font color=#66CADA>Add Restaurant</font color=#66CADA></i> button to add a <i><font color=#4f2262>restaurant</font color=#4f2262></i> to the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>"
-        line5 = "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new <i><font color=#3f3857>location</font color=#3f3857></i> file<br><br>"
-        line6 = "<font color=#553b5e>~ </font color=#553b5e>To edit an existing restaurant, select it and hit <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i></h3><br>"
-        line7 = "<h2>Enjoy!</h2>"
-        # Format string
-        self.welcome_str = line1+line2+line3+line4+line5+line6+line7
-
         # Initialize QLabels
         self.label_current_location = PyQtLabel(parent=self, text=self.get_selected_location_label(), rich=True)
-        self.label_welcome_info = PyQtLabel(parent=self, text=self.welcome_str, rich=True)
+        self.label_welcome_info = PyQtLabel(parent=self, text=self.get_welcome_str(), rich=True)
         self.label_restaurants = PyQtLabel(parent=self)
         self.label_locations = PyQtLabel(parent=self, text="Your Locations:")
-
-        # Enable word wrapping for the welcome label
-        self.label_welcome_info.setWordWrap(True)
 
         # Initialize QTable
         self.table_results = PyQtTable(self)
@@ -329,6 +317,19 @@ class PyQtAppWindow(QWidget):
         self.table_results.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # Display the table on the screen
         self.table_results.show()
+
+    # Method to return custom welcome string
+    def get_welcome_str(self):
+        # Welcome informating string
+        line1 = "<h2>Welcome to Kaia's Restaurant Picker</h2><hr>"
+        line2 = "<h3><font color=#553b5e>~ </font color=#553b5e>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random <i><font color=#4f2262>restaurants</font color=#4f2262></i> from the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>"
+        line3 = "<font color=#553b5e>~ </font color=#553b5e>Click on a <i><font color=#3f3857>location</font color=#3f3857></i> to select and display its <i><font color=#4f2262>restaurants</font color=#4f2262></i><br><br>"
+        line4 = "<font color=#553b5e>~ </font color=#553b5e>Use the <i><font color=#66CADA>Add Restaurant</font color=#66CADA></i> button to add a <i><font color=#4f2262>restaurant</font color=#4f2262></i> to the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>"
+        line5 = "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new <i><font color=#3f3857>location</font color=#3f3857></i> file<br><br>"
+        line6 = "<font color=#553b5e>~ </font color=#553b5e>To edit an existing restaurant, select it and hit <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i></h3><br>"
+        line7 = "<h2>Enjoy!</h2>"
+        # Format and return string
+        return line1+line2+line3+line4+line5+line6+line7
 
     # Method to generate new location label with current location
     def get_selected_location_label(self):
