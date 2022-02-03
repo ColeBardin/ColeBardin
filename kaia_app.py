@@ -1,5 +1,5 @@
 import sys
-from PyQtClasses import *
+from PyQt_classes import *
 
 # Main body function
 def main():
