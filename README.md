@@ -6,6 +6,6 @@ Interfaces with PyQt5 application to add location files and restaurant entries
 
 ## Dependencies
 
-### PyQt5:
+### main.py:
 
 [PyQt5](https://pypi.org/project/PyQt5/)
