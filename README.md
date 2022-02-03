@@ -6,6 +6,6 @@ Interfaces with PyQt5 application to add location files and restaurant entries
 
 ## Dependencies
 
-### main.py:
+### kaia_app.py:
 
 [PyQt5](https://pypi.org/project/PyQt5/)
