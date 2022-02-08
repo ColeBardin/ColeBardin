@@ -531,7 +531,7 @@ class PyQtAppWindow(QWidget):
     # Method to get the signoff label string
     def get_signoff_label(self):
         # Return the string
-        return f"<b>V{self.__current_version} made by Cole Bardin</b>"
+        return f"<b>V{self.__current_version} made with love by Cole Bardin</b>"
 
     # Action method to display random restaurants
     def generate_random_restaurant(self):
