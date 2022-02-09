@@ -12,7 +12,8 @@ basedir = os.path.dirname(__file__)
 path_to_locations = os.path.join(basedir, "locations")
 
 # Variable to hold build version
-current_version = 1.1
+current_version = '1.2.1'
+
 
 # Custom PushButton Class
 class PyQtButton(QPushButton):
