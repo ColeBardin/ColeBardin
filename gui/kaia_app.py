@@ -755,11 +755,15 @@ class PyQtAppWindow(QWidget):
             os.remove(os.path.join(path_to_locations, f'{location.text()}.csv'))
             # Reset delete status
             self.execute_delete == False
+            # Set current location to be None
+            self.current_location = None
             # Rebuild the locations list
             self.build_locations()
+            # Rebuild restaurants list
             self.__build_restaurants()
-            self.build_results([],0)
+            # Hide results table
             self.table_results.hide()
+            # Show welcome label
             self.label_welcome_info.show()
 
     # Method to edit the current restaurant
