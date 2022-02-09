@@ -417,20 +417,21 @@ class PyQtAppWindow(QWidget):
         self.info_current_restaurants = []
         # Adjust label with with current location
         self.label_restaurants.setText("Your Restaurants:")
-        # Get available restaurants from current location file
-        file = open(os.path.join(path_to_locations,
-                    f"{self.current_location}.csv"), "r")
-        # Iterate over each restaurant packet
-        for line in file:
-            # Parse out the name of the restaurant from the packet
-            self.list_current_restaurants.addItem(
-                QListWidgetItem(f"{line.split(',')[0]}"))
-            # Add current restaurant information to info buffer
-            self.info_current_restaurants.append(line.split(','))
-        # Close the current location file
-        file.close()
-        # Set current restaurant to None since list is deselected
-        self.current_restaurant = None
+        if os.path.isfile(os.path.join(path_to_locations, f"{self.current_location}.csv")):
+            # Get available restaurants from current location file
+            file = open(os.path.join(path_to_locations,
+                        f"{self.current_location}.csv"), "r")
+            # Iterate over each restaurant packet
+            for line in file:
+                # Parse out the name of the restaurant from the packet
+                self.list_current_restaurants.addItem(
+                    QListWidgetItem(f"{line.split(',')[0]}"))
+                # Add current restaurant information to info buffer
+                self.info_current_restaurants.append(line.split(','))
+            # Close the current location file
+            file.close()
+            # Set current restaurant to None since list is deselected
+            self.current_restaurant = None
 
     # Method to build results table with given choices
     def build_results(self, choices, number_of_choices):
