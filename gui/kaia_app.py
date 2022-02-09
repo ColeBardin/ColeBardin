@@ -12,7 +12,7 @@ basedir = os.path.dirname(__file__)
 path_to_locations = os.path.join(basedir, "locations")
 
 # Variable to hold build version
-__current_version = 1.1
+current_version = 1.1
 
 # Custom PushButton Class
 class PyQtButton(QPushButton):
@@ -571,7 +571,7 @@ class PyQtAppWindow(QWidget):
     # Method to get the signoff label string
     def get_signoff_label(self):
         # Return the string
-        return f"<b>V{__current_version} made with love by Cole Bardin</b>"
+        return f"<b>V{current_version} made with love by Cole Bardin</b>"
 
     # Action method to display random restaurants
     def generate_random_restaurant(self):
