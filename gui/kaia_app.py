@@ -417,6 +417,7 @@ class PyQtAppWindow(QWidget):
         self.info_current_restaurants = []
         # Adjust label with with current location
         self.label_restaurants.setText("Your Restaurants:")
+        # Verify that location file exists
         if os.path.isfile(os.path.join(path_to_locations, f"{self.current_location}.csv")):
             # Get available restaurants from current location file
             file = open(os.path.join(path_to_locations,
@@ -571,48 +572,50 @@ class PyQtAppWindow(QWidget):
         available_restaurants = []
         # List to hold chose restaurants
         random_choices = []
-        # Read from current location file
-        current_file = open(os.path.join(path_to_locations,
-                            f"{self.current_location}.csv"), "r")
-        # Read all the lines and save them to lines variable
-        lines = current_file.readlines()
-        # Error handle location with no restaurants
-        if len(lines) == 0:
-            # Set to none to indicate no files
-            number_of_choices = 0
-            # Display error message
-            self.generate_display_msg(
-                "Warning", f"{self.current_location} doesn't have any restaurants to choose from", QMessageBox.Warning)
-        # Less than 5 but not zero restaurants
-        elif len(lines) < 5:
-            # Restrict output to not get index error
-            number_of_choices = len(lines)
-        # More than 5 restaurants
-        else:
-            # Output 5 choices
-            number_of_choices = 5
-        # If there are no lines
-        if number_of_choices == 0:
-            # Close the file
-            current_file.close()
-        # If there are available lines
-        else:
-            # Iterate over each line in .CSV
-            for line in lines:
-                # Add restaurants to list to choose from
-                available_restaurants.append(line.split(','))
-            # Close the current location file
-            current_file.close()
-            # Repeat 5 times
-            for _ in range(number_of_choices):
-                # Choose random number
-                random_num = randint(0, len(available_restaurants)-1)
-                # Use random number as index to select restaurant and add to list of choices
-                random_choices.append(available_restaurants[random_num])
-                # Stop current restaurant from beign displayed twice
-                available_restaurants.pop(random_num)
-            # Build results table with random choices
-            self.build_results(random_choices, number_of_choices)
+        # Verify that there is a current location
+        if self.current_location is not None:
+            # Read from current location file
+            current_file = open(os.path.join(path_to_locations,
+                                f"{self.current_location}.csv"), "r")
+            # Read all the lines and save them to lines variable
+            lines = current_file.readlines()
+            # Error handle location with no restaurants
+            if len(lines) == 0:
+                # Set to none to indicate no files
+                number_of_choices = 0
+                # Display error message
+                self.generate_display_msg(
+                    "Warning", f"{self.current_location} doesn't have any restaurants to choose from", QMessageBox.Warning)
+            # Less than 5 but not zero restaurants
+            elif len(lines) < 5:
+                # Restrict output to not get index error
+                number_of_choices = len(lines)
+            # More than 5 restaurants
+            else:
+                # Output 5 choices
+                number_of_choices = 5
+            # If there are no lines
+            if number_of_choices == 0:
+                # Close the file
+                current_file.close()
+            # If there are available lines
+            else:
+                # Iterate over each line in .CSV
+                for line in lines:
+                    # Add restaurants to list to choose from
+                    available_restaurants.append(line.split(','))
+                # Close the current location file
+                current_file.close()
+                # Repeat 5 times
+                for _ in range(number_of_choices):
+                    # Choose random number
+                    random_num = randint(0, len(available_restaurants)-1)
+                    # Use random number as index to select restaurant and add to list of choices
+                    random_choices.append(available_restaurants[random_num])
+                    # Stop current restaurant from beign displayed twice
+                    available_restaurants.pop(random_num)
+                # Build results table with random choices
+                self.build_results(random_choices, number_of_choices)
 
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type, delete=False):
