@@ -1,3 +1,4 @@
+from importlib.resources import path
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
@@ -754,6 +755,12 @@ class PyQtAppWindow(QWidget):
             os.remove(os.path.join(path_to_locations, f'{location.text()}.csv'))
             # Reset delete status
             self.execute_delete == False
+            # Rebuild the locations list
+            self.build_locations()
+            self.__build_restaurants()
+            self.build_results([],0)
+            self.table_results.hide()
+            self.label_welcome_info.show()
 
     # Method to edit the current restaurant
     def edit_restaurant(self):
