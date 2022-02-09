@@ -12,6 +12,8 @@ Shell script `builddmg.sh` takes desktop application build by PyInstaller and cr
 
 Use PyInstaller to create executable application
 
+Run command within  `./gui` directory
+
 ``pyinstaller -n "Amongus" --windowed --add-data='locations:locations' kaia_app.py``
 
 Use shell script to create Disk Image installer for the application
