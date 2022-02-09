@@ -373,22 +373,28 @@ class PyQtAppWindow(QWidget):
 
     # Action method to add a new restaurant to current location
     def add_restaurant(self):
-        # Call method to get restaurant info from user with new_restaurant paramater True
-        new_restaurant_data, result = self.get_restaurant_info()
-        # Once full data collection has occured
-        if result == 4:
-            # Add new restaurant packet to current location file
-            new_res = open(os.path.join(path_to_locations,
-                           f"{self.current_location}.csv"), "a")
-            # Join data with a newline and write
-            new_res.write(','.join(new_restaurant_data) + '\n')
-            # Close current location file
-            new_res.close()
-            # Update available restaurants list
-            self.__build_restaurants()
-            # Display success message once completed
-            self.generate_display_msg(
-                "Success", f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
+        # Verify that there is a current location
+        if self.current_location is not None:
+            # Call method to get restaurant info from user with new_restaurant paramater True
+            new_restaurant_data, result = self.get_restaurant_info()
+            # Once full data collection has occured
+            if result == 4:
+                # Add new restaurant packet to current location file
+                new_res = open(os.path.join(path_to_locations,
+                            f"{self.current_location}.csv"), "a")
+                # Join data with a newline and write
+                new_res.write(','.join(new_restaurant_data) + '\n')
+                # Close current location file
+                new_res.close()
+                # Update available restaurants list
+                self.__build_restaurants()
+                # Display success message once completed
+                self.generate_display_msg(
+                    "Success", f"Successfully added new restaurant to {self.current_location}", QMessageBox.Information)
+        # If there are no location files in the directory
+        else:
+            # Generate a warning prompt
+            self.generate_display_msg(title='Warning', msg='Select a location to add restaurants', err_type=QMessageBox.Warning)
 
     # Method to build the location table
     def build_locations(self, set=None):
