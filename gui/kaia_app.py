@@ -753,7 +753,7 @@ class PyQtAppWindow(QWidget):
     # Callback method to delete a selected location
     def delete_location(self, location):
         # Generate Delete prompt
-        self.generate_display_msg(title=f'{location.text()}', msg=f'Delete {location.text()}?', err_type=QMessageBox.Critical, delete=True)
+        self.generate_display_msg(title=f'{location.text()}', msg=f'Delete {location.text()} and all of its contents?', err_type=QMessageBox.Critical, delete=True)
         # If delet button was hit
         if self.execute_delete == True:
             # Remove the file from the locations directory
