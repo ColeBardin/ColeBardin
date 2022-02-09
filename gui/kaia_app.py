@@ -473,10 +473,10 @@ class PyQtAppWindow(QWidget):
         "<h2>Welcome to Kaia's Restaurant Picker</h2><hr>",
         "<h3><font color=#553b5e>~ </font color=#553b5e>Hit <i><font color=#66CADA>Choose for me!</font color=#66CADA></i> to display 5 random <i><font color=#4f2262>restaurants</font color=#4f2262></i> from the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>",
         "<font color=#553b5e>~ </font color=#553b5e>Click on a <i><font color=#3f3857>location</font color=#3f3857></i> to select and display its <i><font color=#4f2262>restaurants</font color=#4f2262></i><br><br>",
+        "<font color=#553b5e>~ </font color=#553b5e>Double click a <font color=#3f3857><i>location</font color=#3f3857></i> to delete it<br><br>",
         "<font color=#553b5e>~ </font color=#553b5e>Use the <i><font color=#66CADA>Add Restaurant</font color=#66CADA></i> button to add a <i><font color=#4f2262>restaurant</font color=#4f2262></i> to the <i><font color=#3f3857>current location</font color=#3f3857></i><br><br>",
         "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Add Location</font color=#66CADA></i> button to make a new <i><font color=#3f3857>location</font color=#3f3857></i> file<br><br>",
-        "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i> button to edit or delete an existing <i><font color=#4f2262>restaurant</font color=#4f2262></i><br><br>",
-        "<font color=#553b5e>~ </font color=#553b5e>Double click a <font color=#3f3857><i>location</font color=#3f3857></i> to delete it<br>",
+        "<font color=#553b5e>~ </font color=#553b5e>Use <i><font color=#66CADA>Edit Restaurant</font color=#66CADA></i> button to edit or delete an existing <i><font color=#4f2262>restaurant</font color=#4f2262></i><br>",
         "</h3><h2>Enjoy!</h2>",
         ]
         # Join the lines and return the final string
