@@ -623,6 +623,11 @@ class PyQtAppWindow(QWidget):
                     available_restaurants.pop(random_num)
                 # Build results table with random choices
                 self.build_results(random_choices, number_of_choices)
+        # If current_location is None
+        else:
+            # Generate error message
+            self.generate_display_msg(title='Warning', msg='No location selected to choose from', err_type=QMessageBox.Warning)
+
 
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type, delete=False):
