@@ -258,7 +258,7 @@ class PyQtAppWindow(QWidget):
         self.list_current_restaurants = PyQtList(
             parent=self, single=self.set_current_restaurant, double=self.generate_restaurant_info)
         self.list_locations = PyQtList(
-            parent=self, single=self.set_current_location)
+            parent=self, single=self.set_current_location, double=self.delete_location)
 
         # Initialize Table
         self.table_results = PyQtTable(
@@ -629,8 +629,8 @@ class PyQtAppWindow(QWidget):
             disp_msg.addButton(delete_button, QMessageBox.YesRole)
             # Add keep button to message box object and give it RejectRole
             disp_msg.addButton(keep_button, QMessageBox.RejectRole)
-        # Execute error message and save return value
-        disp_msg_ret_val = disp_msg.exec_()
+        # Execute error message
+        disp_msg.exec_()
 
     # Method to display a restaurant's information
     def generate_restaurant_info(self, restaurant):
@@ -652,7 +652,7 @@ class PyQtAppWindow(QWidget):
         info_window = PyQtMessageBox(
             parent=self, title=info_title, msg=info_msg, rich=True)
         # Execute the window build operation
-        result = info_window.exec()
+        info_window.exec()
         # Reset current restaurant to be None
         self.current_restaurant = None
         # Clear selection on Restaurants QList
@@ -733,6 +733,17 @@ class PyQtAppWindow(QWidget):
             "background-color: #9a82b0;"
             "font: 15px;"
         )
+
+    # Callback method to delete a selected location
+    def delete_location(self, location):
+        # Generate Delete prompt
+        self.generate_display_msg(title=f'{location.text()}', msg=f'Delete {location.text()}?', err_type=QMessageBox.Critical, delete=True)
+        # If delet button was hit
+        if self.execute_delete == True:
+            # Remove the file from the locations directory
+            os.remove(os.path.join(path_to_locations, f'{location.text()}.csv'))
+            # Reset delete status
+            self.execute_delete == False
 
     # Method to edit the current restaurant
     def edit_restaurant(self):
