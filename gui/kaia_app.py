@@ -616,7 +616,7 @@ class PyQtAppWindow(QWidget):
                     available_restaurants.append(line.split(','))
                 # Close the current location file
                 current_file.close()
-                # Repeat 5 times
+                # Repeat for the number of available choices, default is 5
                 for _ in range(number_of_choices):
                     # Choose random number
                     random_num = randint(0, len(available_restaurants)-1)
