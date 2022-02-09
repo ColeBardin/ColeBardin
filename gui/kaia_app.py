@@ -11,6 +11,9 @@ basedir = os.path.dirname(__file__)
 # Variable to location subdirectory name
 path_to_locations = os.path.join(basedir, "locations")
 
+# Variable to hold build version
+__current_version = 1.1
+
 # Custom PushButton Class
 class PyQtButton(QPushButton):
     # Initialization method
@@ -231,9 +234,6 @@ class PyQtAppWindow(QWidget):
         self.__height = 800
         self.__ax = 0
         self.__ay = 0
-
-        # Variable to hold current version
-        self.__current_version = 1.0
 
         # Variable to store status of deletion
         self.execute_delete = False
@@ -571,7 +571,7 @@ class PyQtAppWindow(QWidget):
     # Method to get the signoff label string
     def get_signoff_label(self):
         # Return the string
-        return f"<b>V{self.__current_version} made with love by Cole Bardin</b>"
+        return f"<b>V{__current_version} made with love by Cole Bardin</b>"
 
     # Action method to display random restaurants
     def generate_random_restaurant(self):
