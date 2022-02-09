@@ -44,5 +44,5 @@ coll = COLLECT(exe,
                name='Amongus')
 app = BUNDLE(coll,
              name='Amongus.app',
-             icon=None,
+             icon='amongus.icns',
              bundle_identifier=None)

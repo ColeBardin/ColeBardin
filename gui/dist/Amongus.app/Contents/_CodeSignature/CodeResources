@@ -4,13 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/amongus.icns</key>
+		<data>
+		oeuyUCkpHKCupQf9+2HtWQAmeqA=
+		</data>
 		<key>Resources/base_library.zip</key>
 		<data>
 		j+ClCmkZ1UR87nu4XsYX6rakkcA=
-		</data>
-		<key>Resources/icon-windowed.icns</key>
-		<data>
-		eEHOuYpZLB0vKGVIWGZOh5rH8+o=
 		</data>
 		<key>Resources/locations/.DS_Store</key>
 		<data>
@@ -1005,18 +1005,18 @@
 			<key>symlink</key>
 			<string>../Resources/locations</string>
 		</dict>
+		<key>Resources/amongus.icns</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			p2FD0QFjz1CNsLv8aQj7/Ih8SJAKDpyPYA8J/fIEx00=
+			</data>
+		</dict>
 		<key>Resources/base_library.zip</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			8uJMmFzniUDh7/L9V6/iXxmqgEn7E5l9SQaqce0tPck=
-			</data>
-		</dict>
-		<key>Resources/icon-windowed.icns</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			uQo7VuWRab4Phv4EEGmfQsyqFqDIXZgO8OtgaAMvCzY=
 			</data>
 		</dict>
 		<key>Resources/locations/Philly.csv</key>

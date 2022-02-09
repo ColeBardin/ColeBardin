@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Amongus</string>
 	<key>CFBundleIconFile</key>
-	<string>icon-windowed.icns</string>
+	<string>amongus.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>Amongus</string>
 	<key>CFBundleInfoDictionaryVersion</key>
