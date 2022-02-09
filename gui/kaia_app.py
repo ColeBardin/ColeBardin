@@ -631,7 +631,6 @@ class PyQtAppWindow(QWidget):
             # Generate error message
             self.generate_display_msg(title='Warning', msg='No location selected to choose from', err_type=QMessageBox.Warning)
 
-
     # Method to make error messages pop up
     def generate_display_msg(self, title, msg, err_type, delete=False):
         # Generate message box object
