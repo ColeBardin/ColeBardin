@@ -6,11 +6,11 @@ Interfaces with PyQt5 application to add location files and restaurant entries s
 
 Includes a compiled desktop application and installer
 
-Shell script `builddmg.sh` takes desktop application build by PyInstaller and created DMG installer for MacOS
+Shell script `builddmg.sh` takes desktop application built by PyInstaller and created DMG installer for MacOS
 
 ## Compililation, Packaging and Bundling
 
-Use PyInstaller to create executable application
+Use PyInstaller to create desktop application
 
 Run command within  `./gui` directory
 
