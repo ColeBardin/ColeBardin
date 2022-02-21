@@ -508,7 +508,7 @@ class PyQtAppWindow(QWidget):
         new_restaurant_data = ['', '', '', '']
         # List of prompts for line edits
         messages = ["Restaurant Name:", "Restaurant Genre",
-                    "Price 0($) to 10($$)", "Short Description"]
+                    "Price 1($) to 10($$)", "Short Description"]
         # Change first prompt when editing a restaurant
         if new_restaurant == False:
             messages[0] = f"Restaurant Name:\n(Leave blank to delete {self.current_restaurant})"
@@ -666,7 +666,7 @@ class PyQtAppWindow(QWidget):
         # Create title string
         info_title = f"{restaurant_info[0]}"
         # Create message string
-        info_msg = f"<h2>{restaurant_info[0]},<br>{self.current_location}</h2><h3><font color=#66CADA>Genre:</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[1]}</font color=#9a82b0></h4><h3><font color=#66CADA>Price 0($) to 10($$):</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[2]}</font color=#9a82b0></h4><h3><font color=#66CADA>Description:</font color=#66CADA></h4><h3><font color=#9a82b0>{restaurant_info[3]}</font color=#9a82b0></h3>"
+        info_msg = f"<h2>{restaurant_info[0]},<br>{self.current_location}</h2><h3><font color=#66CADA>Genre:</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[1]}</font color=#9a82b0></h4><h3><font color=#66CADA>Price 1($) to 10($$):</font color=#66CADA></h3><h4><font color=#9a82b0>{restaurant_info[2]}</font color=#9a82b0></h4><h3><font color=#66CADA>Description:</font color=#66CADA></h4><h3><font color=#9a82b0>{restaurant_info[3]}</font color=#9a82b0></h3>"
         # Initialize QDialog box winodw
         info_window = PyQtMessageBox(
             parent=self, title=info_title, msg=info_msg, rich=True)
