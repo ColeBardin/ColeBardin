@@ -699,7 +699,6 @@ class PyQtAppWindow(QWidget):
         # Update the list of available restaurants from this new location
         self.__build_restaurants()
  
-
     # Method to delete restaurant
     def set_execute_delete(self):
         # Change setting to delete
@@ -776,6 +775,13 @@ class PyQtAppWindow(QWidget):
             self.build_locations()
             # Rebuild restaurants list
             self.__build_restaurants()
+            remaining_files = [file for file in os.listdir(path_to_locations) if file.lower() != '.ds_store']
+            if len(remaining_files) > 0:
+                self.current_location = remaining_files[0][:-4]
+            else:
+                self.current_location = None
+            self.label_current_location.setText(self.get_selected_location_label())
+            self.build_locations(set=self.current_location)
             # Hide results table
             self.table_results.hide()
             # Show welcome label
