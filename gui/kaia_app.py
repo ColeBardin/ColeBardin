@@ -775,12 +775,19 @@ class PyQtAppWindow(QWidget):
             self.build_locations()
             # Rebuild restaurants list
             self.__build_restaurants()
+            # Create a list of all the filenames that arent .DS_Store in locations directory
             remaining_files = [file for file in os.listdir(path_to_locations) if file.lower() != '.ds_store']
+            # If there are more locations left
             if len(remaining_files) > 0:
+                # Set the current location to be the first location file
                 self.current_location = remaining_files[0][:-4]
+            # If there are no other locations
             else:
+                # Set current location to be none
                 self.current_location = None
+            # Update the current location label
             self.label_current_location.setText(self.get_selected_location_label())
+            # Rebuild the list of locations
             self.build_locations(set=self.current_location)
             # Hide results table
             self.table_results.hide()
