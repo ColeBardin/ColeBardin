@@ -686,12 +686,19 @@ class PyQtAppWindow(QWidget):
 
     # Action method to set the selected location from the drop down as the current location
     def set_current_location(self, item):
+        # Check if new location is being selected
+        if item.text() != self.current_location:
+            # Hide results table
+            self.table_results.hide()
+            # Show welcome label
+            self.label_welcome_info.show()
         # Setting current location
         self.current_location = item.text()
         # Update current location label
         self.label_current_location.setText(self.get_selected_location_label())
         # Update the list of available restaurants from this new location
         self.__build_restaurants()
+ 
 
     # Method to delete restaurant
     def set_execute_delete(self):
